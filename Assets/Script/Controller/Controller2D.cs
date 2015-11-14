@@ -13,6 +13,7 @@ public class Controller2D : MonoBehaviour {
     public int verticalRayCount = 4;        // This indicates how many ray we should cast along the vertical sides of our box collider
 
     float maxClimbAngle = 80f;
+    float maxDescendAngle = 75f;
 
     public CollisionInfo collisions;
 
@@ -36,6 +37,13 @@ public class Controller2D : MonoBehaviour {
     public void Move(Vector3 velocity){
         UpdateRaycastOrigins();
         collisions.Reset();
+
+        collisions.velocityOld = velocity;
+
+        if(velocity.y < 0)
+        {
+            DescendSlope(ref velocity);
+        }
 
         // Passing a reference to our velocity instance...
         if (velocity.x != 0)
@@ -90,6 +98,26 @@ public class Controller2D : MonoBehaviour {
                 collisions.above = directionY == 1;
             }
         }
+        // Another little fix here... it appears that sometimes when we have two different slopes angles in the same climb,
+        // Sometimes our character penetrate a little in the second slope causing it to stuck for a few frames
+        // A quick fix is to cast another ray to check if the slopeAngle has changed, if so, we update our velocity.x
+        // to avoid penetrating the new terrain and we update our slopeAngle!
+        if (collisions.climbingSlope)
+        {
+            float directionX = Mathf.Sign(velocity.x);
+            rayLength = Mathf.Abs(velocity.x) + skinWidth;
+            Vector2 rayOrigin = ((directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight) + Vector2.up * velocity.y;
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
+            if (hit)
+            {
+                float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+                if (slopeAngle != collisions.slopeAngle)
+                {
+                    velocity.x = (hit.distance - skinWidth) * directionX;
+                    collisions.slopeAngle = slopeAngle;
+                }
+            }
+        }
     }
 
     void HorizontalCollisions(ref Vector3 velocity)
@@ -113,6 +141,14 @@ public class Controller2D : MonoBehaviour {
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
                 if(i == 0 && slopeAngle <= maxClimbAngle)
                 {
+                    // Ok this is quick fix to an issue that was showing up when
+                    // we were descending a slope, and meeting a climb immidiatly...
+                    // we tell our player that he's not descending anymore, but climbing again
+                    if (collisions.descendingSlope)
+                    {
+                        collisions.descendingSlope = false;
+                        velocity = collisions.velocityOld;
+                    }
                     float distanceToSlopeStart = 0;
                     if(slopeAngle != collisions.slopeAngleOld)
                     {
@@ -156,6 +192,41 @@ public class Controller2D : MonoBehaviour {
 
     }
 
+    void DescendSlope(ref Vector3 velocity)
+    {
+        float directionX = Mathf.Sign(velocity.x);
+        // Let's cast another ray below us
+        Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Infinity, collisionMask);
+
+        if (hit)
+        {
+            float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+            // Checking wether we are no on a flat surface or in a too steep descend
+            // in such cases we don't need to worry about descending slopes!
+            if(slopeAngle != 0 && slopeAngle <= maxDescendAngle)
+            {
+                // We use the sign of the x component of the normal vector of the collision to establish the 
+                // direction of the slope against our direction and see if we are actually descending
+                if(Mathf.Sign(hit.normal.x) == directionX)
+                {
+                    // Everything from here makes sense only if we are actually touching the slope, otherwise we are still falling
+                    if(hit.distance - skinWidth <= Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(velocity.x))
+                    {
+                        float moveDistance = Mathf.Abs(velocity.x);
+                        float descendVelocityY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
+                        velocity.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign(velocity.x);
+                        velocity.y -= descendVelocityY;
+
+                        collisions.slopeAngle = slopeAngle;
+                        collisions.descendingSlope = true;
+                        collisions.below = true;
+                    }
+                }
+            }
+        }
+    }
+
     void UpdateRaycastOrigins(){
         Bounds bounds = collider.bounds;
         // We are reducing a little bit the raycast origins position because we want rays to be cast
@@ -195,12 +266,15 @@ public class Controller2D : MonoBehaviour {
         public bool above, below;
         public bool left, right;
         public bool climbingSlope;
+        public bool descendingSlope;
         public float slopeAngle, slopeAngleOld;
+        public Vector3 velocityOld;
 
         public void Reset(){
             above = below = false;
             left = right = false;
             climbingSlope = false;
+            descendingSlope = false;
             slopeAngleOld = slopeAngle;
             slopeAngle = 0f;
         }
