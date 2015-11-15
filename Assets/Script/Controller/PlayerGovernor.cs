@@ -54,7 +54,7 @@ public class PlayerGovernor : MonoBehaviour {
 	void FixedUpdate () {
 		
 		// Check if the player is changed
-		if (Input.GetKeyDown (KeyCode.LeftControl)) {
+		if (Input.GetButtonDown("SwitchPlayer")) {
 			if (isP1Active) 
 				SwitchPlayer(player1, player2);
 			else 
@@ -75,7 +75,7 @@ public class PlayerGovernor : MonoBehaviour {
 		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 		
 		// Jumping logic
-		if(Input.GetKeyDown (KeyCode.Space) && controller.collisions.below){
+		if(Input.GetButtonDown("Jump") && controller.collisions.below){
 			velocity.y = jumpVelocity;
 		}
 		

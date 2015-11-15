@@ -48,7 +48,7 @@ public class Player : MonoBehaviour {
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         // Jumping logic
-        if(Input.GetKeyDown (KeyCode.Space) && controller.collisions.below){
+        if (Input.GetButtonDown("Jump") && controller.collisions.below){
             velocity.y = jumpVelocity;
         }
 
