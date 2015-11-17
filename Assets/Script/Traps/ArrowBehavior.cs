@@ -15,7 +15,7 @@ public class ArrowBehavior : MonoBehaviour {
         transform.position = pos;
 	}
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnCollisionEnter2D(Collision2D col)
     {
         Destroy(gameObject);
     }
