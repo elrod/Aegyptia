@@ -114,8 +114,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 1536562333}
   player2: {fileID: 1963852237}
-  jumpHeight: 4
-  timeToJumpApex: .400000006
 --- !u!4 &502691852
 Transform:
   m_ObjectHideFlags: 0
@@ -235,6 +233,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothTimeY: .200000003
   smoothTimeX: .200000003
+  normalCameraSize: 5
+  zoomOutCameraSize: 10
+  zoomFactor: 1.00999999
   bounds: 0
   minCameraPos: {x: 0, y: 0, z: 0}
   maxCameraPos: {x: 0, y: 0, z: 0}
@@ -391,6 +392,7 @@ GameObject:
   - 23: {fileID: 1536562336}
   - 61: {fileID: 1536562335}
   - 114: {fileID: 1536562334}
+  - 114: {fileID: 1536562339}
   m_Layer: 8
   m_Name: Player1
   m_TagString: Player
@@ -470,6 +472,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+--- !u!114 &1536562339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1536562333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f35182d113493145908d60cdb871d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHeight: 4
+  timeToJumpApex: .400000006
 --- !u!1 &1541828640
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,6 +571,7 @@ GameObject:
   - 23: {fileID: 1963852240}
   - 61: {fileID: 1963852239}
   - 114: {fileID: 1963852238}
+  - 114: {fileID: 1963852243}
   m_Layer: 8
   m_Name: Player2
   m_TagString: InactivePlayer
@@ -635,3 +651,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1963852243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1963852237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f35182d113493145908d60cdb871d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHeight: 4
+  timeToJumpApex: .400000006

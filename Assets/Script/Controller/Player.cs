@@ -7,6 +7,8 @@ public class Player : MonoBehaviour {
 
     Controller2D controller;
 
+	bool isActive = true; 	
+
     public float jumpHeight = 4;           // How many unity units we want our player to jump
     public float timeToJumpApex = .4f;     // How much time our player will take to reach the top of the jump curve.
     float accelerationTimeAirborne = .2f;
@@ -44,19 +46,28 @@ public class Player : MonoBehaviour {
             velocity.y = 0;
         }
 
-        // Getting input
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		if (isActive) {
+			// Getting input
+			Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 
-        // Jumping logic
-        if (Input.GetButtonDown("Jump") && controller.collisions.below){
-            velocity.y = jumpVelocity;
-        }
+			// Jumping logic
+			if (Input.GetButtonDown ("Jump") && controller.collisions.below) {
+				velocity.y = jumpVelocity;
+			}
 
-        float targetVelocityX = input.x * moveSpeed;
-        // We use smoothDamp to gradually reach our top velocity
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-
+			float targetVelocityX = input.x * moveSpeed;
+			// We use smoothDamp to gradually reach our top velocity
+			velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+		}
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+	}
+
+	public void TurnOn(){
+		isActive = true;
+	}
+
+	public void TurnOff(){
+		isActive = false;
 	}
 }
