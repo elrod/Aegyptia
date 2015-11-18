@@ -94,13 +94,14 @@ GameObject:
   m_Component:
   - 4: {fileID: 195645905}
   - 114: {fileID: 195645904}
+  - 114: {fileID: 195645906}
   m_Layer: 0
   m_Name: FewStonesSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &195645904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +131,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &195645906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 195645903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e773df2bfc2b944ac973c323caaa77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!1 &339145516
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +152,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 339145517}
   - 114: {fileID: 339145518}
+  - 114: {fileID: 339145519}
   m_Layer: 0
   m_Name: StoneSpawner
   m_TagString: Untagged
@@ -175,6 +189,18 @@ MonoBehaviour:
   maxSpawnTime: 1
   applyXOffset: 0
   xOffsetMagnitude: .200000003
+--- !u!114 &339145519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 339145516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e773df2bfc2b944ac973c323caaa77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 1
 --- !u!1 &423669650
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +275,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1001 &763580490
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 462368, guid: d7e5ce5f17b2247488c520a54384c172, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 3.22000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 462368, guid: d7e5ce5f17b2247488c520a54384c172, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.54999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 462368, guid: d7e5ce5f17b2247488c520a54384c172, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 462368, guid: d7e5ce5f17b2247488c520a54384c172, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 462368, guid: d7e5ce5f17b2247488c520a54384c172, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 462368, guid: d7e5ce5f17b2247488c520a54384c172, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 462368, guid: d7e5ce5f17b2247488c520a54384c172, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 462368, guid: d7e5ce5f17b2247488c520a54384c172, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11494824, guid: d7e5ce5f17b2247488c520a54384c172, type: 2}
+      propertyPath: relatedTrap
+      value: 
+      objectReference: {fileID: 195645903}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d7e5ce5f17b2247488c520a54384c172, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1521045365
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +408,7 @@ GameObject:
   - 50: {fileID: 1675214981}
   - 61: {fileID: 1675214980}
   m_Layer: 0
-  m_Name: TrapActivator
+  m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -413,7 +485,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &2020917072
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,57 +572,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!1 &2135889865
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2135889868}
-  - 114: {fileID: 2135889867}
-  - 61: {fileID: 2135889866}
-  m_Layer: 0
-  m_Name: TrapSwitch
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &2135889866
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2135889865}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 3, y: 1}
---- !u!114 &2135889867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2135889865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b78095760acb40d1b41754bf461fd7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  relatedTrap: {fileID: 195645903}
---- !u!4 &2135889868
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2135889865}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.06999993, y: -3.17000008, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5

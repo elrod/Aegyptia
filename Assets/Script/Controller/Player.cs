@@ -69,5 +69,6 @@ public class Player : MonoBehaviour {
 
 	public void TurnOff(){
 		isActive = false;
+		velocity.x = 0;
 	}
 }

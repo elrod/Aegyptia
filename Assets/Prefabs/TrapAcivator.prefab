@@ -9,10 +9,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 462368}
   - 61: {fileID: 6196098}
-  - 114: {fileID: 11492990}
   - 50: {fileID: 5072242}
+  - 114: {fileID: 11494824}
   m_Layer: 0
-  m_Name: RotatingAxeSwitch
+  m_Name: TrapAcivator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ BoxCollider2D:
   m_Offset: {x: -.190057993, y: -.828455925}
   serializedVersion: 2
   m_Size: {x: 1.02923989, y: 2.65692115}
---- !u!114 &11492990
+--- !u!114 &11494824
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -67,10 +67,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 117588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fc3698e1820aee4cae3a5e0107a99e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 998997e31ae92e0428e645ea73ec913c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relatedRotatingAxe: {fileID: 0}
+  relatedTrap: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

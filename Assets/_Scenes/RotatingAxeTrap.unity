@@ -89,6 +89,18 @@ NavMeshSettings:
 GameObject:
   m_PrefabParentObject: {fileID: 185334, guid: 021e53fbfe47c4f4bbf2ee472b595712, type: 2}
   m_PrefabInternal: {fileID: 1708857030}
+--- !u!114 &301217030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 301217028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e773df2bfc2b944ac973c323caaa77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!1001 &329922762
 Prefab:
   m_ObjectHideFlags: 0
@@ -131,6 +143,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57c3743dfe906e64d99f9194a129dae9, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &929598208 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 185334, guid: 021e53fbfe47c4f4bbf2ee472b595712, type: 2}
+  m_PrefabInternal: {fileID: 1332175495}
+--- !u!114 &929598210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 929598208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e773df2bfc2b944ac973c323caaa77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 1
 --- !u!1001 &1332175495
 Prefab:
   m_ObjectHideFlags: 0
@@ -382,6 +410,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11492990, guid: d7e5ce5f17b2247488c520a54384c172, type: 2}
       propertyPath: relatedRotatingAxe
+      value: 
+      objectReference: {fileID: 301217028}
+    - target: {fileID: 11494824, guid: d7e5ce5f17b2247488c520a54384c172, type: 2}
+      propertyPath: relatedTrap
       value: 
       objectReference: {fileID: 301217028}
     m_RemovedComponents: []
