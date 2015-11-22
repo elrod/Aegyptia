@@ -14,12 +14,21 @@ public class Player : MonoBehaviour {
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
     float moveSpeed = 6;
-
+    
     float gravity;
     float jumpVelocity;
 
     Vector3 velocity;
     float velocityXSmoothing;
+
+    //vars for the mutation
+    public bool CanShapeShift { get; set; }
+    public GameObject NewShape { get; set; }
+    GameObject anim;
+    bool isHuman = true;
+    float oldGravity;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -47,20 +56,47 @@ public class Player : MonoBehaviour {
         }
 
 		if (isActive) {
-			// Getting input
-			Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 
-			// Jumping logic
-			if (Input.GetButtonDown ("Jump") && controller.collisions.below) {
-				velocity.y = jumpVelocity;
-			}
+            if (isHuman)
+            {
+                // Getting input
+                Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-			float targetVelocityX = input.x * moveSpeed;
-			// We use smoothDamp to gradually reach our top velocity
-			velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-		}
+                // Jumping logic
+                if (Input.GetButtonDown("Jump") && controller.collisions.below)
+                {
+                    velocity.y = jumpVelocity;
+                }
+
+                float targetVelocityX = input.x * moveSpeed;
+                // We use smoothDamp to gradually reach our top velocity
+                velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+
+                if (Input.GetButtonDown("ShapeShift"))
+                {
+
+                    if (CanShapeShift)
+                    {
+                        ShapeShift();
+                    }
+
+                }
+
+            }
+            else
+            {
+                velocity.x = 0;
+                velocity.y = 0;
+                if (Input.GetButtonDown("ShapeShift")) // if is not human
+                {
+                    BackToHuman();
+                }
+            }
+        
+        }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
 	}
 
 	public void TurnOn(){
@@ -71,4 +107,25 @@ public class Player : MonoBehaviour {
 		isActive = false;
 		velocity.x = 0;
 	}
+
+    private void ShapeShift()
+    {
+        anim = Instantiate<GameObject>(NewShape) as GameObject; //create the new shape
+        Vector3 pos = transform.position; 
+        anim.transform.position = pos; //the new shape's position is the same of the player
+        gameObject.GetComponent<MeshRenderer>().enabled = false; //unactive the player and make it invisible
+        gameObject.transform.parent = anim.transform; //the player became the child of the new shape
+        oldGravity = gravity;
+        gravity = 0;
+        isHuman = false;
+    }
+
+    private void BackToHuman()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        gravity = oldGravity;
+        isHuman = true;
+        gameObject.transform.parent = null;
+        Destroy(anim);
+    }
 }
