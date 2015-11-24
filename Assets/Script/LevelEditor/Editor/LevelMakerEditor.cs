@@ -58,18 +58,18 @@ public class LevelMakerEditor : Editor {
         {
             case EventType.MouseDown:
                 GUIUtility.hotControl = controlID;
-                Debug.Log("MOUSE DOWN");
+                //Debug.Log("MOUSE DOWN");
                 e.Use();
                 break;
             case EventType.MouseUp:
                 GUIUtility.hotControl = 0;
-                Debug.Log("MOUSE UP");
+                //Debug.Log("MOUSE UP");
                 OnMouseUpHandler(e.mousePosition, e.button);
                 e.Use();
                 break;
             case EventType.MouseDrag:
                 GUIUtility.hotControl = controlID;
-                Debug.Log("MOUSE DRAG");
+                //Debug.Log("MOUSE DRAG");
                 OnMouseDragHandler(e.mousePosition, e.button);
                 e.Use();
                 break;
@@ -89,7 +89,7 @@ public class LevelMakerEditor : Editor {
         {
             grid.AddTile(snappedPosition);
         }
-        else
+        else if(button == 1)
         {
             grid.RemoveTileAt(snappedPosition);
         }
@@ -109,7 +109,7 @@ public class LevelMakerEditor : Editor {
         {
             grid.AddTile(snappedPosition);
         }
-        else
+		else if(button == 1)
         {
             grid.RemoveTileAt(snappedPosition);
         }

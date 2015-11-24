@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Controller2D : MonoBehaviour {
 
-    const float skinWidth = 0.05f;
+    const float skinWidth = 0.15f;
 
     // public stuff
     public LayerMask collisionMask;         // We use this to establish which objects we want to collide with...

@@ -10,6 +10,7 @@ public class LevelMaker : MonoBehaviour {
     public float height = 32.0f;
 
     public Color gridColor = Color.green;
+	public bool gridVisible = true;
 
     public GameObject[] tiles;
 
@@ -19,13 +20,27 @@ public class LevelMaker : MonoBehaviour {
 
     void OnDrawGizmos()
     {
+		if(gameObject.GetComponentsInChildren<Transform>().Length - 1 > levelTiles.Count){
+			levelTiles.Clear();
+			foreach(Transform child in gameObject.GetComponentsInChildren<Transform>()){
+				if(!child.gameObject.Equals(gameObject)){
+					levelTiles.Add(child.gameObject);
+				}
+			}
+		}
         DrawGrid();
     }
 
     void DrawGrid()
     {
         Vector3 pos = Camera.current.transform.position;
-        Gizmos.color = gridColor;
+		if(gridVisible){
+			gridColor.a = 1f;
+		}
+		else{
+			gridColor.a = 0f;
+		}
+		Gizmos.color = gridColor;
 
         for (float y = pos.y - 800.0f; y < pos.y + 800.0f; y += this.height)
         {
