@@ -87,7 +87,7 @@ public class LevelMakerEditor : Editor {
         // Add element: left click, remove element, right click
         if (button == 0)
         {
-            grid.AddTile(snappedPosition);
+            grid.AddTile(snappedPosition,true);
         }
         else if(button == 1)
         {
@@ -107,7 +107,7 @@ public class LevelMakerEditor : Editor {
         // Add element: left click, remove element, right click
         if (button == 0)
         {
-            grid.AddTile(snappedPosition);
+            grid.AddTile(snappedPosition,false);
         }
 		else if(button == 1)
         {

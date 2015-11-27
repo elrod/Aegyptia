@@ -12,7 +12,10 @@ public class LevelMaker : MonoBehaviour {
     public Color gridColor = Color.green;
 	public bool gridVisible = true;
 
+    public bool loop;
     public GameObject[] tiles;
+    public GameObject[] tilesOnLoop;
+    int loopIndex = 0;
 
     List<GameObject> levelTiles = new List<GameObject>();
 
@@ -65,10 +68,52 @@ public class LevelMaker : MonoBehaviour {
                 return;
             }
         }
-        GameObject newTile = Instantiate<GameObject>(tiles[selectedTile]) as GameObject;
-        newTile.transform.position = position;
-        newTile.transform.SetParent(transform);
-        levelTiles.Add(newTile);
+            GameObject newTile = Instantiate<GameObject>(tiles[selectedTile]) as GameObject;
+            newTile.transform.position = position;
+            newTile.transform.SetParent(transform);
+            levelTiles.Add(newTile);
+    }
+
+    public void AddTile(Vector3 position, bool isLast)
+    {
+        foreach (GameObject tile in levelTiles)
+        {
+            if (tile.transform.position == position)
+            {
+                // If we get here, tile is already occupied, ignoring adding request
+                //Debug.Log("Tile already occupied, ignoring");
+                return;
+            }
+        }
+        if (loop)
+        {
+            if (isLast)
+            {
+                GameObject newTile = Instantiate<GameObject>(tilesOnLoop[tilesOnLoop.Length - 1]) as GameObject;
+                newTile.transform.position = position;
+                newTile.transform.SetParent(transform);
+                levelTiles.Add(newTile);
+                loopIndex = 0;
+            }
+            else
+            {
+                if (loopIndex == tilesOnLoop.Length - 1) loopIndex = 1; //se arrivi alla fine dell'array inserisci la seconda tile (la prima va solo all'inizio)
+                {
+                    GameObject newTile = Instantiate<GameObject>(tilesOnLoop[loopIndex]) as GameObject;
+                    newTile.transform.position = position;
+                    newTile.transform.SetParent(transform);
+                    levelTiles.Add(newTile);
+                    loopIndex++;
+                }
+            }
+        }
+        else
+        {
+            GameObject newTile = Instantiate<GameObject>(tiles[selectedTile]) as GameObject;
+            newTile.transform.position = position;
+            newTile.transform.SetParent(transform);
+            levelTiles.Add(newTile);
+        }
     }
 
     public void RemoveTileAt(Vector3 position)
