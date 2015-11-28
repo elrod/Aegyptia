@@ -3,15 +3,16 @@ using System.Collections;
 
 public class SpearBehavior : MonoBehaviour {
 
-    public float velocityUp = 1;
-    public float velocityDown = 1;
-    public float deltaMovement = 5;
+    public float velocityUp;
+    public float velocityDown;
+    public float deltaMovement;
 
-    bool isGoingUp = true, isGoingDown = false;
+    Vector3 initPosition;
+    bool isGoingDown = false;
 
 	// Use this for initialization
 	void Start () {
-	
+        initPosition = gameObject.transform.position;
 	}
 	
 	// Update is called once per frame
@@ -20,15 +21,25 @@ public class SpearBehavior : MonoBehaviour {
         else goUp();
 	}
 
+    void goDown()
+    {
+        Vector3 pos = transform.position;
+        pos += new Vector3(Mathf.Cos((transform.eulerAngles.z - 90) * Mathf.Deg2Rad), Mathf.Sin((transform.eulerAngles.z - 90) * Mathf.Deg2Rad), 0) * velocityDown * Time.deltaTime;
+        transform.position = pos;
+        if (pos.y < initPosition.y - deltaMovement)
+        {
+            isGoingDown = false;
+        }
+    }
+
     void goUp()
     {
         Vector3 pos = transform.position;
-        pos += new Vector3(Mathf.Pow(Mathf.Cos(transform.eulerAngles.z),2),Mathf.Pow(Mathf.Sin(transform.eulerAngles.z),2),0) * velocityUp * Time.deltaTime;
+        pos -= new Vector3(Mathf.Cos((transform.eulerAngles.z - 90) * Mathf.Deg2Rad), Mathf.Sin((transform.eulerAngles.z - 90) * Mathf.Deg2Rad), 0) * velocityUp * Time.deltaTime;
         transform.position = pos;
-    }
-
-    void goDown()
-    {
-
+        if (pos.y > initPosition.y + deltaMovement)
+        {
+            isGoingDown = true;
+        }
     }
 }
