@@ -17,6 +17,7 @@ public class LevelMakerEditor : Editor {
         DrawDefaultInspector();
         // SEPARATOR
         GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
+		GUILayout.Label("SELECT SINGLE TILE");
         // Customizing the inspector a little bit
         GUILayout.BeginHorizontal();
         for (int i = 0; i < grid.tiles.Length; i++)
@@ -31,11 +32,29 @@ public class LevelMakerEditor : Editor {
             if (GUILayout.Button(tilePrefab.name))
             {
                 grid.SelectTile(i);
+				grid.DisableLoop();
             }
         }
         GUILayout.EndHorizontal();
         // SEPARATOR
         GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
+		GUILayout.Label("SELECT LOOP");
+		GUILayout.BeginHorizontal();
+		for(int j = 0; j < grid.loops.Length; j++){
+			if(j % 2 == 0 && j != 0)
+			{
+				GUILayout.EndHorizontal();
+				GUILayout.BeginHorizontal();
+			}
+			if(GUILayout.Button(grid.loops[j].loopName == "" ? "Loop "+ j : grid.loops[j].loopName)){
+				grid.SelectLoop(j);
+				grid.EnableLoop();
+			}
+		}
+		GUILayout.EndHorizontal();
+		// SEPARATOR
+		GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
+		GUILayout.Label("WARNING AREA!!!");
         if (GUILayout.Button("Reset Level"))
         {
             grid.ResetLevel();

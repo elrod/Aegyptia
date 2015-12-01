@@ -9,8 +9,6 @@ public class Scarab : MonoBehaviour {
     float smoothMove = 0.1f;
     float moveSpeed = 6;
 
-    float jumpVelocity;
-
     Vector3 velocity;
 
     float velocityXSmoothing;
@@ -51,4 +49,5 @@ public class Scarab : MonoBehaviour {
         velocity.x = 0;
         velocity.y = 0;
     }
+
 }

@@ -112,14 +112,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b20882f7603164289faf15c6081162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 32
-  height: 32
+  width: 1
+  height: 1
   gridColor: {r: 0, g: 1, b: 0, a: 1}
+  gridVisible: 1
   tiles:
   - {fileID: 159852, guid: ca027919c76abd940aa592ef34047923, type: 2}
   - {fileID: 130696, guid: a51e40bb9baacbe4096de93ba40515fc, type: 2}
   - {fileID: 156626, guid: 570d88802b1ef5e4ca2fd9c4f3deb377, type: 2}
   - {fileID: 117488, guid: 88866749381b0d8438107cb3fc6b57c6, type: 2}
+  loops:
+  - loopName: Pavimento
+    tiles:
+    - {fileID: 153600, guid: 749f411039f6fcc429fba9b9587454a3, type: 2}
+    - {fileID: 188298, guid: cbb831d2e6a6a05418aec98e457b5a2a, type: 2}
 --- !u!4 &422108573
 Transform:
   m_ObjectHideFlags: 0
