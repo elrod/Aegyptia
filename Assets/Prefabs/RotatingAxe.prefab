@@ -26,6 +26,7 @@ GameObject:
   - 33: {fileID: 3387882}
   - 23: {fileID: 2331908}
   - 61: {fileID: 6102920}
+  - 114: {fileID: 11478542}
   m_Layer: 9
   m_Name: Blade
   m_TagString: Untagged
@@ -45,6 +46,8 @@ GameObject:
   - 23: {fileID: 2363972}
   - 61: {fileID: 6148374}
   - 114: {fileID: 11428062}
+  - 114: {fileID: 11450312}
+  - 114: {fileID: 11472362}
   m_Layer: 9
   m_Name: RotatingAxe
   m_TagString: Untagged
@@ -59,8 +62,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 1, z: 0}
-  m_LocalScale: {x: 2, y: .200000003, z: 1}
+  m_LocalPosition: {x: 16.3999996, y: 24.6000004, z: 0}
+  m_LocalScale: {x: 6, y: .600000024, z: 1}
   m_Children:
   - {fileID: 446684}
   - {fileID: 454672}
@@ -160,7 +163,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 161818}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -173,7 +176,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 185334}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -190,19 +193,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotationCentre: {fileID: 156688}
-  rotationSpeed: 0
-  invertRotation: 0
+  rotationSpeed: 60
+  invertRotation: 1
   minAngle: 0
-  maxAngle: 0
-  goRight: 0
-  isActive: 0
+  maxAngle: 180
+  goRight: 1
+--- !u!114 &11450312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fd254bb66d8b248a15d39d943357d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11472362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e773df2bfc2b944ac973c323caaa77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 1
+--- !u!114 &11478542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fd254bb66d8b248a15d39d943357d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 185334}

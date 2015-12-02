@@ -6,14 +6,18 @@ using System.Collections;
 public class FollowingEnemy : MonoBehaviour {
 
 	Controller2D controller;
+
 	public GameObject playerToFollow;
-	
+	public float movementRange = 2f;
+	public float moveSpeed = 4;
+
+	Vector3 tempPosition;
+	bool following = true;
+
 	float accelerationTimeAirborne = .2f;
 	float accelerationTimeGrounded = .1f;
-	public float moveSpeed = 4;
 	
 	float gravity = -50;
-
 	Vector3 velocity;
 	float velocityXSmoothing;
 	
@@ -31,8 +35,19 @@ public class FollowingEnemy : MonoBehaviour {
 		if(controller.collisions.above || controller.collisions.below){
 			velocity.y = 0;
 		}
-
-		float directionX = Mathf.Sign (playerToFollow.transform.position.x - transform.position.x);
+		float distance;
+		if (following) {
+			distance = playerToFollow.transform.position.x - transform.position.x;
+		} else {
+			distance = tempPosition.x - transform.position.x;
+		}
+		if (Mathf.Abs(distance) < 0.1f && following) {
+			following = false;
+			tempPosition = playerToFollow.transform.position + (new Vector3 (Random.Range (-movementRange, movementRange), 0f, 0f));
+		} else if (Mathf.Abs(distance) < 0.1f && !following) {
+			following = true;
+		}
+		float directionX = Mathf.Sign (distance);
 		float targetVelocityX = directionX * moveSpeed;
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 

@@ -523,8 +523,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPreFab: {fileID: 120756, guid: 0bc1df2d97d9cd64f8b827bbc7eedbe6, type: 2}
   playerToFollow: {fileID: 1510135572}
-  enemyToSpawn: 1
-  interval: 5
+  enemyToSpawn: 2
+  interval: 3
 --- !u!4 &794752419
 Transform:
   m_ObjectHideFlags: 0
