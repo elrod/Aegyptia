@@ -29,7 +29,6 @@ public class Player : MonoBehaviour {
     float oldGravity;
 
 
-
 	// Use this for initialization
 	void Start () {
         controller = GetComponent<Controller2D>();
@@ -128,4 +127,16 @@ public class Player : MonoBehaviour {
         gameObject.transform.parent = null;
         Destroy(anim);
     }
+
+	void OnCollisionEnter2D(Collision2D coll){
+		if (coll.gameObject.tag == "MovingPlatform") {
+			transform.parent = coll.transform;
+		}
+	}
+
+	void OnCollisionExit2D(Collision2D coll){
+		if (coll.gameObject.tag == "MovingPlatform") {
+			transform.parent = null;
+		}
+	}
 }
