@@ -7,7 +7,7 @@ public class Player : MonoBehaviour {
 
     Controller2D controller;
 
-	bool isActive = true; 	
+	public bool isActive = true; 	
 
     public float jumpHeight = 4;           // How many unity units we want our player to jump
     public float timeToJumpApex = .4f;     // How much time our player will take to reach the top of the jump curve.

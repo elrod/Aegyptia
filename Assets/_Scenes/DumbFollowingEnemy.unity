@@ -437,62 +437,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57c3743dfe906e64d99f9194a129dae9, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &667111588
+--- !u!1 &667111588 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 667111591}
-  - 114: {fileID: 667111590}
-  - 114: {fileID: 667111589}
-  m_Layer: 0
-  m_Name: TriggeredEnemySpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &667111589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 667111588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3200b5f427d746444838db390036b091, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPreFab: {fileID: 120756, guid: 0bc1df2d97d9cd64f8b827bbc7eedbe6, type: 2}
-  playerToFollow: {fileID: 162036718}
-  enemyToSpawn: 1
-  interval: 2
---- !u!114 &667111590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 667111588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99e773df2bfc2b944ac973c323caaa77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isActive: 0
---- !u!4 &667111591
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 667111588}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.9000001, y: -1.39999998, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_PrefabParentObject: {fileID: 175874, guid: a89670593a50855409ce9bdd9cc184f6, type: 2}
+  m_PrefabInternal: {fileID: 1535190937}
 --- !u!1 &794752417
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,6 +642,52 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 180004, guid: 57c3743dfe906e64d99f9194a129dae9, type: 2}
   m_PrefabInternal: {fileID: 461285435}
+--- !u!1001 &1535190937
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 418598, guid: a89670593a50855409ce9bdd9cc184f6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 6.9000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 418598, guid: a89670593a50855409ce9bdd9cc184f6, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.39999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 418598, guid: a89670593a50855409ce9bdd9cc184f6, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 418598, guid: a89670593a50855409ce9bdd9cc184f6, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 418598, guid: a89670593a50855409ce9bdd9cc184f6, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 418598, guid: a89670593a50855409ce9bdd9cc184f6, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 418598, guid: a89670593a50855409ce9bdd9cc184f6, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 418598, guid: a89670593a50855409ce9bdd9cc184f6, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 11407924, guid: a89670593a50855409ce9bdd9cc184f6, type: 2}
+      propertyPath: playerToFollow
+      value: 
+      objectReference: {fileID: 162036718}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a89670593a50855409ce9bdd9cc184f6, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1710148511
 Prefab:
   m_ObjectHideFlags: 0
