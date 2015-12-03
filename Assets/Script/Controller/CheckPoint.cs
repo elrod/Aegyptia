@@ -7,10 +7,13 @@ public class CheckPoint : MonoBehaviour {
 	public Color activeCheckpoint;
 
 	LevelManager levelManager;
+	PlayerGovernor playerGovernor;
 	
 	// Use this for initialization
 	void Start () {
 		levelManager = FindObjectOfType<LevelManager> ();
+		playerGovernor = FindObjectOfType<PlayerGovernor> ();
+
 		gameObject.GetComponent<MeshRenderer> ().material.color = inactiveCheckPoint;
 	}
 	
@@ -21,10 +24,19 @@ public class CheckPoint : MonoBehaviour {
 	
 	void OnTriggerEnter2D (Collider2D coll){
 		if (coll.tag == "Player") {
-			levelManager.currentCheckpoint.GetComponent<MeshRenderer> ().material.color = inactiveCheckPoint; 	
+			if (playerGovernor.IsP1Active()){
+				if (levelManager.currentCheckpointP1 != null){
+					levelManager.currentCheckpointP1.GetComponent<MeshRenderer> ().material.color = inactiveCheckPoint; 	
+				}
+				levelManager.currentCheckpointP1 = gameObject;
+			} else {
+				if (levelManager.currentCheckpointP2 != null){
+					levelManager.currentCheckpointP2.GetComponent<MeshRenderer> ().material.color = inactiveCheckPoint; 	
+				}
+				levelManager.currentCheckpointP2 = gameObject;
+			}
 			gameObject.GetComponent<MeshRenderer> ().material.color = activeCheckpoint;
-			levelManager.currentCheckpoint = gameObject;
-			Debug.Log("Activated checkpoint " + transform.position);
+			// Debug.Log("Activated checkpoint " + transform.position);
 		}
 	}
 }

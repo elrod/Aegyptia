@@ -100,10 +100,12 @@ public class Player : MonoBehaviour {
 
 	public void TurnOn(){
 		isActive = true;
+		gameObject.tag = "Player";
 	}
 
 	public void TurnOff(){
 		isActive = false;
+		gameObject.tag = "InactivePlayer";
 		velocity.x = 0;
 	}
 

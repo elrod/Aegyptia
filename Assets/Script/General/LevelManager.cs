@@ -3,18 +3,22 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 
-	public GameObject currentCheckpoint;
+	public GameObject currentCheckpointP1 = null;
+	public GameObject currentCheckpointP2 = null;
 	public GameObject deathParticle;
 	public GameObject respawnParticle;
 	public float respawnDelay;
 
 	GameObject player;
+	PlayerGovernor playerGovernor;
 	
 	// Update is called once per frame
 	void Update () {
 
 		// Find the active player
 		player = GameObject.FindGameObjectWithTag ("Player");
+
+		playerGovernor = FindObjectOfType<PlayerGovernor> ();
 
 	}
 
@@ -37,7 +41,11 @@ public class LevelManager : MonoBehaviour {
 		// Now we wait the respawn delay so the death animation can be seen and then the player respawn
 		// to the last activated chekpoint 
 		yield return new WaitForSeconds (respawnDelay);
-		player.transform.position = currentCheckpoint.transform.position;
+		if (playerGovernor.IsP1Active ()) {
+			player.transform.position = currentCheckpointP1.transform.position;
+		} else {
+			player.transform.position = currentCheckpointP1.transform.position;
+		}
 		player.GetComponent<Controller2D> ().enabled = true;
 		player.GetComponent<Renderer> ().enabled = true;
 		Instantiate (respawnParticle, player.transform.position, player.transform.rotation);

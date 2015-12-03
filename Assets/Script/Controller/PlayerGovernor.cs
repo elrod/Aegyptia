@@ -46,4 +46,8 @@ public class PlayerGovernor : MonoBehaviour {
 		isP1Active = !isP1Active;
 		Camera.main.GetComponent<CameraMovement>().SwitchingFocus(activeNow.transform.position);
 	}
+
+	public bool IsP1Active(){
+		return isP1Active;
+	}
 }

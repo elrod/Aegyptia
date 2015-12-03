@@ -35,18 +35,29 @@ public class FollowingEnemy : MonoBehaviour {
 		if(controller.collisions.above || controller.collisions.below){
 			velocity.y = 0;
 		}
+
+		// Check the distance between the enemy and its current target
 		float distance;
 		if (following) {
 			distance = playerToFollow.transform.position.x - transform.position.x;
 		} else {
 			distance = tempPosition.x - transform.position.x;
 		}
+
+		// If the enemy is arrived then pick a random target if it is followin the player or return following him
 		if (Mathf.Abs(distance) < 0.1f && following) {
 			following = false;
 			tempPosition = playerToFollow.transform.position + (new Vector3 (Random.Range (-movementRange, movementRange), 0f, 0f));
 		} else if (Mathf.Abs(distance) < 0.1f && !following) {
 			following = true;
 		}
+
+		// If there is a collision that forbid the enemy to move pick a new random target
+		if (controller.collisions.left || controller.collisions.right) {
+			following = false;
+			tempPosition = playerToFollow.transform.position + (new Vector3 (Random.Range (-movementRange, movementRange), 0f, 0f));
+		}
+
 		float directionX = Mathf.Sign (distance);
 		float targetVelocityX = directionX * moveSpeed;
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
