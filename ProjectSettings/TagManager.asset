@@ -6,6 +6,7 @@ TagManager:
   tags:
   - InactivePlayer
   - MovingPlatform
+  - ArrowShoter
   layers:
   - Default
   - TransparentFX

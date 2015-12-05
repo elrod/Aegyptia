@@ -141,4 +141,11 @@ public class Player : MonoBehaviour {
 			transform.parent = null;
 		}
 	}
+    public void MenageShapeOnRespawn()
+    {
+        if (!isHuman)
+        {
+            BackToHuman();
+        }
+    }
 }
