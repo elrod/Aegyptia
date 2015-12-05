@@ -6,6 +6,7 @@ using System.Collections;
 public class FallingStones : MonoBehaviour {
 
 	public GameObject stonePrefab;
+    public GameObject stoneFragmentsParticle;
 
 	public int stonesToSpawn;			// 0 means infinity
 	public float minSpawnTime;
@@ -42,6 +43,7 @@ public class FallingStones : MonoBehaviour {
 		}
 		go.transform.position = stonePosition;
 		go.transform.parent = transform;
+        go.GetComponent<StoneBehavior>().fragments = stoneFragmentsParticle;
 		if (stonesToSpawn == 0) {
 			Invoke("SpawnStone", Random.Range (minSpawnTime, maxSpawnTime));
 		}

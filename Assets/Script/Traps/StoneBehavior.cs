@@ -21,8 +21,7 @@ public class StoneBehavior : MonoBehaviour {
 	}
 
 	void SelfDestroy(){
-
-        Instantiate(fragments, gameObject.transform.position, gameObject.transform.rotation);
+        fragments.GetComponent<Fragments>().ShowParticles();
 		Destroy(gameObject);
 	}
     void OnTriggerEnter2D(Collider2D col)
