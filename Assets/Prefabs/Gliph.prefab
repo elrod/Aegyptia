@@ -13,8 +13,8 @@ GameObject:
   - 61: {fileID: 6179614}
   - 114: {fileID: 11407432}
   m_Layer: 0
-  m_Name: ScarabGliph
-  m_TagString: Player
+  m_Name: Gliph
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.80999994, y: 2.92000008, z: 0}
+  m_LocalPosition: {x: 97.5763245, y: 10.3292847, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -49,9 +49,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -88,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc65765b3a9f4bb42a61ed98982b1c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shape: {fileID: 159180, guid: 4ad31f481a2b5d646a15503d145afd2a, type: 2}
+  shape: {fileID: 130232, guid: 60a3176ba4eb27d43a27bfffa97337df, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

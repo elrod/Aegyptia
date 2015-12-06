@@ -7,7 +7,7 @@ public class Player : MonoBehaviour {
 
     Controller2D controller;
 
-	bool isActive = true; 	
+	public bool isActive = true; 	
 
     public float jumpHeight = 4;           // How many unity units we want our player to jump
     public float timeToJumpApex = .4f;     // How much time our player will take to reach the top of the jump curve.
@@ -27,7 +27,6 @@ public class Player : MonoBehaviour {
     GameObject anim;
     bool isHuman = true;
     float oldGravity;
-
 
 
 	// Use this for initialization
@@ -101,10 +100,12 @@ public class Player : MonoBehaviour {
 
 	public void TurnOn(){
 		isActive = true;
+		gameObject.tag = "Player";
 	}
 
 	public void TurnOff(){
 		isActive = false;
+		gameObject.tag = "InactivePlayer";
 		velocity.x = 0;
 	}
 
@@ -127,5 +128,24 @@ public class Player : MonoBehaviour {
         isHuman = true;
         gameObject.transform.parent = null;
         Destroy(anim);
+    }
+
+	void OnCollisionEnter2D(Collision2D coll){
+		if (coll.gameObject.tag == "MovingPlatform") {
+			transform.parent = coll.transform;
+		}
+	}
+
+	void OnCollisionExit2D(Collision2D coll){
+		if (coll.gameObject.tag == "MovingPlatform") {
+			transform.parent = null;
+		}
+	}
+    public void ManageShapeOnRespawn()
+    {
+        if (!isHuman)
+        {
+            BackToHuman();
+        }
     }
 }

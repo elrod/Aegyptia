@@ -8,9 +8,9 @@ public class CameraMovement : MonoBehaviour {
 	public float smoothTimeY = 0.2f;
 	public float smoothTimeX = 0.2f;
 
-	public float normalCameraSize;
-	public float zoomOutCameraSize;
-	public float zoomFactor;
+	public float normalCameraSize = 5f;
+	public float zoomOutCameraSize = 10f;
+	public float zoomFactor = 1.01f;
 	float cameraZValue;
 
 	bool isSwitching = false;
@@ -31,20 +31,26 @@ public class CameraMovement : MonoBehaviour {
 		cameraZValue = Mathf.Abs(Camera.main.transform.position.z)+.1f;
 	}
 	
-	void Update (){
-		activePlayer = GameObject.FindGameObjectWithTag ("Player");
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+	// NOTE: Don't use FixedUpdate, use Update here... I think this was causing that camera vibration feeling while the player
+    // was moving. FixedUpdate should be used for physics only... It could be called more than once per frame, so this could result
+    // in a camera moving faster than it should and vibrating when the player is moving!
+	void Update () {
 
 		if (isSwitching && zoomingOut) {
 			ZoomOut ();
 		}
 
+		if (isSwitching && !zoomingOut) {
+			// With SmoothDamp we reach the position of the prayer gradually 
+			float posX = Mathf.SmoothDamp (transform.position.x, destination.x, ref velocity.x, smoothTimeX);
+			float posY = Mathf.SmoothDamp (transform.position.y, destination.y, ref velocity.y, smoothTimeY);
+			
+			transform.position = new Vector3 (posX, posY, transform.position.z);
+		}
+
 		// The camera moves only if it is not zooming out, so we are sure that if the destination is close
 		// the camera doesn't reach it before completing the zoom out
-		if (!zoomingOut) {
+		if (!isSwitching && !zoomingOut) {
 			// With SmoothDamp we reach the position of the prayer gradually 
 			float posX = Mathf.SmoothDamp (transform.position.x, activePlayer.transform.position.x, ref velocity.x, smoothTimeX);
 			float posY = Mathf.SmoothDamp (transform.position.y, activePlayer.transform.position.y, ref velocity.y, smoothTimeY);
@@ -86,6 +92,9 @@ public class CameraMovement : MonoBehaviour {
 	}
 
 	public void SwitchingFocus(Vector3 dest){
+
+		activePlayer = GameObject.FindGameObjectWithTag ("Player");
+		
 		isSwitching = true;
 		zoomingOut = true;
 		destination = dest;

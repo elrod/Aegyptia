@@ -3,9 +3,12 @@ using System.Collections;
 
 public class StoneBehavior : MonoBehaviour {
 
+
+    Rigidbody2D rb;
+    public GameObject fragments;
 	// Use this for initialization
 	void Start () {
-	
+	    rb = gameObject.GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
@@ -18,6 +21,11 @@ public class StoneBehavior : MonoBehaviour {
 	}
 
 	void SelfDestroy(){
+        fragments.GetComponent<Fragments>().ShowParticles();
 		Destroy(gameObject);
 	}
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        SelfDestroy();
+    }
 }

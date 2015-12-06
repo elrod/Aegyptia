@@ -39,11 +39,15 @@ public class PlayerGovernor : MonoBehaviour {
 	}
 	
 	void SwitchPlayer (GameObject activeBefore, GameObject activeNow){
-		activeBefore.transform.gameObject.tag = "InactivePlayer";
-		activeNow.transform.gameObject.tag = "Player";
+		//activeBefore.transform.gameObject.tag = "InactivePlayer";
+		//activeNow.transform.gameObject.tag = "Player";
 		activeBefore.GetComponent<Player> ().TurnOff ();
 		activeNow.GetComponent<Player> ().TurnOn ();
 		isP1Active = !isP1Active;
 		Camera.main.GetComponent<CameraMovement>().SwitchingFocus(activeNow.transform.position);
+	}
+
+	public bool IsP1Active(){
+		return isP1Active;
 	}
 }

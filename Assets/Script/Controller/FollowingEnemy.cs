@@ -6,14 +6,18 @@ using System.Collections;
 public class FollowingEnemy : MonoBehaviour {
 
 	Controller2D controller;
+
 	public GameObject playerToFollow;
-	
+	public float movementRange = 2f;
+	public float moveSpeed = 4;
+
+	Vector3 tempPosition;
+	bool following = true;
+
 	float accelerationTimeAirborne = .2f;
 	float accelerationTimeGrounded = .1f;
-	public float moveSpeed = 4;
 	
 	float gravity = -50;
-
 	Vector3 velocity;
 	float velocityXSmoothing;
 	
@@ -32,7 +36,29 @@ public class FollowingEnemy : MonoBehaviour {
 			velocity.y = 0;
 		}
 
-		float directionX = Mathf.Sign (playerToFollow.transform.position.x - transform.position.x);
+		// Check the distance between the enemy and its current target
+		float distance;
+		if (following) {
+			distance = playerToFollow.transform.position.x - transform.position.x;
+		} else {
+			distance = tempPosition.x - transform.position.x;
+		}
+
+		// If the enemy is arrived then pick a random target if it is followin the player or return following him
+		if (Mathf.Abs(distance) < 0.1f && following) {
+			following = false;
+			tempPosition = playerToFollow.transform.position + (new Vector3 (Random.Range (-movementRange, movementRange), 0f, 0f));
+		} else if (Mathf.Abs(distance) < 0.1f && !following) {
+			following = true;
+		}
+
+		// If there is a collision that forbid the enemy to move pick a new random target
+		if (controller.collisions.left || controller.collisions.right) {
+			following = false;
+			tempPosition = playerToFollow.transform.position + (new Vector3 (Random.Range (-movementRange, movementRange), 0f, 0f));
+		}
+
+		float directionX = Mathf.Sign (distance);
 		float targetVelocityX = directionX * moveSpeed;
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 

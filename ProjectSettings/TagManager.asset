@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - InactivePlayer
+  - MovingPlatform
+  - ArrowShoter
   layers:
   - Default
   - TransparentFX
