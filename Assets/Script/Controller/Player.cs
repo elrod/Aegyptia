@@ -141,7 +141,7 @@ public class Player : MonoBehaviour {
 			transform.parent = null;
 		}
 	}
-    public void MenageShapeOnRespawn()
+    public void ManageShapeOnRespawn()
     {
         if (!isHuman)
         {

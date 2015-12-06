@@ -31,8 +31,10 @@ public class CameraMovement : MonoBehaviour {
 		cameraZValue = Mathf.Abs(Camera.main.transform.position.z)+.1f;
 	}
 	
-	// Update is called once per frame
-	void FixedUpdate () {
+	// NOTE: Don't use FixedUpdate, use Update here... I think this was causing that camera vibration feeling while the player
+    // was moving. FixedUpdate should be used for physics only... It could be called more than once per frame, so this could result
+    // in a camera moving faster than it should and vibrating when the player is moving!
+	void Update () {
 
 		if (isSwitching && zoomingOut) {
 			ZoomOut ();

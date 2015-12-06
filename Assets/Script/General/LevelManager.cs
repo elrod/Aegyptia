@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour {
 		Instantiate (deathParticle, player.transform.position, player.transform.rotation);
 		player.GetComponent<Controller2D> ().enabled = false;
 		player.GetComponent<Renderer> ().enabled = false;
-        player.GetComponent<Player>().MenageShapeOnRespawn();
+        player.GetComponent<Player>().ManageShapeOnRespawn();
 		//Debug.Log ("Player respawn");
 	
 		// Now we wait the respawn delay so the death animation can be seen and then the player respawn
