@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 452024}
   - 198: {fileID: 19882956}
   - 199: {fileID: 19983060}
+  - 114: {fileID: 11460760}
   m_Layer: 0
   m_Name: RespawnParticle
   m_TagString: Untagged
@@ -29,6 +30,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11460760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8add0195dce7e4bd8b0f08734a7e4a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 1.10000002
 --- !u!198 &19882956
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1100,7 +1113,9 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -1124,7 +1139,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: timer
+      value: 1.10000002
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 159772}

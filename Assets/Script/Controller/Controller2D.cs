@@ -128,7 +128,8 @@ public class Controller2D : MonoBehaviour {
         for (int i = 0; i < horizontalRayCount; i++)
         {
             Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
-            rayOrigin += Vector2.up * (horizontalRaySpacing * i + velocity.y);     // We are adding x velocity because we want to cast from the point we will be after moving in the x direction
+			/* we should add  "+ velocity.y" but it seems to generate problem, we should investigate this... */
+            rayOrigin += Vector2.up * (horizontalRaySpacing * i);     // We are adding x velocity because we want to cast from the point we will be after moving in the x direction
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
 
             Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
