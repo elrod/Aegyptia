@@ -26,7 +26,7 @@ public class PlayerGovernor : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		
 		// Check if the player is changed
 		if (Input.GetButtonDown("SwitchPlayer")) {
