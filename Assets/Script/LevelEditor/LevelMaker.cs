@@ -21,13 +21,16 @@ public class LevelMaker : MonoBehaviour {
 
     public GameObject[] tiles;
 	public Loop[] loops;
+	public Loop[] randomLoops;
 
     List<GameObject> levelTiles = new List<GameObject>();
 
     int selectedTile = 0;
 	int selectedLoop = 0;
+	int selectedRandomLoop = 0;
 	int loopIndex = 0;
 	bool loop;
+	bool randomLoop;
 
     void OnDrawGizmos()
     {
@@ -86,6 +89,12 @@ public class LevelMaker : MonoBehaviour {
         	levelTiles.Add(newTile);
     
 		}
+		else if(randomLoop){
+			GameObject newTile = Instantiate<GameObject>(loops[selectedLoop].tiles[Random.Range(0,loops[selectedLoop].tiles.Length)]) as GameObject;
+			newTile.transform.position = position;
+			newTile.transform.SetParent(transform);
+			levelTiles.Add(newTile);
+		}
 		else{
 			GameObject newTile = Instantiate<GameObject>(tiles[selectedTile]) as GameObject;
 			newTile.transform.position = position;
@@ -141,11 +150,26 @@ public class LevelMaker : MonoBehaviour {
 			selectedLoop = 0;
 	}
 
+	public void SelectRandomLoop(int index)
+	{
+		selectedRandomLoop = index;
+		// In case of array overflow default to 0
+		if(index >= tiles.Length)
+			selectedRandomLoop = 0;
+	}
+
+	public void EnableRandomLoop(){
+		loop = false;
+		randomLoop = true;
+	}
+
 	public void EnableLoop(){
+		randomLoop = false;
 		loop = true;
 	}
 
 	public void DisableLoop(){
+		randomLoop = false;
 		loop = false;
 	}
 
