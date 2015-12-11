@@ -46,4 +46,32 @@ public class Inventory : MonoBehaviour {
 			}
 		}
 	}
+
+    public bool Has(string name)
+    {
+        foreach (InventoryObject obj in inventory)
+        {
+            if (obj.name.Equals(name))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public GameObject Give(string objToGive)
+    {
+        
+        foreach (InventoryObject obj in inventory)
+        {
+            if (obj.name.Equals(objToGive))
+            {
+                GameObject toGive = obj.tool.gameObject;
+                inventory.Remove(obj);
+                return toGive;
+            }
+        }
+        return new GameObject();
+        
+    }
 }
