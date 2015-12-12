@@ -90,7 +90,7 @@ public class LevelMaker : MonoBehaviour {
     
 		}
 		else if(randomLoop){
-			GameObject newTile = Instantiate<GameObject>(loops[selectedLoop].tiles[Random.Range(0,loops[selectedLoop].tiles.Length)]) as GameObject;
+			GameObject newTile = Instantiate<GameObject>(randomLoops[selectedRandomLoop].tiles[Random.Range(0, randomLoops[selectedRandomLoop].tiles.Length)]) as GameObject;
 			newTile.transform.position = position;
 			newTile.transform.SetParent(transform);
 			levelTiles.Add(newTile);

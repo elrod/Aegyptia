@@ -114,7 +114,7 @@ public class Player : MonoBehaviour {
         anim = Instantiate<GameObject>(NewShape) as GameObject; //create the new shape
         Vector3 pos = transform.position; 
         anim.transform.position = pos; //the new shape's position is the same of the player
-        gameObject.GetComponent<MeshRenderer>().enabled = false; //unactive the player and make it invisible
+        gameObject.GetComponent<SpriteRenderer>().enabled = false; //unactive the player and make it invisible
         gameObject.transform.parent = anim.transform; //the player became the child of the new shape
         oldGravity = gravity;
         gravity = 0;
@@ -123,7 +123,7 @@ public class Player : MonoBehaviour {
 
     private void BackToHuman()
     {
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gravity = oldGravity;
         isHuman = true;
         gameObject.transform.parent = null;
