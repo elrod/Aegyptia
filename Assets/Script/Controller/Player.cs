@@ -112,7 +112,8 @@ public class Player : MonoBehaviour {
     private void ShapeShift()
     {
         anim = Instantiate<GameObject>(NewShape) as GameObject; //create the new shape
-        Vector3 pos = transform.position; 
+        Vector3 pos = transform.position;
+        pos.z = 1; 
         anim.transform.position = pos; //the new shape's position is the same of the player
         gameObject.GetComponent<SpriteRenderer>().enabled = false; //unactive the player and make it invisible
         gameObject.transform.parent = anim.transform; //the player became the child of the new shape
