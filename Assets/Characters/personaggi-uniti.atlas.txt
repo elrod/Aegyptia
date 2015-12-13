@@ -1,0 +1,524 @@
+
+personaggi-uniti.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+iside/Layer 19
+  rotate: false
+  xy: 942, 1308
+  size: 102, 103
+  orig: 102, 103
+  offset: 0, 0
+  index: -1
+iside/Layer 20
+  rotate: false
+  xy: 942, 1413
+  size: 130, 134
+  orig: 130, 134
+  offset: 0, 0
+  index: -1
+iside/Layer 21
+  rotate: true
+  xy: 394, 52
+  size: 24, 13
+  orig: 24, 13
+  offset: 0, 0
+  index: -1
+osiride/Layer 50
+  rotate: true
+  xy: 394, 52
+  size: 24, 13
+  orig: 24, 13
+  offset: 0, 0
+  index: -1
+iside/Layer 22
+  rotate: false
+  xy: 1969, 1532
+  size: 77, 264
+  orig: 77, 264
+  offset: 0, 0
+  index: -1
+iside/Layer 23
+  rotate: true
+  xy: 1683, 1549
+  size: 71, 258
+  orig: 71, 258
+  offset: 0, 0
+  index: -1
+iside/Layer 24
+  rotate: false
+  xy: 564, 1546
+  size: 329, 500
+  orig: 329, 500
+  offset: 0, 0
+  index: -1
+iside/Layer 25
+  rotate: false
+  xy: 889, 1292
+  size: 51, 252
+  orig: 51, 252
+  offset: 0, 0
+  index: -1
+osiride/Layer 55
+  rotate: false
+  xy: 889, 1292
+  size: 51, 252
+  orig: 51, 252
+  offset: 0, 0
+  index: -1
+iside/Layer 26
+  rotate: false
+  xy: 338, 78
+  size: 69, 172
+  orig: 69, 172
+  offset: 0, 0
+  index: -1
+osiride/Layer 56
+  rotate: false
+  xy: 338, 78
+  size: 69, 172
+  orig: 69, 172
+  offset: 0, 0
+  index: -1
+iside/Layer 27
+  rotate: true
+  xy: 1415, 1570
+  size: 69, 266
+  orig: 69, 266
+  offset: 0, 0
+  index: -1
+osiride/Layer 57
+  rotate: true
+  xy: 1415, 1570
+  size: 69, 266
+  orig: 69, 266
+  offset: 0, 0
+  index: -1
+iside/Layer 28
+  rotate: false
+  xy: 498, 432
+  size: 51, 253
+  orig: 51, 253
+  offset: 0, 0
+  index: -1
+osiride/Layer 58
+  rotate: false
+  xy: 498, 432
+  size: 51, 253
+  orig: 51, 253
+  offset: 0, 0
+  index: -1
+iside/Layer 29
+  rotate: false
+  xy: 825, 709
+  size: 66, 173
+  orig: 66, 173
+  offset: 0, 0
+  index: -1
+osiride/Layer 59
+  rotate: false
+  xy: 825, 709
+  size: 66, 173
+  orig: 66, 173
+  offset: 0, 0
+  index: -1
+iside/Layer 30
+  rotate: false
+  xy: 189, 252
+  size: 236, 107
+  orig: 236, 107
+  offset: 0, 0
+  index: -1
+osiride/Layer 45
+  rotate: false
+  xy: 189, 252
+  size: 236, 107
+  orig: 236, 107
+  offset: 0, 0
+  index: -1
+iside/Layer 31
+  rotate: false
+  xy: 536, 759
+  size: 64, 425
+  orig: 64, 425
+  offset: 0, 0
+  index: -1
+osiride/Layer 46
+  rotate: false
+  xy: 536, 759
+  size: 64, 425
+  orig: 64, 425
+  offset: 0, 0
+  index: -1
+iside/Layer 32
+  rotate: true
+  xy: 1700, 1798
+  size: 93, 311
+  orig: 93, 311
+  offset: 0, 0
+  index: -1
+osiride/Layer 47
+  rotate: true
+  xy: 1700, 1798
+  size: 93, 311
+  orig: 93, 311
+  offset: 0, 0
+  index: -1
+iside/Layer 33
+  rotate: true
+  xy: 1415, 1499
+  size: 69, 266
+  orig: 69, 266
+  offset: 0, 0
+  index: -1
+osiride/Layer 54
+  rotate: true
+  xy: 1415, 1499
+  size: 69, 266
+  orig: 69, 266
+  offset: 0, 0
+  index: -1
+iside/Layer 34
+  rotate: false
+  xy: 824, 884
+  size: 84, 311
+  orig: 84, 311
+  offset: 0, 0
+  index: -1
+osiride/Layer 42
+  rotate: false
+  xy: 824, 884
+  size: 84, 311
+  orig: 84, 311
+  offset: 0, 0
+  index: -1
+iside/Layer 35
+  rotate: false
+  xy: 602, 770
+  size: 65, 425
+  orig: 65, 425
+  offset: 0, 0
+  index: -1
+osiride/Layer 43
+  rotate: false
+  xy: 602, 770
+  size: 65, 425
+  orig: 65, 425
+  offset: 0, 0
+  index: -1
+iside/Layer 36
+  rotate: false
+  xy: 895, 1549
+  size: 326, 497
+  orig: 326, 497
+  offset: 0, 0
+  index: -1
+iside/Layer 39
+  rotate: false
+  xy: 1730, 1688
+  size: 237, 108
+  orig: 237, 108
+  offset: 0, 0
+  index: -1
+osiride/Layer 41
+  rotate: false
+  xy: 1730, 1688
+  size: 237, 108
+  orig: 237, 108
+  offset: 0, 0
+  index: -1
+iside/Layer 5
+  rotate: false
+  xy: 2, 370
+  size: 203, 814
+  orig: 203, 814
+  offset: 0, 0
+  index: -1
+iside/Layer 7
+  rotate: false
+  xy: 910, 1042
+  size: 46, 78
+  orig: 46, 78
+  offset: 0, 0
+  index: -1
+iside/Layer 8
+  rotate: false
+  xy: 910, 967
+  size: 47, 73
+  orig: 47, 73
+  offset: 0, 0
+  index: -1
+iside/bocca
+  rotate: false
+  xy: 910, 884
+  size: 30, 26
+  orig: 30, 26
+  offset: 0, 0
+  index: -1
+iside/bocca_rossa
+  rotate: true
+  xy: 1046, 1381
+  size: 30, 26
+  orig: 30, 26
+  offset: 0, 0
+  index: -1
+iside/capelli_lv1
+  rotate: true
+  xy: 207, 361
+  size: 66, 298
+  orig: 66, 298
+  offset: 0, 0
+  index: -1
+iside/capelli_lv2
+  rotate: false
+  xy: 207, 429
+  size: 289, 256
+  orig: 289, 256
+  offset: 0, 0
+  index: -1
+iside/capelli_lv3
+  rotate: false
+  xy: 189, 76
+  size: 147, 174
+  orig: 147, 174
+  offset: 0, 0
+  index: -1
+iside/capelli_ornamento
+  rotate: false
+  xy: 889, 1200
+  size: 73, 90
+  orig: 73, 90
+  offset: 0, 0
+  index: -1
+iside/cintura
+  rotate: true
+  xy: 476, 133
+  size: 137, 52
+  orig: 137, 52
+  offset: 0, 0
+  index: -1
+iside/fascia_capelli
+  rotate: false
+  xy: 1447, 1641
+  size: 281, 147
+  orig: 281, 147
+  offset: 0, 0
+  index: -1
+iside/maglia_collo
+  rotate: false
+  xy: 1700, 1893
+  size: 319, 153
+  orig: 319, 153
+  offset: 0, 0
+  index: -1
+iside/occhio
+  rotate: true
+  xy: 2021, 1982
+  size: 64, 21
+  orig: 64, 21
+  offset: 0, 0
+  index: -1
+iside/orecchio
+  rotate: true
+  xy: 2, 13
+  size: 32, 54
+  orig: 32, 54
+  offset: 0, 0
+  index: -1
+osiride/orecchio-o
+  rotate: true
+  xy: 2, 13
+  size: 32, 54
+  orig: 32, 54
+  offset: 0, 0
+  index: -1
+iside/serpente
+  rotate: false
+  xy: 476, 55
+  size: 51, 76
+  orig: 51, 76
+  offset: 0, 0
+  index: -1
+iside/sopracciglio
+  rotate: true
+  xy: 1943, 1560
+  size: 60, 16
+  orig: 60, 16
+  offset: 0, 0
+  index: -1
+iside/velo_posteriore
+  rotate: false
+  xy: 2, 1186
+  size: 560, 860
+  orig: 560, 860
+  offset: 0, 0
+  index: -1
+osiride/Layer 40
+  rotate: true
+  xy: 2, 47
+  size: 321, 185
+  orig: 321, 185
+  offset: 0, 0
+  index: -1
+osiride/Layer 44
+  rotate: false
+  xy: 207, 687
+  size: 327, 497
+  orig: 327, 497
+  offset: 0, 0
+  index: -1
+osiride/Layer 48
+  rotate: true
+  xy: 1074, 1443
+  size: 104, 145
+  orig: 104, 145
+  offset: 0, 0
+  index: -1
+osiride/Layer 49
+  rotate: true
+  xy: 669, 744
+  size: 130, 154
+  orig: 130, 154
+  offset: 0, 0
+  index: -1
+osiride/Layer 53
+  rotate: false
+  xy: 564, 1197
+  size: 323, 347
+  orig: 323, 347
+  offset: 0, 0
+  index: -1
+osiride/Layer 60
+  rotate: true
+  xy: 189, 22
+  size: 52, 139
+  orig: 52, 139
+  offset: 0, 0
+  index: -1
+osiride/Layer 61
+  rotate: true
+  xy: 1074, 1389
+  size: 52, 141
+  orig: 52, 141
+  offset: 0, 0
+  index: -1
+osiride/Layer 63-o
+  rotate: true
+  xy: 536, 695
+  size: 62, 73
+  orig: 62, 73
+  offset: 0, 0
+  index: -1
+osiride/Layer 64-o
+  rotate: false
+  xy: 330, 2
+  size: 62, 72
+  orig: 62, 72
+  offset: 0, 0
+  index: -1
+osiride/Layer 66-o
+  rotate: true
+  xy: 427, 272
+  size: 87, 111
+  orig: 87, 111
+  offset: 0, 0
+  index: -1
+osiride/Layer 68-o
+  rotate: false
+  xy: 910, 912
+  size: 53, 53
+  orig: 53, 53
+  offset: 0, 0
+  index: -1
+osiride/bocca-o
+  rotate: true
+  xy: 2021, 1896
+  size: 28, 20
+  orig: 28, 20
+  offset: 0, 0
+  index: -1
+osiride/capelli_lv1-o
+  rotate: true
+  xy: 1730, 1622
+  size: 64, 229
+  orig: 64, 229
+  offset: 0, 0
+  index: -1
+osiride/capelli_lv2-o
+  rotate: false
+  xy: 1447, 1790
+  size: 251, 256
+  orig: 251, 256
+  offset: 0, 0
+  index: -1
+osiride/cinta
+  rotate: false
+  xy: 1223, 1552
+  size: 190, 106
+  orig: 190, 106
+  offset: 0, 0
+  index: -1
+osiride/collare-o
+  rotate: true
+  xy: 669, 876
+  size: 319, 153
+  orig: 319, 153
+  offset: 0, 0
+  index: -1
+osiride/fascetta-o
+  rotate: true
+  xy: 1046, 1326
+  size: 53, 17
+  orig: 53, 17
+  offset: 0, 0
+  index: -1
+osiride/fascetta1
+  rotate: true
+  xy: 1683, 1483
+  size: 64, 253
+  orig: 64, 253
+  offset: 0, 0
+  index: -1
+osiride/fascetta2
+  rotate: false
+  xy: 409, 55
+  size: 65, 195
+  orig: 65, 195
+  offset: 0, 0
+  index: -1
+osiride/fascetta3
+  rotate: false
+  xy: 893, 686
+  size: 46, 196
+  orig: 46, 196
+  offset: 0, 0
+  index: -1
+osiride/occhio-o
+  rotate: true
+  xy: 2021, 1926
+  size: 54, 20
+  orig: 54, 20
+  offset: 0, 0
+  index: -1
+osiride/robaverde
+  rotate: false
+  xy: 1223, 1660
+  size: 222, 386
+  orig: 222, 386
+  offset: 0, 0
+  index: -1
+osiride/serpente-o
+  rotate: false
+  xy: 910, 1122
+  size: 51, 76
+  orig: 51, 76
+  offset: 0, 0
+  index: -1
+osiride/sopracciglio-o
+  rotate: false
+  xy: 58, 30
+  size: 60, 15
+  orig: 60, 15
+  offset: 0, 0
+  index: -1
