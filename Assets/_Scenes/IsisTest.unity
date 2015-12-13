@@ -1561,11 +1561,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 1
   height: 1
-  gridColor: {r: 0, g: 1, b: 0, a: 1}
-  gridVisible: 1
+  gridColor: {r: 0, g: 1, b: 0, a: 0}
+  gridVisible: 0
   tiles:
   - {fileID: 188298, guid: cbb831d2e6a6a05418aec98e457b5a2a, type: 2}
   loops: []
+  randomLoops: []
 --- !u!1 &1620402982
 GameObject:
   m_ObjectHideFlags: 0
