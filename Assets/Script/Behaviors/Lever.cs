@@ -3,58 +3,49 @@ using System.Collections;
 
 public class Lever : Tool {
 
-	// Declare your serializable data.
 	[System.Serializable]
-	public class TileArea
+	public struct TileArea
 	{
-		public Transform bottomLeft;
-		public Transform topRight;
-		public int tileToSpawnIndex; //Look at th level maker to find it
-		public bool isALoop = false;
-		public int loopToSpawnIndex; //Look at th level maker to find it
+		public GameObject area;
+		public float minY;
+		public float maxY;
 	}
-
-	public TileArea[] destroyArea;
-	public TileArea[] spawnArea;
-
+	
+	public TileArea[] destroyAreas;
+	public TileArea[] createAreas;
+	
 	int currentArea = 0;
 	bool currentAreaChanged = true;
-
+	
+	float currentY;
+	
 	public Tool[] toolsToUse;
 	bool active = false;
-	LevelMaker level;
 	bool used = false;
-	float xDestrMin;
-	float xDestrMax;
-	float yDestrMin;
-	float yDestrMax;
-	float xSpawnMin;
-	float xSpawnMax;
-	float ySpawnMin;
-	float ySpawnMax;
-	float z;
-	float yDestr;
-	float ySpawn;
-
+	
 	public float interval = 1f;
 	float elapsedTime = 0f;
 	bool destroying = false;
-	bool spawning = false;
+	bool creating = false;
 	bool start = false;
+	
+	
 	
 	
 	
 	// Use this for initialization
 	void Start () {
-		level = FindObjectOfType<LevelMaker>();
-		if (destroyArea.Length > 0) {
+		if (destroyAreas.Length > 0) {
 			destroying = true;
+		} else if (createAreas.Length > 0) {
+			creating = true;
 		}
+		SetMinAndMax ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 		// Surely not the best way to call it, but I've rewritten this so many times that 
 		// at the moement I don't want to change it.
 		if (Input.GetKeyDown(KeyCode.Q)){
@@ -66,105 +57,139 @@ public class Lever : Tool {
 			Use ();
 		}
 	}
-
+	
 	public override void Use(){
 		// the lever is designed to be used only one time.
 		if (!used){
+			
+			
 			// First there is the part in which we destroy the existing tiles (if it has to be done)
-			if(destroying && destroyArea.Length != 0){
-
-				// If it is a new area the bounds are set
-				if(currentAreaChanged){
-					xDestrMin = destroyArea[currentArea].bottomLeft.position.x;
-					xDestrMax = destroyArea[currentArea].topRight.position.x;
-					yDestrMin = destroyArea[currentArea].bottomLeft.position.y;
-					yDestrMax = destroyArea[currentArea].topRight.position.y;
-					z = destroyArea[currentArea].topRight.position.z;
-					yDestr = yDestrMax;
-					currentAreaChanged = false;
-				}
-
-				// Remove one row
-				for(float xDestr = xDestrMin; xDestr<=xDestrMax; xDestr +=1f){
-					level.RemoveTileAt(new Vector3(xDestr, yDestr, z));
-				}
-
-				// If it is not the last row wait the interval and then move on to the next row.
-				// Otherwise if it wasn't the last area increment currentArea, if it was the last
-				// reset the variables and go active the spawning section.
-				if(yDestr!= yDestrMin){
-					if (elapsedTime<interval){
-						elapsedTime += Time.deltaTime;
-					} else {
-						yDestr-=1f;
-						elapsedTime = 0f;
-					}
-				} else {
-					if (currentArea+1 < destroyArea.Length){
-						currentArea++;
-					} else {
-						destroying = false;
-						spawning = true;
-						currentArea = 0;
-					}
-					currentAreaChanged = true;
-				}
+			if(destroying){
+				DestroyRow();
 			}
-
-			if(spawning && spawnArea.Length != 0){
-				// If it is a new area set the tile, the loop and the bounds
-				if(currentAreaChanged){
-
-					if(spawnArea[currentArea].isALoop){
-						level.EnableLoop();
-						level.SelectLoop(spawnArea[currentArea].loopToSpawnIndex);
-					}else{
-						level.DisableLoop(); 
-						level.SelectTile(spawnArea[currentArea].tileToSpawnIndex);
-					}
-
-					xSpawnMin = spawnArea[currentArea].bottomLeft.position.x;
-					xSpawnMax = spawnArea[currentArea].topRight.position.x;
-					ySpawnMin = spawnArea[currentArea].bottomLeft.position.y;
-					ySpawnMax = spawnArea[currentArea].topRight.position.y;
-					z = spawnArea[currentArea].topRight.position.z;
-					ySpawn = ySpawnMin;
-					currentAreaChanged = false;
-				}	
-
-				// Spawn a row
-				for(float xSpawn = xSpawnMin; xSpawn<=xSpawnMax; xSpawn +=1f){
-					level.AddTile(new Vector3(xSpawn, ySpawn, z));
-				}
-
-				// Like we did to destroy the tiles check if it is the last row, last area, etc.
-				if(ySpawn != ySpawnMax){
-					if (elapsedTime<interval){
-						elapsedTime += Time.deltaTime;
-					} else {
-						ySpawn+=1f;
-						elapsedTime = 0f;
-					}
-				} else {
-					if (currentArea+1 < spawnArea.Length){
-						currentArea++;
-					} else {
-						destroying = false;
-						spawning = false;
-						currentArea = 0;
-					}
-					currentAreaChanged = true;
-				}
+			
+			if(creating){
+				CreateRow();
 			}
-
+			
 			// Finally use the tools
-			if (!destroying && !spawning){
+			if (!destroying && !creating){
 				foreach(Tool tool in toolsToUse){
 					tool.Use();
 				}
 				used = true;
 				start = false;
 			}
+		}
+	}
+	
+	void DestroyRow(){
+		// If it is a new area the bounds are set
+		float numChild = destroyAreas [currentArea].area.transform.childCount;
+		if(currentAreaChanged){
+
+			currentY = destroyAreas[currentArea].maxY;
+			currentAreaChanged = false;
+		}
+		
+		for (int i=0; i<numChild; i++) {
+			if(destroyAreas [currentArea].area.transform.GetChild(i).position.y == currentY){
+				destroyAreas [currentArea].area.transform.GetChild(i).gameObject.SetActive (false);
+			}
+		}
+		
+		// If it is not the last row wait the interval and then move on to the next row.
+		// Otherwise if it wasn't the last area increment currentArea, if it was the last
+		// reset the variables and go active the spawning section.
+		if (currentY != destroyAreas [currentArea].minY) {
+			if (elapsedTime < interval) {
+				elapsedTime += Time.deltaTime;
+			} else {
+				currentY -= 1f;
+				elapsedTime = 0f;
+			}
+		} else {
+			if (currentArea + 1 < destroyAreas.Length) {
+				currentArea++;
+			} else {
+				destroying = false;
+				if(createAreas.Length>0){
+					creating = true;
+				}
+				currentArea = 0;
+				currentY = 0;
+			}
+			currentAreaChanged = true;
+		}
+	}
+	
+	void CreateRow(){
+		// If it is a new area the bounds are set
+		float numChild = createAreas [currentArea].area.transform.childCount;
+		if(currentAreaChanged){
+			currentY = createAreas[currentArea].minY;
+			currentAreaChanged = false;
+		}
+		
+		for (int i=0; i<numChild; i++) {
+			if(createAreas [currentArea].area.transform.GetChild(i).position.y == currentY){
+				createAreas [currentArea].area.transform.GetChild(i).gameObject.SetActive (true);
+			}
+		}
+		
+		// If it is not the last row wait the interval and then move on to the next row.
+		// Otherwise if it wasn't the last area increment currentArea, if it was the last
+		// reset the variables and go active the spawning section.
+		if (currentY != createAreas [currentArea].maxY) {
+			if (elapsedTime < interval) {
+				elapsedTime += Time.deltaTime;
+			} else {
+				currentY += 1f;
+				elapsedTime = 0f;
+			}
+		} else {
+			if (currentArea + 1 < createAreas.Length) {
+				currentArea++;
+			} else {
+				creating = false;
+				currentArea = 0;
+				currentY = 0;
+			}
+			currentAreaChanged = true;
+		}
+	}
+
+	void SetMinAndMax(){
+		for (int i=0; i<destroyAreas.Length; i++) {
+			float tmpMin = 10000;
+			float tmpMax = -10000;
+			float numChild = destroyAreas [i].area.transform.childCount;
+			for (int k=0; k<numChild; k++){
+				if(destroyAreas [i].area.transform.GetChild(k).position.y>tmpMax){
+					tmpMax = destroyAreas [i].area.transform.GetChild(k).position.y;
+				}
+				if(destroyAreas [i].area.transform.GetChild(k).position.y<tmpMin){
+					tmpMin = destroyAreas [i].area.transform.GetChild(k).position.y;
+				}
+			}
+			destroyAreas[i].maxY = tmpMax;
+			destroyAreas[i].minY = tmpMin;
+		}
+
+		for (int i=0; i<createAreas.Length; i++) {
+			float tmpMin = 10000;
+			float tmpMax = -10000;
+			float numChild = createAreas [i].area.transform.childCount;
+			for (int k=0; k<numChild; k++){
+				if(createAreas [i].area.transform.GetChild(k).position.y>tmpMax){
+					tmpMax = createAreas [i].area.transform.GetChild(k).position.y;
+				}
+				if(createAreas [i].area.transform.GetChild(k).position.y<tmpMin){
+					tmpMin = createAreas [i].area.transform.GetChild(k).position.y;
+				}
+			}
+			createAreas[i].maxY = tmpMax;
+			createAreas[i].minY = tmpMin;
 		}
 	}
 	
