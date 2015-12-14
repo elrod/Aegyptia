@@ -49,7 +49,7 @@ public class RotatingPass : Tool {
                     objLeft = col.gameObject.GetComponent<Inventory>().Give(requestedObjectLeft);
                     objLeft.transform.position = gameObject.transform.position + new Vector3(-1, 0, 0);
                     objLeft.transform.parent = gameObject.transform;
-                    objLeft.GetComponent<MeshRenderer>().enabled = true;
+                    objLeft.GetComponent<SpriteRenderer>().enabled = true;
                     if (objectPlaced())
                     {
                         Flip();
@@ -63,7 +63,7 @@ public class RotatingPass : Tool {
                     objRight = col.gameObject.GetComponent<Inventory>().Give(requestedObjectRight);
                     objRight.transform.position = gameObject.transform.position + new Vector3(1, 0, 0);
                     objRight.transform.parent = gameObject.transform;
-                    objRight.GetComponent<MeshRenderer>().enabled = true;
+                    objRight.GetComponent<SpriteRenderer>().enabled = true;
                     if (objectPlaced())
                     {
                         Flip();
