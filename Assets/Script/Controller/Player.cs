@@ -33,6 +33,7 @@ public class Player : MonoBehaviour {
 
     SkeletonAnimation spineAnim;
     string curr_anim;
+    bool jumping = false;
 
 	// Use this for initialization
 	void Start () {
@@ -89,6 +90,20 @@ public class Player : MonoBehaviour {
                 if (Input.GetButtonDown("Jump") && controller.collisions.below)
                 {
                     velocity.y = jumpVelocity;
+                    //Debug.Log("salto");
+                    spineAnim.state.SetAnimation(1, "jump-salto", false);
+                    jumping = true;
+                }
+                else if (jumping && controller.collisions.below)
+                {
+                    //Debug.Log("atterro");
+                    spineAnim.state.SetAnimation(1, "jump-atterro", false);
+                    jumping = false;
+                }
+                else if (jumping)
+                {
+                    //Debug.Log("volo");
+                    spineAnim.state.SetAnimation(1, "jump-volo", true);
                 }
 
                 float targetVelocityX = input.x * moveSpeed;
