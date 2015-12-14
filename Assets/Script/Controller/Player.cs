@@ -29,6 +29,7 @@ public class Player : MonoBehaviour {
     float oldGravity;
     Vector2 humanColliderSize;
     Vector2 humanColliderOffset;
+    Vector3 tranformationPoint;
 
     SkeletonAnimation spineAnim;
     string curr_anim;
@@ -111,7 +112,8 @@ public class Player : MonoBehaviour {
                 velocity.y = 0;
                 if (Input.GetButtonDown("ShapeShift")) // if is not human
                 {
-                    BackToHuman();
+                    if (CanShapeShift)
+                        BackToHuman();
                 }
             }
         
@@ -135,9 +137,11 @@ public class Player : MonoBehaviour {
     private void ShapeShift()
     {
         anim = Instantiate<GameObject>(NewShape) as GameObject; //create the new shape
-        Vector3 pos = transform.position;
+        //Vector3 pos = transform.position;
+        Vector3 pos = tranformationPoint;
         pos.z = 1;
-        anim.transform.position = pos; //the new shape's position is the same of the player
+        gameObject.transform.position = pos;
+        anim.transform.position = pos; //the new shape's position is the same of the player and the spawnpoint
         gameObject.GetComponent<MeshRenderer>().enabled = false; //unactive the player and make it invisible
         humanColliderSize = gameObject.GetComponent<BoxCollider2D>().size;
         humanColliderOffset = gameObject.GetComponent<BoxCollider2D>().offset;
@@ -178,4 +182,20 @@ public class Player : MonoBehaviour {
             BackToHuman();
         }
     }
+
+    public bool IsHuman()
+    {
+        return isHuman;
+    }
+
+    public void forceBackToHuman()
+    {
+        BackToHuman();
+    }
+
+    public void setTransformationPoint(Vector3 point)
+    {
+        tranformationPoint = point;
+    }
+
 }
