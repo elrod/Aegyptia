@@ -4,42 +4,76 @@ using System.Collections;
 public class Door : Tool {
 
 	public bool isClosed = true;
-	bool changeState;
-	
-	// Update is called once per frame
-	void Update () {
-		if (changeState) {
-			if(isClosed){
-				Open();
-			} else {
-				gameObject.GetComponent<Renderer>().enabled = true;
-				Close();
-			}
+	public bool automaticWithObject;
+	public GameObject obj;
+	public float speed = 1;
+	bool used = false;
+	bool opening = false;
+	bool closing = false;
+	GameObject door;
+
+
+	void Start () {
+		door = transform.GetChild (0).gameObject;
+	}
+
+	void Update(){
+		if (opening) {
+			Open ();
+		}
+		if (closing) {
+			Close();
 		}
 	}
 	
 	public override void Use(){
-		changeState = true;
-	}
-	
-	void Open(){
-		if (transform.eulerAngles.y < 90){
-			transform.Rotate(new Vector3(0, 1, 0));
+		if (isClosed) {
+			opening = true;
+			closing = false;
 		} else {
-			isClosed = false;
-			gameObject.GetComponent<Renderer>().enabled = false;
-			changeState = false;
+			closing = true;
+			opening = false;
 		}
 	}
 	
-	void Close(){
-		if (transform.eulerAngles.y < 359){
-			Debug.Log(transform.eulerAngles.y);
-			transform.Rotate(new Vector3(0, -1, 0));
+	void Open(){
+		//door.SetActive (false);
+		if (door.transform.eulerAngles.y < 90) {
+			door.transform.Rotate(new Vector3 (0, speed, 0));
 		} else {
-			isClosed = true;
-			changeState = false;
-			transform.eulerAngles = Vector3.zero;
+			door.transform.eulerAngles = new Vector3(0, 90, 0);
+			opening = false;
+		}
+		isClosed = false;
+	}
+	
+	void Close(){
+		//door.SetActive (true);
+		if (door.transform.eulerAngles.y < 350) {
+			door.transform.Rotate(new Vector3 (0, -speed, 0));
+		} else {
+			door.transform.eulerAngles = Vector3.zero;
+			closing = false;
+		}
+		isClosed = true;
+	}
+
+	void OnTriggerEnter2D(Collider2D coll){
+		if (automaticWithObject && coll.gameObject.CompareTag ("Player")) {
+			if(coll.gameObject.GetComponent<Inventory>().Has(obj.name)){
+				coll.gameObject.GetComponent<Inventory>().Use(obj.name);
+				used = true;
+			}
+		}
+	}
+
+	// This does not work because in the scene I rotate the object, and the collider 2D disappear
+	void OnTriggerExit2D(Collider2D coll){
+		if (automaticWithObject && used && coll.gameObject.CompareTag ("Player")) {
+			if (!opening && ! closing){
+				Use ();
+				used = false;
+			}
 		}
 	}
 }

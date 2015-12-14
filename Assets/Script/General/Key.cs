@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class Key : Tool {
+	public Tool tool;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +17,6 @@ public class Key : Tool {
 	}
 
 	public override void Use(){
-		Debug.Log ("TODO: open a door and self destroy");
+		tool.Use ();
 	}
 }
