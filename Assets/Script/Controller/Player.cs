@@ -161,6 +161,9 @@ public class Player : MonoBehaviour {
         gravity = oldGravity;
         isHuman = true;
         gameObject.transform.parent = null;
+        Vector3 pos = gameObject.transform.position;
+        pos.z = 0;
+        gameObject.transform.position = pos;
         Destroy(anim);
     }
 
