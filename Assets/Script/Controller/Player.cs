@@ -28,6 +28,8 @@ public class Player : MonoBehaviour {
     bool isHuman = true;
     float oldGravity;
 
+    SkeletonAnimation spineAnim;
+    string curr_anim;
 
 	// Use this for initialization
 	void Start () {
@@ -42,7 +44,11 @@ public class Player : MonoBehaviour {
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         // Debug.Log("gravity: " + gravity + "; jumpVelocity: " + jumpVelocity);
 
-	}
+        spineAnim = GetComponent<SkeletonAnimation>();
+        spineAnim.state.SetAnimation(0, "idle", true);
+        curr_anim = "idle";
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -60,6 +66,21 @@ public class Player : MonoBehaviour {
             {
                 // Getting input
                 Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+                // TODO FIX THIS... we should put some kind of transition smooth between animation
+                // I did bruteforce here, because it was late and I was tired
+                if (input.x != 0 && curr_anim != "walk")
+                {
+                    spineAnim.Reset();
+                    spineAnim.state.SetAnimation(0, "walk", true);
+                    curr_anim = "walk";
+                }
+                else if (input.x == 0 && curr_anim != "idle")
+                {
+                    spineAnim.Reset();
+                    spineAnim.state.SetAnimation(0, "idle", true);
+                    curr_anim = "idle";
+                }
 
                 // Jumping logic
                 if (Input.GetButtonDown("Jump") && controller.collisions.below)
@@ -115,7 +136,7 @@ public class Player : MonoBehaviour {
         Vector3 pos = transform.position;
         pos.z = 1; 
         anim.transform.position = pos; //the new shape's position is the same of the player
-        gameObject.GetComponent<SpriteRenderer>().enabled = false; //unactive the player and make it invisible
+        gameObject.GetComponent<MeshRenderer>().enabled = false; //unactive the player and make it invisible
         gameObject.transform.parent = anim.transform; //the player became the child of the new shape
         oldGravity = gravity;
         gravity = 0;
@@ -124,7 +145,7 @@ public class Player : MonoBehaviour {
 
     private void BackToHuman()
     {
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
         gravity = oldGravity;
         isHuman = true;
         gameObject.transform.parent = null;
