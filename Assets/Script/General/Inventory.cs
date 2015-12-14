@@ -52,17 +52,7 @@ public class Inventory : MonoBehaviour {
 			if(obj.name.Equals(name)){
 				obj.tool.Use();
 				inventory.Remove(obj);
-				if(inventory.Count == 0){
-					GUIItemPic.sprite = null;
-					GUIItemPic.enabled = false;
-					GUIItemText.text = "Inventory Empty";
-				}
-				else{
-					selectedObject = inventory[inventory.Count - 1].name;
-					GUIItemPic.sprite = inventory[inventory.Count - 1].itemPic;
-					GUIItemPic.enabled = true;
-					GUIItemText.text = inventory[inventory.Count - 1].name;
-				}
+                updateInventoryGui();
 				break;
 			}
 		}
@@ -89,10 +79,29 @@ public class Inventory : MonoBehaviour {
             {
                 GameObject toGive = obj.tool.gameObject;
                 inventory.Remove(obj);
+                updateInventoryGui();
+                Debug.Log(inventory.Count);
                 return toGive;
             }
         }
-        return new GameObject();
+        return new GameObject(); // shouldn't reach this
         
+    }
+
+    private void updateInventoryGui()
+    {
+        if (inventory.Count == 0)
+        {
+            GUIItemPic.sprite = null;
+            GUIItemPic.enabled = false;
+            GUIItemText.text = "Inventory Empty";
+        }
+        else
+        {
+            selectedObject = inventory[inventory.Count - 1].name;
+            GUIItemPic.sprite = inventory[inventory.Count - 1].itemPic;
+            GUIItemPic.enabled = true;
+            GUIItemText.text = inventory[inventory.Count - 1].name;
+        }
     }
 }
