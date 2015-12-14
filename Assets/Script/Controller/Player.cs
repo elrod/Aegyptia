@@ -27,6 +27,8 @@ public class Player : MonoBehaviour {
     GameObject anim;
     bool isHuman = true;
     float oldGravity;
+    Vector2 humanColliderSize;
+    Vector2 humanColliderOffset;
 
     SkeletonAnimation spineAnim;
     string curr_anim;
@@ -134,10 +136,14 @@ public class Player : MonoBehaviour {
     {
         anim = Instantiate<GameObject>(NewShape) as GameObject; //create the new shape
         Vector3 pos = transform.position;
-        pos.z = 1; 
+        pos.z = 1;
         anim.transform.position = pos; //the new shape's position is the same of the player
         gameObject.GetComponent<MeshRenderer>().enabled = false; //unactive the player and make it invisible
+        humanColliderSize = gameObject.GetComponent<BoxCollider2D>().size;
+        humanColliderOffset = gameObject.GetComponent<BoxCollider2D>().offset;
         gameObject.transform.parent = anim.transform; //the player became the child of the new shape
+        gameObject.GetComponent<BoxCollider2D>().size = new Vector2(Mathf.Abs(anim.GetComponent<BoxCollider2D>().size.x / gameObject.transform.localScale.x), Mathf.Abs(anim.GetComponent<BoxCollider2D>().size.y / gameObject.transform.localScale.y));
+        gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0);
         oldGravity = gravity;
         gravity = 0;
         isHuman = false;
@@ -146,6 +152,8 @@ public class Player : MonoBehaviour {
     private void BackToHuman()
     {
         gameObject.GetComponent<MeshRenderer>().enabled = true;
+        gameObject.GetComponent<BoxCollider2D>().size = humanColliderSize;
+        gameObject.GetComponent<BoxCollider2D>().offset = humanColliderOffset;
         gravity = oldGravity;
         isHuman = true;
         gameObject.transform.parent = null;
