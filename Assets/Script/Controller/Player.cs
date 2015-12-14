@@ -43,8 +43,8 @@ public class Player : MonoBehaviour {
         // Now we should get jump velocity from: velocity = v0 + acceleration * time
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         // Debug.Log("gravity: " + gravity + "; jumpVelocity: " + jumpVelocity);
-
         spineAnim = GetComponent<SkeletonAnimation>();
+		spineAnim.Reset();
         spineAnim.state.SetAnimation(0, "idle", true);
         curr_anim = "idle";
 

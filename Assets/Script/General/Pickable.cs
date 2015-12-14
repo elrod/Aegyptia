@@ -3,12 +3,14 @@ using System.Collections;
 
 public class Pickable : MonoBehaviour {
 
-	MeshRenderer theRenderer;
+	public Sprite inventoryPicture;
+
+	Renderer theRenderer;
 	Collider2D theCollider;
 
 	// Use this for initialization
 	void Start () {
-		theRenderer = GetComponent<MeshRenderer>();
+		theRenderer = GetComponent<Renderer>();
 		theCollider = GetComponent<Collider2D>();
 	}
 	
@@ -19,7 +21,7 @@ public class Pickable : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if(col.tag == "Player"){
-			col.gameObject.GetComponent<Inventory>().PickUp(gameObject);
+			col.gameObject.GetComponent<Inventory>().PickUp(gameObject, inventoryPicture);
 			theCollider.enabled = false;
 			theRenderer.enabled = false;
 		}
