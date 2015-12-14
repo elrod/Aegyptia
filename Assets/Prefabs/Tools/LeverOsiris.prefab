@@ -18,6 +18,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &177552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 423492}
+  m_Layer: 0
+  m_Name: RotationCentre
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &423492
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177552}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .35800001, y: -.57099998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 430630}
+  m_RootOrder: 0
 --- !u!4 &430630
 Transform:
   m_ObjectHideFlags: 1
@@ -25,9 +52,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .637161255, y: 2.79449606, z: 0}
+  m_LocalPosition: {x: .637161255, y: 2.54999995, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 423492}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!61 &6181636
@@ -40,9 +68,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 5.96046448e-08, y: 0}
+  m_Offset: {x: .0867648125, y: -.0266969204}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: .826470613, y: 1.05339384}
 --- !u!114 &11493856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,10 +82,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbaeff8505975054882a19d93d3eafed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyAreas: []
-  createAreas: []
+  destroyAreas:
+  - area: {fileID: 0}
+    minY: 0
+    maxY: 0
+  createAreas:
+  - area: {fileID: 0}
+    minY: 0
+    maxY: 0
   toolsToUse: []
-  interval: 1
+  interval: .699999988
+  rotationSpeed: 20
 --- !u!212 &21229602
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -28,9 +28,13 @@ public class Lever : Tool {
 	bool destroying = false;
 	bool creating = false;
 	bool start = false;
+
+	public float rotationSpeed = 20f;
+	bool rotating = false;
+	Transform rotationCentre;
+	bool rotationDirection = true;
 	
-	
-	
+	public bool reversible;
 	
 	
 	// Use this for initialization
@@ -41,6 +45,7 @@ public class Lever : Tool {
 			creating = true;
 		}
 		SetMinAndMax ();
+		rotationCentre = transform.GetChild (0);
 	}
 	
 	// Update is called once per frame
@@ -51,18 +56,21 @@ public class Lever : Tool {
 		if (Input.GetKeyDown(KeyCode.Q)){
 			if (active) {
 				start = true;
+				rotating = true;
+				rotationDirection = true;
 			}
 		}
 		if (start){
 			Use ();
+		}
+		if (rotating) {
+			RotateLever(rotationDirection);
 		}
 	}
 	
 	public override void Use(){
 		// the lever is designed to be used only one time.
 		if (!used){
-			
-			
 			// First there is the part in which we destroy the existing tiles (if it has to be done)
 			if(destroying){
 				DestroyRow();
@@ -79,6 +87,9 @@ public class Lever : Tool {
 				}
 				used = true;
 				start = false;
+				if(reversible){
+					Init();
+				}
 			}
 		}
 	}
@@ -191,6 +202,42 @@ public class Lever : Tool {
 			createAreas[i].maxY = tmpMax;
 			createAreas[i].minY = tmpMin;
 		}
+	}
+
+	void RotateLever(bool direct){
+		if (direct) {
+			if (transform.eulerAngles.z == 0 || transform.eulerAngles.z > 300){
+				transform.RotateAround (rotationCentre.position, Vector3.forward, -rotationSpeed * Time.deltaTime);
+			}
+			if (transform.eulerAngles.z < 300){
+				transform.eulerAngles = new Vector3(0f, 0f, 300f);
+				rotating = false;
+			}
+		} else {
+			if (transform.eulerAngles.z >= 300){
+				transform.RotateAround (rotationCentre.position, Vector3.forward, rotationSpeed * Time.deltaTime);
+			}
+			if (transform.eulerAngles.z < 1){
+				transform.eulerAngles = Vector3.zero;
+				rotating = false;
+			}
+		}
+	}
+
+	void Init(){
+		TileArea[] tmp = destroyAreas;
+		destroyAreas = createAreas;
+		createAreas = tmp;
+
+		if (destroyAreas.Length > 0) {
+			destroying = true;
+		} else if (createAreas.Length > 0) {
+			creating = true;
+		}
+		SetMinAndMax ();
+		used = false;
+		rotating = true;
+		rotationDirection = false;
 	}
 	
 	void OnTriggerEnter2D (Collider2D coll){
