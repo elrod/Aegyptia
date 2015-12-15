@@ -17,10 +17,12 @@ public class PlayerGovernor : MonoBehaviour {
 		// Can be avoided if the game starts everytime with one specific player
 		if (player1.Equals (GameObject.FindGameObjectWithTag ("Player"))) {
 			isP1Active = true;
-			player2.GetComponent<Player>().TurnOff();
+            FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
+            player2.GetComponent<Player>().TurnOff();
 		} else {
 			isP1Active = false;
-			player1.GetComponent<Player>().TurnOff();
+            FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
+            player1.GetComponent<Player>().TurnOff();
 		}
 		
 	}
@@ -30,11 +32,15 @@ public class PlayerGovernor : MonoBehaviour {
 		
 		// Check if the player is changed
 		if (Input.GetButtonDown("SwitchPlayer")) {
-			if (isP1Active) 
+			if (isP1Active) { 
 				SwitchPlayer(player1, player2);
-			else 
+                FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
+            }
+            else { 
 				SwitchPlayer(player2, player1);
-		}
+                FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
+            }
+        }
 
 	}
 	

@@ -17,6 +17,7 @@ public class Key : Tool {
 	}
 
 	public override void Use(){
-		tool.Use ();
+        if(tool != null)
+		    tool.Use ();
 	}
 }

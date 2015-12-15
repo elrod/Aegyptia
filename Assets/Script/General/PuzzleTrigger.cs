@@ -4,10 +4,14 @@ using System.Collections;
 public class PuzzleTrigger : MonoBehaviour {
 
     public GameObject thePuzzle;
+    public GameObject neededObject;
+
+    string neededObjName = "";
 
 	// Use this for initialization
 	void Start () {
-	
+        if(neededObject != null)
+            neededObjName = neededObject.name;
 	}
 	
 	// Update is called once per frame
@@ -19,7 +23,14 @@ public class PuzzleTrigger : MonoBehaviour {
     {
         if(col.tag == "Player")
         {
-            thePuzzle.SetActive(true);
+            if(col.gameObject.GetComponent<Inventory>().Use(neededObjName) || neededObjName == "") {
+                thePuzzle.SetActive(true);
+            }
+            else
+            {
+                FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_TABLET_MISSING");
+                Debug.Log("You need: '" + neededObjName + "' to activate '" + thePuzzle.name + "'");
+            }
         }
     }
 }

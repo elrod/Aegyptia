@@ -69,6 +69,7 @@ public class TabletPuzzle : MonoBehaviour {
                             //Debug.Log("SOLVED!");
                             GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().enabled = true;
                             gameObject.SetActive(false);
+                            FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_LEVEL_FINISHED");
                         }
                         else
                         {
