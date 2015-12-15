@@ -28,6 +28,24 @@ public class Scarab : MonoBehaviour {
         {
             // Getting input
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            Vector3 rot = transform.rotation.eulerAngles;
+            if(input.x > 0 && Mathf.Abs(input.x) >= Mathf.Abs(input.y))
+            {
+                rot.z = -90;
+            }
+            else if(input.x < 0 && Mathf.Abs(input.x) >= Mathf.Abs(input.y))
+            {
+                rot.z = 90;
+            }
+            else if(input.y > 0 && Mathf.Abs(input.y) >= Mathf.Abs(input.x))
+            {
+                rot.z = 0;
+            }
+            else if(input.y < 0 && Mathf.Abs(input.y) >= Mathf.Abs(input.x))
+            {
+                rot.z = 180;
+            }
+            transform.rotation = Quaternion.Euler(rot);
 
             float targetVelocityX = input.x * moveSpeed;
             float targetVelocityY = input.y * moveSpeed;

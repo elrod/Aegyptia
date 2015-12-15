@@ -177,8 +177,11 @@ public class Player : MonoBehaviour {
         isHuman = true;
         gameObject.transform.parent = null;
         Vector3 pos = gameObject.transform.position;
+        Vector3 rot = gameObject.transform.rotation.eulerAngles;
+        rot.z = 0;
         pos.z = 0;
         gameObject.transform.position = pos;
+        gameObject.transform.rotation = Quaternion.Euler(rot);
         Destroy(anim);
     }
 

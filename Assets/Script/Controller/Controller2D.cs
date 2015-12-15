@@ -55,7 +55,7 @@ public class Controller2D : MonoBehaviour {
             VerticalCollisions(ref velocity);
         }
 
-        transform.Translate(velocity);
+        transform.Translate(velocity,Space.World);
 
         Vector3 scale = transform.localScale;
         if ((collisions.oldPos.x < transform.position.x && !collisions.right && scale.x < 0) || 
