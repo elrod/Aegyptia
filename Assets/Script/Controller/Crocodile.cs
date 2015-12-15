@@ -72,6 +72,7 @@ public class Crocodile : MonoBehaviour
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
     }
 
     public void TurnOn()
