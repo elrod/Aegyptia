@@ -141,12 +141,18 @@ public class Player : MonoBehaviour {
 	public void TurnOn(){
 		isActive = true;
 		gameObject.tag = "Player";
+		if (transform.parent != null && transform.parent.GetComponent<Animal>() != null) {
+			transform.parent.GetComponent<Animal>().TurnOn();
+		}
 	}
 
 	public void TurnOff(){
 		isActive = false;
 		gameObject.tag = "InactivePlayer";
 		velocity.x = 0;
+		if (transform.parent != null && transform.parent.GetComponent<Animal>() != null) {
+			transform.parent.GetComponent<Animal>().TurnOff();
+		}
 	}
 
     private void ShapeShift()

@@ -2,7 +2,118 @@
 using System.Collections;
 
 public class CameraMovement : MonoBehaviour {
+
+	Vector2 velocity;
 	
+	public float smoothTimeY = 0.2f;
+	public float smoothTimeX = 0.2f;
+	
+	public float step = 0.02f;
+	float distance = 0f;
+	
+	public float cameraSize = 5f;
+	public float zoomOutSize = 10f;
+	public Vector2 offset;
+	
+	bool switchingPlayer = false;
+	bool moveFocus = false;
+	bool moving = false;
+	bool comingBack = false;
+	
+	Vector3 startPos;
+	Vector3 destPos;
+	
+	GameObject activePlayer;
+	
+	// Use this for initialization
+	void Start () {
+		// It uses the Tag to know which player is active
+		activePlayer = GameObject.FindGameObjectWithTag ("Player");
+		startPos = transform.position;
+	}
+	
+	// NOTE: Don't use FixedUpdate, use Update here... I think this was causing that camera vibration feeling while the player
+	// was moving. FixedUpdate should be used for physics only... It could be called more than once per frame, so this could result
+	// in a camera moving faster than it should and vibrating when the player is moving!
+	void Update(){
+		
+		if (moving) {
+			ReachNewPosition();
+		}
+		
+		if (comingBack) {
+			ComeBack();
+		}
+		
+		if (!moving && !comingBack) {
+			float posX = Mathf.SmoothDamp (transform.position.x, activePlayer.transform.position.x + offset.x, ref velocity.x, smoothTimeX);
+			float posY = Mathf.SmoothDamp (transform.position.y, activePlayer.transform.position.y + offset.y, ref velocity.y, smoothTimeY);
+			
+			transform.position = new Vector3 (posX, posY, transform.position.z);
+		}
+	}
+
+	// Used to set the variables to execute the routine associated to the change of the active player
+	public void SwitchPlayer(Vector3 dest){
+		activePlayer = GameObject.FindGameObjectWithTag ("Player");
+		destPos = dest;
+		startPos = transform.position;
+		switchingPlayer = true;
+		moving = true;
+		
+	}
+
+	// Used to set the variables to execute the routine associated to the temporarary change of the focused element
+	public void SwitchFocus(Vector3 dest){
+		destPos = dest;
+		startPos = transform.position;
+		moveFocus = true;
+		moving = true;
+	}
+	
+	void ReachNewPosition(){
+		bool isArrived = Vector2.Distance (transform.position, destPos) == 0;
+		if (isArrived) {
+			distance = 0;
+			moving = false;
+			if(moveFocus){
+				startPos = activePlayer.transform.position;
+				comingBack = true;
+				moveFocus = false;
+			} else {
+				switchingPlayer = false;
+			}
+		} else {
+			distance += step;
+			if(switchingPlayer){
+				if(distance <= 0.5f){
+					Camera.main.orthographicSize = Mathf.Lerp(cameraSize, 2*zoomOutSize, distance);
+				} else {
+					Camera.main.orthographicSize = Mathf.Lerp(2*zoomOutSize, cameraSize, distance);
+				}
+			}
+			float posX = Mathf.Lerp(startPos.x, destPos.x, distance);
+			float posY = Mathf.Lerp(startPos.y, destPos.y, distance);
+			transform.position = new Vector3 (posX, posY, transform.position.z);
+		}
+	}
+	
+	void ComeBack(){
+		bool isArrived = Vector2.Distance (transform.position, startPos) == 0;
+		if (!isArrived) {
+			distance += 2*step;
+			float posX = Mathf.Lerp(destPos.x, startPos.x, distance);
+			float posY = Mathf.Lerp(destPos.y, startPos.y, distance);
+			
+			transform.position = new Vector3 (posX, posY, transform.position.z);
+		} else {
+			distance = 0;
+			comingBack = false;
+		}
+	}
+
+
+	/*
 	Vector2 velocity;
 	
 	public float smoothTimeY = 0.2f;
@@ -99,4 +210,5 @@ public class CameraMovement : MonoBehaviour {
 		zoomingOut = true;
 		destination = dest;
 	}
+	*/
 }

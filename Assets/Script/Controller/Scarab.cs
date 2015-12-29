@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Scarab : MonoBehaviour {
+public class Scarab : Animal {
 
     Controller2D controller;
 
@@ -56,12 +56,12 @@ public class Scarab : MonoBehaviour {
         controller.Move(velocity * Time.deltaTime);
     }
 
-    public void TurnOn()
+    public override void TurnOn()
     {
         isActive = true;
     }
 
-    public void TurnOff()
+    public override void TurnOff()
     {
         isActive = false;
         velocity.x = 0;

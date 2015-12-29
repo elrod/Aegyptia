@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Crocodile : MonoBehaviour
+public class Crocodile : Animal
 {
 
     Controller2D controller;
@@ -81,12 +81,12 @@ public class Crocodile : MonoBehaviour
 
     }
 
-    public void TurnOn()
+    public override void TurnOn()
     {
         isActive = true;
     }
 
-    public void TurnOff()
+    public override void TurnOff()
     {
         isActive = false;
         velocity.x = 0;
