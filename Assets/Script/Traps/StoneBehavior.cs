@@ -26,6 +26,8 @@ public class StoneBehavior : MonoBehaviour {
 	}
     void OnTriggerEnter2D(Collider2D col)
     {
-        SelfDestroy();
+		if (!col.gameObject.CompareTag("ZoomArea")) {
+			SelfDestroy ();
+		}
     }
 }
