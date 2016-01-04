@@ -11,9 +11,9 @@ public class Player : MonoBehaviour {
 
     public float jumpHeight = 4;           // How many unity units we want our player to jump
     public float timeToJumpApex = .4f;     // How much time our player will take to reach the top of the jump curve.
+    public float moveSpeed = 6;            // Max movement speed
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
-    float moveSpeed = 6;
     
     float gravity;
     float jumpVelocity;
