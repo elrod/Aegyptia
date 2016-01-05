@@ -17,11 +17,15 @@ public class PlayerGovernor : MonoBehaviour {
 		// Can be avoided if the game starts everytime with one specific player
 		if (player1.Equals (GameObject.FindGameObjectWithTag ("Player"))) {
 			isP1Active = true;
-            FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
+			if(FindObjectOfType<LevelEventsManager>() != null){
+            	FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
+			}
             player2.GetComponent<Player>().TurnOff();
 		} else {
 			isP1Active = false;
-            FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
+			if(FindObjectOfType<LevelEventsManager>() != null){
+            	FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
+			}
             player1.GetComponent<Player>().TurnOff();
 		}
 		
@@ -34,11 +38,15 @@ public class PlayerGovernor : MonoBehaviour {
 		if (Input.GetButtonDown("SwitchPlayer")) {
 			if (isP1Active) { 
 				SwitchPlayer(player1, player2);
-                FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
+				if(FindObjectOfType<LevelEventsManager>() != null){
+					FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
+				}
             }
             else { 
 				SwitchPlayer(player2, player1);
-                FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
+				if(FindObjectOfType<LevelEventsManager>() != null){
+					FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
+				}
             }
         }
 

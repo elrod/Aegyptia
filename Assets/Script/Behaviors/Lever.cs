@@ -44,7 +44,9 @@ public class Lever : Tool {
 		} else if (createAreas.Length > 0) {
 			creating = true;
 		}
-		SetMinAndMax ();
+		if (destroying || creating) {
+			SetMinAndMax ();
+		}
 		rotationCentre = transform.GetChild (0);
 	}
 	
