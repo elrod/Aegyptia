@@ -62,6 +62,7 @@ public class CameraMovement : MonoBehaviour {
 		startPos = transform.position;
 		switchingPlayer = true;
 		moving = true;
+		FindObjectOfType<PlayerGovernor> ().DisableInput ();
 	}
 	
 	// Used to set the variables to execute the routine associated to the temporarary change of the focused element
@@ -70,6 +71,7 @@ public class CameraMovement : MonoBehaviour {
 		startPos = transform.position;
 		moveFocus = true;
 		moving = true;
+		FindObjectOfType<PlayerGovernor> ().DisableInput ();
 	}
 	
 	void ReachNewPosition(){
@@ -83,6 +85,7 @@ public class CameraMovement : MonoBehaviour {
 				moveFocus = false;
 			} else {
 				switchingPlayer = false;
+				FindObjectOfType<PlayerGovernor> ().EnableInput ();
 			}
 		} else {
 			elapsedTime += Time.deltaTime;
@@ -112,6 +115,7 @@ public class CameraMovement : MonoBehaviour {
 		} else {
 			elapsedTime = 0;
 			comingBack = false;
+			FindObjectOfType<PlayerGovernor> ().EnableInput ();
 		}
 	}
 }

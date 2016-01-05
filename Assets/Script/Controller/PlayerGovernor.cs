@@ -8,6 +8,7 @@ public class PlayerGovernor : MonoBehaviour {
 	public GameObject player2;
 
 	bool isP1Active;
+	bool enabled = true;
 
 	
 	// Use this for initialization
@@ -35,7 +36,7 @@ public class PlayerGovernor : MonoBehaviour {
 	void Update () {
 		
 		// Check if the player is changed
-		if (Input.GetButtonDown("SwitchPlayer")) {
+		if (Input.GetButtonDown("SwitchPlayer") && enabled) {
 			if (isP1Active) { 
 				SwitchPlayer(player1, player2);
 				if(FindObjectOfType<LevelEventsManager>() != null){
@@ -64,5 +65,23 @@ public class PlayerGovernor : MonoBehaviour {
 
 	public bool IsP1Active(){
 		return isP1Active;
+	}
+
+	public void DisableInput(){
+		enabled = false;
+		if (isP1Active) {
+			player1.GetComponent<Player> ().TurnOff ();
+		} else {
+			player2.GetComponent<Player> ().TurnOff ();
+		}
+	}
+
+	public void EnableInput(){
+		enabled = true;
+		if (isP1Active) {
+			player1.GetComponent<Player> ().TurnOn ();
+		} else {
+			player2.GetComponent<Player> ().TurnOn ();
+		}
 	}
 }
