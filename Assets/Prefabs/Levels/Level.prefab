@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &122484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 446022}
+  - 114: {fileID: 11409964}
+  m_Layer: 0
+  m_Name: Level
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &446022
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11409964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b20882f7603164289faf15c6081162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 1
+  height: 1
+  gridColor: {r: 0, g: 1, b: 0, a: 0}
+  gridVisible: 0
+  tiles:
+  - {fileID: 145390, guid: 4ffa2945ba8470d4b8439f8f541fa8d0, type: 2}
+  - {fileID: 139118, guid: f42b953a9b5e99d419d38778484035e9, type: 2}
+  - {fileID: 157768, guid: 34b36642ffc864e4791240e3dc54884a, type: 2}
+  - {fileID: 126438, guid: 9cfe4ae9f050b6d41a7db1255f387ab7, type: 2}
+  - {fileID: 125498, guid: 41d587ed9bccc2046bbdbaae2f77e882, type: 2}
+  - {fileID: 127806, guid: c53d39e3834c18942b29bcce4535986b, type: 2}
+  - {fileID: 177180, guid: 148601d6fce69d841a3a3304e6f08b22, type: 2}
+  - {fileID: 169820, guid: 2a284a0b72ba4b44ea46f01023922636, type: 2}
+  - {fileID: 131764, guid: ba18dd34b580e2043bdca9f973efe18a, type: 2}
+  - {fileID: 168834, guid: 2d21da858bdaa4641a0b41a928ef130f, type: 2}
+  - {fileID: 107124, guid: 8bf5ec0d1b99c5746a16e6705ea8e584, type: 2}
+  - {fileID: 176748, guid: 2650a9b03867ba94493c74868c84aba9, type: 2}
+  - {fileID: 197768, guid: e194e05734dc4664ba120d96218ac776, type: 2}
+  - {fileID: 196446, guid: e72544121f6f48a4abbf080177552cbd, type: 2}
+  - {fileID: 147796, guid: df927d01c0f0c0a45982e756b7d96712, type: 2}
+  - {fileID: 116680, guid: 66b59d1bfa5d5b14ba3bc5a9f36bbbcf, type: 2}
+  loops:
+  - loopName: Floor
+    tiles:
+    - {fileID: 102278, guid: 4ccccc45474cc564f867218ff06c0c7f, type: 2}
+    - {fileID: 113330, guid: 0e8cb8657dbf5a742ad235c067bb3f6c, type: 2}
+    - {fileID: 113330, guid: 0e8cb8657dbf5a742ad235c067bb3f6c, type: 2}
+  randomLoops:
+  - loopName: BrickWall
+    tiles:
+    - {fileID: 128604, guid: 394e26375bd1c3c429af8a1d133b9dfd, type: 2}
+    - {fileID: 184194, guid: c3dd47e338cd1c344a82e23e3e80c1bd, type: 2}
+    - {fileID: 184340, guid: d7e88a6630210e9499d001c490abfa9d, type: 2}
+    - {fileID: 150308, guid: b0e7e12b1d337d44d9b448a1dc28c89d, type: 2}
+  - loopName: Collider BrickWall
+    tiles:
+    - {fileID: 128604, guid: bf66dcf704c9c254cb6b2a620d3e5bb7, type: 2}
+    - {fileID: 184194, guid: c11bec7d70b12ea4f902b3bc3f33289d, type: 2}
+    - {fileID: 184340, guid: d5a3280b54917ca48bd88a42f10f994e, type: 2}
+    - {fileID: 150308, guid: 7a734a0263c35e34881a977c62e103b2, type: 2}
+  - loopName: Hieroglyphs
+    tiles:
+    - {fileID: 112258, guid: c6ebc8d2ba30326409b8ee415287af6a, type: 2}
+    - {fileID: 153766, guid: 78766e6a1c2d1dd40b4e42ab0587c169, type: 2}
+    - {fileID: 175652, guid: 32cfe63f776cdd3418343c653b8df5f1, type: 2}
+    - {fileID: 157184, guid: 71be39fbbd19b344fa768712089b05ea, type: 2}
+    - {fileID: 188858, guid: 8781f1bd890014649b5b89d7bc441e00, type: 2}
+    - {fileID: 183004, guid: 84344622e80b2a542a6a15139bac73d8, type: 2}
+    - {fileID: 132362, guid: 1b367590b4a21014c954af6d4259f46d, type: 2}
+    - {fileID: 175532, guid: 258b69a3bab5b0e479f20e9dd5e2f212, type: 2}
+    - {fileID: 118054, guid: 65eeb9a021dd1dd4bb528edd0e88df0c, type: 2}
+    - {fileID: 185926, guid: 9fbf2a8f444f064479b327244174cbb9, type: 2}
+    - {fileID: 171966, guid: d97d7697d0001124aa0d965782b6407c, type: 2}
+    - {fileID: 115718, guid: b7e0fd48ac7649045b6405c1c9ba3e7b, type: 2}
+    - {fileID: 107884, guid: 0064506ed06d46646a4916a7343c63de, type: 2}
+    - {fileID: 135504, guid: cd070438a9e9f5b418f3138af64d168a, type: 2}
+    - {fileID: 110926, guid: 6fbb58d20bf83e74891a0b99f9be2683, type: 2}
+    - {fileID: 141290, guid: 11128b8306a10844a9d1afdc81b93554, type: 2}
+    - {fileID: 196462, guid: d44c7ea4e6d383e47a7b1fddefe8313b, type: 2}
+    - {fileID: 181280, guid: 9fd2d235da7b48c459adb9cbf7a881ef, type: 2}
+    - {fileID: 138282, guid: c2cfc23bf5f1a3a4aab1c443e421ab8d, type: 2}
+    - {fileID: 140004, guid: 75cfe93b63d27b74ea9007d07c42fbc9, type: 2}
+    - {fileID: 171934, guid: 6dbe834e59c40c148ae45c8efc2efcd8, type: 2}
+    - {fileID: 147846, guid: 57e2e0d0496c5804c905738472d9cfd2, type: 2}
+    - {fileID: 186444, guid: 49e19147df182844ebd9bff4af782493, type: 2}
+    - {fileID: 160730, guid: 1f84ac44175840947b78ff439b5d148f, type: 2}
+    - {fileID: 107592, guid: 9fac3b4a3b841494fa2fc14e2066a289, type: 2}
+    - {fileID: 149796, guid: 17cc415a2eb5a5f48b6c5b16d85cfad2, type: 2}
+    - {fileID: 117128, guid: 6cbe4abdd17f63245a5fabf348defe8b, type: 2}
+    - {fileID: 196790, guid: ae80e781858b98b448b19decba3d2f81, type: 2}
+    - {fileID: 146858, guid: b7c04e5c72529b74498f7f0acd237204, type: 2}
+    - {fileID: 135176, guid: a027d6a9f73c9cf4e84739de3648a9be, type: 2}
+    - {fileID: 115710, guid: 38d82a3e175080d4a8296df375e61824, type: 2}
+    - {fileID: 184950, guid: 1a2baac712532dd45a3487c574836bfd, type: 2}
+  - loopName: Wall Cracks
+    tiles:
+    - {fileID: 169708, guid: d1ff7f28fa726484390e5cb9d3b63957, type: 2}
+    - {fileID: 185346, guid: f1139c1c7d7d4324a9aa51412482a3ce, type: 2}
+    - {fileID: 158050, guid: 3150ed325c231404cbab07633a71b9aa, type: 2}
+    - {fileID: 143058, guid: 14964addd8e831040881389c1fc7ab6c, type: 2}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 122484}
+  m_IsPrefabParent: 1
