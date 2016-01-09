@@ -185,7 +185,7 @@ public class Player : MonoBehaviour {
         Vector3 pos = gameObject.transform.position;
         Vector3 rot = gameObject.transform.rotation.eulerAngles;
         rot.z = 0;
-        pos.z = 0;
+        pos.z = -2;
         gameObject.transform.position = pos;
         gameObject.transform.rotation = Quaternion.Euler(rot);
         Destroy(anim);

@@ -9,27 +9,27 @@ EditorBuildSettings:
     path: Assets/_Scenes/TitleMenu.unity
   - enabled: 1
     path: Assets/_Scenes/DemoLevel.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/ArrowShooter.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/CameraMovementCharSwitchingTest.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/CharacterMovementTest.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/DumbFollowingEnemy.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/GuardianOnBoat.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/LevelEditorTest.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/MovingPlatforms.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/RotatingAxeTrap.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/ScarabGliph.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/SceneSelection.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/StoneTrap.unity
   - enabled: 1
     path: Assets/_Scenes/TitleMenu.unity

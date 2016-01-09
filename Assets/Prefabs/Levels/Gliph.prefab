@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00999999978, y: 1.36000001, z: 0}
+  m_LocalPosition: {x: 82.4100037, y: 9.51000023, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,9 +54,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 2
-  m_Color: {r: 0, g: .926470578, b: .0447262451, a: 1}
+  m_Color: {r: 0, g: .573529422, b: .0276876763, a: 1}
   m_Intensity: 8
-  m_Range: 3.20000005
+  m_Range: 5
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -101,9 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbfa2a9573d70d43a2f19e911d6913e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minLightIntensity: 6
-  maxLightIntensity: 8
-  lightVariationSpeed: 1
+  minLightIntensity: .800000012
+  maxLightIntensity: 1
+  lightVariationSpeed: .00999999978
 --- !u!212 &21256814
 SpriteRenderer:
   m_ObjectHideFlags: 1
