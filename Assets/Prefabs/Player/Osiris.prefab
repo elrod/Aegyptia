@@ -140,6 +140,7 @@ MonoBehaviour:
   isActive: 1
   jumpHeight: 4
   timeToJumpApex: .400000006
+  moveSpeed: 6
 --- !u!114 &11496978
 MonoBehaviour:
   m_ObjectHideFlags: 1
