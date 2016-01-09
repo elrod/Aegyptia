@@ -8,6 +8,7 @@ public class PlayerGovernor : MonoBehaviour {
 	public GameObject player2;
 
 	bool isP1Active;
+	bool enabled = true;
 
 	
 	// Use this for initialization
@@ -17,10 +18,16 @@ public class PlayerGovernor : MonoBehaviour {
 		// Can be avoided if the game starts everytime with one specific player
 		if (player1.Equals (GameObject.FindGameObjectWithTag ("Player"))) {
 			isP1Active = true;
-			player2.GetComponent<Player>().TurnOff();
+			if(FindObjectOfType<LevelEventsManager>() != null){
+            	FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
+			}
+            player2.GetComponent<Player>().TurnOff();
 		} else {
 			isP1Active = false;
-			player1.GetComponent<Player>().TurnOff();
+			if(FindObjectOfType<LevelEventsManager>() != null){
+            	FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
+			}
+            player1.GetComponent<Player>().TurnOff();
 		}
 		
 	}
@@ -29,12 +36,20 @@ public class PlayerGovernor : MonoBehaviour {
 	void Update () {
 		
 		// Check if the player is changed
-		if (Input.GetButtonDown("SwitchPlayer")) {
-			if (isP1Active) 
+		if (Input.GetButtonDown("SwitchPlayer") && enabled) {
+			if (isP1Active) { 
 				SwitchPlayer(player1, player2);
-			else 
+				if(FindObjectOfType<LevelEventsManager>() != null){
+					FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
+				}
+            }
+            else { 
 				SwitchPlayer(player2, player1);
-		}
+				if(FindObjectOfType<LevelEventsManager>() != null){
+					FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
+				}
+            }
+        }
 
 	}
 	
@@ -44,10 +59,29 @@ public class PlayerGovernor : MonoBehaviour {
 		activeBefore.GetComponent<Player> ().TurnOff ();
 		activeNow.GetComponent<Player> ().TurnOn ();
 		isP1Active = !isP1Active;
-		Camera.main.GetComponent<CameraMovement>().SwitchingFocus(activeNow.transform.position);
+		Camera.main.GetComponent<CameraMovement> ().offset = Vector2.zero;
+		Camera.main.GetComponent<CameraMovement>().SwitchPlayer(activeNow.transform.position);
 	}
 
 	public bool IsP1Active(){
 		return isP1Active;
+	}
+
+	public void DisableInput(){
+		enabled = false;
+		if (isP1Active) {
+			player1.GetComponent<Player> ().TurnOff ();
+		} else {
+			player2.GetComponent<Player> ().TurnOff ();
+		}
+	}
+
+	public void EnableInput(){
+		enabled = true;
+		if (isP1Active) {
+			player1.GetComponent<Player> ().TurnOn ();
+		} else {
+			player2.GetComponent<Player> ().TurnOn ();
+		}
 	}
 }

@@ -22,7 +22,7 @@ public class ArrowBehavior : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (!coll.tag.Equals("ArrowShoter"))
+		if (!coll.tag.Equals("ArrowShoter") && !coll.tag.Equals("ZoomArea"))
         {
             Destroy(gameObject);
         }

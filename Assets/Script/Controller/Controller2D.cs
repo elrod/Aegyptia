@@ -39,6 +39,7 @@ public class Controller2D : MonoBehaviour {
         collisions.Reset();
 
         collisions.velocityOld = velocity;
+        collisions.oldPos = transform.position;
 
         if(velocity.y < 0)
         {
@@ -54,8 +55,12 @@ public class Controller2D : MonoBehaviour {
             VerticalCollisions(ref velocity);
         }
 
+        transform.Translate(velocity,Space.World);
 
-        transform.Translate(velocity);
+        Vector3 scale = transform.localScale;
+        if ((collisions.oldPos.x < transform.position.x && !collisions.right && scale.x < 0) || 
+            (collisions.oldPos.x > transform.position.x && !collisions.left && scale.x > 0)) scale.x *= -1;
+        transform.localScale = scale;
     }
 
     // This takes a reference to the velocity vector, so that every change to the velocity vector, will affect the instance of velocity from caller
@@ -270,6 +275,7 @@ public class Controller2D : MonoBehaviour {
         public bool descendingSlope;
         public float slopeAngle, slopeAngleOld;
         public Vector3 velocityOld;
+        public Vector3 oldPos;
 
         public void Reset(){
             above = below = false;

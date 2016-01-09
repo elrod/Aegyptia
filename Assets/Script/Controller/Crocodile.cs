@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Crocodile : MonoBehaviour
+public class Crocodile : Animal
 {
 
     Controller2D controller;
@@ -37,6 +37,7 @@ public class Crocodile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float input = Input.GetAxisRaw("Horizontal");
 
         if (isActive)
         {
@@ -45,7 +46,6 @@ public class Crocodile : MonoBehaviour
                 velocity.y = 0;
             }
 
-            float input = Input.GetAxisRaw("Horizontal");
             float targetVelocityX;
 
             if (isInTheWater)
@@ -72,14 +72,21 @@ public class Crocodile : MonoBehaviour
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+        if(input < 0)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
+
     }
 
-    public void TurnOn()
+    public override void TurnOn()
     {
         isActive = true;
     }
 
-    public void TurnOff()
+    public override void TurnOff()
     {
         isActive = false;
         velocity.x = 0;

@@ -12,6 +12,8 @@ public class FallingStones : MonoBehaviour {
 	public float minSpawnTime;
 	public float maxSpawnTime;
 
+	bool infiniteStones = false;
+
 	public bool applyXOffset;
 	public float xOffsetMagnitude = 0.2f;
 
@@ -23,8 +25,13 @@ public class FallingStones : MonoBehaviour {
 	void Start () {
 		trapInfo = transform.GetComponent<Trap> ();
 		if (stonesToSpawn == 0) {
+			infiniteStones = true;
+		}
+		/*
+		if (stonesToSpawn == 0) {
 			Invoke("SpawnStone", Random.Range (minSpawnTime, maxSpawnTime));
 		}
+		*/
 	}
 	
 	// Update is called once per frame
@@ -32,6 +39,11 @@ public class FallingStones : MonoBehaviour {
 		if (trapInfo.isActive && spawnedStones < stonesToSpawn && stonesToSpawn != 0) {
 			Invoke("SpawnStone", Random.Range (minSpawnTime, maxSpawnTime));
 			spawnedStones++;
+		}
+
+		if (trapInfo.isActive && infiniteStones) {
+			Invoke("SpawnStone", Random.Range (minSpawnTime, maxSpawnTime));
+			infiniteStones = false;
 		}
 	}
 
@@ -44,7 +56,7 @@ public class FallingStones : MonoBehaviour {
 		go.transform.position = stonePosition;
 		go.transform.parent = transform;
         go.GetComponent<StoneBehavior>().fragments = stoneFragmentsParticle;
-		if (stonesToSpawn == 0) {
+		if (trapInfo.isActive && stonesToSpawn == 0) {
 			Invoke("SpawnStone", Random.Range (minSpawnTime, maxSpawnTime));
 		}
 	}

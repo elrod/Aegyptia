@@ -21,13 +21,16 @@ public class LevelMaker : MonoBehaviour {
 
     public GameObject[] tiles;
 	public Loop[] loops;
+	public Loop[] randomLoops;
 
     List<GameObject> levelTiles = new List<GameObject>();
 
     int selectedTile = 0;
 	int selectedLoop = 0;
+	int selectedRandomLoop = 0;
 	int loopIndex = 0;
 	bool loop;
+	bool randomLoop;
 
     void OnDrawGizmos()
     {
@@ -86,6 +89,12 @@ public class LevelMaker : MonoBehaviour {
         	levelTiles.Add(newTile);
     
 		}
+		else if(randomLoop){
+			GameObject newTile = Instantiate<GameObject>(randomLoops[selectedRandomLoop].tiles[Random.Range(0, randomLoops[selectedRandomLoop].tiles.Length)]) as GameObject;
+			newTile.transform.position = position;
+			newTile.transform.SetParent(transform);
+			levelTiles.Add(newTile);
+		}
 		else{
 			GameObject newTile = Instantiate<GameObject>(tiles[selectedTile]) as GameObject;
 			newTile.transform.position = position;
@@ -124,6 +133,78 @@ public class LevelMaker : MonoBehaviour {
         levelTiles.Clear();
     }
 
+    public void RebuildLevel()
+    {
+        // This actually reinstantiates every gameobject in levelTiles list, for some reason Unity doesn't keep prefab link on instances
+        // so this is useful when we make changes on the prefab and want to apply them to the level.
+        List<GameObject> newLevelTiles = new List<GameObject>();
+        int counter = 0;
+        int totalElements = levelTiles.Count;
+        foreach(GameObject tileObj in levelTiles)
+        {
+            string prefabName = tileObj.name.Replace("(Clone)", "");
+            Vector3 objPosition = tileObj.transform.position;
+            GameObject prefabToInstantiate = null;
+            foreach(GameObject prefab in tiles)
+            {
+                if (prefab.name.Equals(prefabName))
+                {
+                    prefabToInstantiate = prefab;
+                    break;
+                }
+            }
+            if(prefabToInstantiate == null)
+            {
+                foreach(Loop lp in loops)
+                {
+                    foreach(GameObject prefab in lp.tiles)
+                    {
+                        if (prefab.name.Equals(prefabName))
+                        {
+                            prefabToInstantiate = prefab;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (prefabToInstantiate == null)
+            {
+                foreach (Loop lp in randomLoops)
+                {
+                    foreach (GameObject prefab in lp.tiles)
+                    {
+                        if (prefab.name.Equals(prefabName))
+                        {
+                            prefabToInstantiate = prefab;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(prefabToInstantiate != null)
+            {
+                GameObject.DestroyImmediate(tileObj);
+                GameObject newTile = Instantiate<GameObject>(prefabToInstantiate) as GameObject;
+                newTile.transform.position = objPosition;
+                newTile.transform.SetParent(transform);
+                counter++;
+            }
+            else
+            {
+                Debug.Log("Could not find a prefab named: " + prefabName);
+            }
+        }
+        levelTiles.Clear();
+        foreach (Transform child in gameObject.GetComponentsInChildren<Transform>())
+        {
+            if (!child.gameObject.Equals(gameObject))
+            {
+                levelTiles.Add(child.gameObject);
+            }
+        }
+        Debug.Log("Reinstantiated " + counter + " of " + totalElements + " gameObjects");
+    }
+
     public void SelectTile(int index)
     {
         selectedTile = index;
@@ -141,11 +222,26 @@ public class LevelMaker : MonoBehaviour {
 			selectedLoop = 0;
 	}
 
+	public void SelectRandomLoop(int index)
+	{
+		selectedRandomLoop = index;
+		// In case of array overflow default to 0
+		if(index >= tiles.Length)
+			selectedRandomLoop = 0;
+	}
+
+	public void EnableRandomLoop(){
+		loop = false;
+		randomLoop = true;
+	}
+
 	public void EnableLoop(){
+		randomLoop = false;
 		loop = true;
 	}
 
 	public void DisableLoop(){
+		randomLoop = false;
 		loop = false;
 	}
 

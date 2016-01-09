@@ -17,7 +17,7 @@ public class LevelMakerEditor : Editor {
         DrawDefaultInspector();
         // SEPARATOR
         GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
-		GUILayout.Label("SELECT SINGLE TILE");
+		GUILayout.Label("SINGLE TILE");
         // Customizing the inspector a little bit
         GUILayout.BeginHorizontal();
         for (int i = 0; i < grid.tiles.Length; i++)
@@ -38,7 +38,7 @@ public class LevelMakerEditor : Editor {
         GUILayout.EndHorizontal();
         // SEPARATOR
         GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
-		GUILayout.Label("SELECT LOOP");
+		GUILayout.Label("SEQUENTIAL LOOPS");
 		GUILayout.BeginHorizontal();
 		for(int j = 0; j < grid.loops.Length; j++){
 			if(j % 2 == 0 && j != 0)
@@ -54,7 +54,27 @@ public class LevelMakerEditor : Editor {
 		GUILayout.EndHorizontal();
 		// SEPARATOR
 		GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
+		GUILayout.Label("RANDOM LOOPS");
+		GUILayout.BeginHorizontal();
+		for(int z = 0; z < grid.randomLoops.Length; z++){
+			if(z % 2 == 0 && z != 0)
+			{
+				GUILayout.EndHorizontal();
+				GUILayout.BeginHorizontal();
+			}
+			if(GUILayout.Button(grid.randomLoops[z].loopName == "" ? "Loop "+ z : grid.randomLoops[z].loopName)){
+				grid.SelectRandomLoop(z);
+				grid.EnableRandomLoop();
+			}
+		}
+		GUILayout.EndHorizontal();
+		// SEPARATOR
+		GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
 		GUILayout.Label("WARNING AREA!!!");
+        if(GUILayout.Button("Rebuild Level"))
+        {
+            grid.RebuildLevel();
+        }
         if (GUILayout.Button("Reset Level"))
         {
             grid.ResetLevel();

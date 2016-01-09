@@ -22,10 +22,12 @@ public class StoneBehavior : MonoBehaviour {
 
 	void SelfDestroy(){
         fragments.GetComponent<Fragments>().ShowParticles();
-		Destroy(gameObject);
+	    Destroy(gameObject);
 	}
     void OnTriggerEnter2D(Collider2D col)
     {
-        SelfDestroy();
+		if (!col.gameObject.CompareTag("ZoomArea")) {
+			SelfDestroy ();
+		}
     }
 }

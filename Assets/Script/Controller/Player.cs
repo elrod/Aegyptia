@@ -11,9 +11,9 @@ public class Player : MonoBehaviour {
 
     public float jumpHeight = 4;           // How many unity units we want our player to jump
     public float timeToJumpApex = .4f;     // How much time our player will take to reach the top of the jump curve.
+    public float moveSpeed = 6;            // Max movement speed
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
-    float moveSpeed = 6;
     
     float gravity;
     float jumpVelocity;
@@ -27,7 +27,13 @@ public class Player : MonoBehaviour {
     GameObject anim;
     bool isHuman = true;
     float oldGravity;
+    Vector2 humanColliderSize;
+    Vector2 humanColliderOffset;
+    Vector3 tranformationPoint;
 
+    SkeletonAnimation spineAnim;
+    string curr_anim;
+    bool jumping = false;
 
 	// Use this for initialization
 	void Start () {
@@ -41,8 +47,12 @@ public class Player : MonoBehaviour {
         // Now we should get jump velocity from: velocity = v0 + acceleration * time
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         // Debug.Log("gravity: " + gravity + "; jumpVelocity: " + jumpVelocity);
+        spineAnim = GetComponent<SkeletonAnimation>();
+		spineAnim.Reset();
+        spineAnim.state.SetAnimation(0, "idle", true);
+        curr_anim = "idle";
 
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -61,10 +71,39 @@ public class Player : MonoBehaviour {
                 // Getting input
                 Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
+                // TODO FIX THIS... we should put some kind of transition smooth between animation
+                // I did bruteforce here, because it was late and I was tired
+                if (input.x != 0 && curr_anim != "walk")
+                {
+                    spineAnim.Reset();
+                    spineAnim.state.SetAnimation(0, "walk", true);
+                    curr_anim = "walk";
+                }
+                else if (input.x == 0 && curr_anim != "idle")
+                {
+                    spineAnim.Reset();
+                    spineAnim.state.SetAnimation(0, "idle", true);
+                    curr_anim = "idle";
+                }
+
                 // Jumping logic
                 if (Input.GetButtonDown("Jump") && controller.collisions.below)
                 {
                     velocity.y = jumpVelocity;
+                    //Debug.Log("salto");
+                    spineAnim.state.SetAnimation(1, "jump-salto", false);
+                    jumping = true;
+                }
+                else if (jumping && controller.collisions.below)
+                {
+                    //Debug.Log("atterro");
+                    spineAnim.state.SetAnimation(1, "jump-atterro", false);
+                    jumping = false;
+                }
+                else if (jumping)
+                {
+                    //Debug.Log("volo");
+                    spineAnim.state.SetAnimation(1, "jump-volo", true);
                 }
 
                 float targetVelocityX = input.x * moveSpeed;
@@ -88,7 +127,8 @@ public class Player : MonoBehaviour {
                 velocity.y = 0;
                 if (Input.GetButtonDown("ShapeShift")) // if is not human
                 {
-                    BackToHuman();
+                    if (CanShapeShift)
+                        BackToHuman();
                 }
             }
         
@@ -101,21 +141,34 @@ public class Player : MonoBehaviour {
 	public void TurnOn(){
 		isActive = true;
 		gameObject.tag = "Player";
+		if (transform.parent != null && transform.parent.GetComponent<Animal>() != null) {
+			transform.parent.GetComponent<Animal>().TurnOn();
+		}
 	}
 
 	public void TurnOff(){
 		isActive = false;
 		gameObject.tag = "InactivePlayer";
 		velocity.x = 0;
+		if (transform.parent != null && transform.parent.GetComponent<Animal>() != null) {
+			transform.parent.GetComponent<Animal>().TurnOff();
+		}
 	}
 
     private void ShapeShift()
     {
         anim = Instantiate<GameObject>(NewShape) as GameObject; //create the new shape
-        Vector3 pos = transform.position; 
-        anim.transform.position = pos; //the new shape's position is the same of the player
+        //Vector3 pos = transform.position;
+        Vector3 pos = tranformationPoint;
+        pos.z = 1;
+        gameObject.transform.position = pos;
+        anim.transform.position = pos; //the new shape's position is the same of the player and the spawnpoint
         gameObject.GetComponent<MeshRenderer>().enabled = false; //unactive the player and make it invisible
+        humanColliderSize = gameObject.GetComponent<BoxCollider2D>().size;
+        humanColliderOffset = gameObject.GetComponent<BoxCollider2D>().offset;
         gameObject.transform.parent = anim.transform; //the player became the child of the new shape
+        gameObject.GetComponent<BoxCollider2D>().size = new Vector2(Mathf.Abs(anim.GetComponent<BoxCollider2D>().size.x / gameObject.transform.localScale.x), Mathf.Abs(anim.GetComponent<BoxCollider2D>().size.y / gameObject.transform.localScale.y));
+        gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0);
         oldGravity = gravity;
         gravity = 0;
         isHuman = false;
@@ -124,9 +177,17 @@ public class Player : MonoBehaviour {
     private void BackToHuman()
     {
         gameObject.GetComponent<MeshRenderer>().enabled = true;
+        gameObject.GetComponent<BoxCollider2D>().size = humanColliderSize;
+        gameObject.GetComponent<BoxCollider2D>().offset = humanColliderOffset;
         gravity = oldGravity;
         isHuman = true;
         gameObject.transform.parent = null;
+        Vector3 pos = gameObject.transform.position;
+        Vector3 rot = gameObject.transform.rotation.eulerAngles;
+        rot.z = 0;
+        pos.z = 0;
+        gameObject.transform.position = pos;
+        gameObject.transform.rotation = Quaternion.Euler(rot);
         Destroy(anim);
     }
 
@@ -148,4 +209,20 @@ public class Player : MonoBehaviour {
             BackToHuman();
         }
     }
+
+    public bool IsHuman()
+    {
+        return isHuman;
+    }
+
+    public void forceBackToHuman()
+    {
+        BackToHuman();
+    }
+
+    public void setTransformationPoint(Vector3 point)
+    {
+        tranformationPoint = point;
+    }
+
 }
