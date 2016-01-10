@@ -12,6 +12,17 @@ public class Player : MonoBehaviour {
     public float jumpHeight = 4;           // How many unity units we want our player to jump
     public float timeToJumpApex = .4f;     // How much time our player will take to reach the top of the jump curve.
     public float moveSpeed = 6;            // Max movement speed
+
+    public string idleAnimation = "idle";
+    public string walkAnimation = "walk";
+    public string jumpStart = "jump-salto";
+    public string jumpFly = "jump-volo";
+    public string jumpLand = "jump-atterro";
+
+    public bool frontRight = true;
+
+    string currentAnimation = "";
+
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
     
@@ -71,40 +82,12 @@ public class Player : MonoBehaviour {
                 // Getting input
                 Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-                // TODO FIX THIS... we should put some kind of transition smooth between animation
-                // I did bruteforce here, because it was late and I was tired
-                if (input.x != 0 && curr_anim != "walk")
-                {
-                    spineAnim.Reset();
-                    spineAnim.state.SetAnimation(0, "walk", true);
-                    curr_anim = "walk";
-                }
-                else if (input.x == 0 && curr_anim != "idle")
-                {
-                    spineAnim.Reset();
-                    spineAnim.state.SetAnimation(0, "idle", true);
-                    curr_anim = "idle";
-                }
-
-                // Jumping logic
                 if (Input.GetButtonDown("Jump") && controller.collisions.below)
                 {
                     velocity.y = jumpVelocity;
-                    //Debug.Log("salto");
-                    spineAnim.state.SetAnimation(1, "jump-salto", false);
-                    jumping = true;
                 }
-                else if (jumping && controller.collisions.below)
-                {
-                    //Debug.Log("atterro");
-                    spineAnim.state.SetAnimation(1, "jump-atterro", false);
-                    jumping = false;
-                }
-                else if (jumping)
-                {
-                    //Debug.Log("volo");
-                    spineAnim.state.SetAnimation(1, "jump-volo", true);
-                }
+
+                UpdateAnimation(input);
 
                 float targetVelocityX = input.x * moveSpeed;
                 // We use smoothDamp to gradually reach our top velocity
@@ -138,7 +121,68 @@ public class Player : MonoBehaviour {
 
 	}
 
-	public void TurnOn(){
+    void UpdateAnimation(Vector2 input)
+    {
+        /*Bounds bounds = GetComponent<Collider2D>().bounds;
+        bounds.Expand(-0.30f);
+        Vector3 rayOrigin = new Vector3((bounds.min.x + bounds.max.x) / 2f, bounds.min.y, transform.position.z);
+        Debug.DrawRay(rayOrigin, Vector3.down, Color.green, 1f);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, 1f, LayerMask.NameToLayer("Obstacles"));*/
+        if (input.x == 0)
+        {
+            if (spineAnim.state.GetCurrent(0) != null && spineAnim.state.GetCurrent(0).Animation.name == walkAnimation) SetAnimation(idleAnimation, true, true);
+            if (!jumping && (currentAnimation != jumpLand || spineAnim.state.GetCurrent(0) == null)) SetAnimation(idleAnimation, true);
+        }
+        else
+        {
+            if(input.x > 0)
+            {
+                spineAnim.skeleton.FlipX = frontRight ? false : true;
+            }
+            else if(input.x < 0)
+            {
+               spineAnim.skeleton.FlipX = frontRight ? true : false;
+            }
+            if (!jumping) SetAnimation(walkAnimation, true);
+        }
+        if (Input.GetButtonDown("Jump") && controller.collisions.below)
+        {
+            //Debug.Log("salto");
+            SetAnimation(jumpStart, false);
+            jumping = true;
+        }
+        else if (jumping && controller.collisions.below)
+        {
+            //Debug.Log("atterro");
+            SetAnimation(jumpLand, false);
+            jumping = false;
+        }
+        else if (jumping)
+        {
+            //Debug.Log("volo");
+            SetAnimation(jumpFly, true);
+
+        }
+    }
+
+    void SetAnimation(string anim, bool loop, bool reset = false)
+    {
+        if (currentAnimation != anim)
+        {
+            Debug.Log("NUOVA ANIMAZIONE:" + anim);
+            if (reset)
+            {
+                Debug.Log("RESETTING");
+                bool currentFlipX = spineAnim.skeleton.flipX;
+                spineAnim.Reset();
+                spineAnim.skeleton.flipX = currentFlipX;
+            }
+            spineAnim.state.SetAnimation(0, anim, loop);
+            currentAnimation = anim;
+        }
+    }
+
+    public void TurnOn(){
 		isActive = true;
 		gameObject.tag = "Player";
 		if (transform.parent != null && transform.parent.GetComponent<Animal>() != null) {

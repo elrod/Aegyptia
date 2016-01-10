@@ -26,6 +26,8 @@ public class Crocodile : Animal
     float velocityXSmoothing;
     float velocityYSmoothing;
 
+    bool goingLeft = true;
+
     // Use this for initialization
     void Start()
     {
@@ -72,11 +74,19 @@ public class Crocodile : Animal
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-        if(input < 0)
+        if(input < 0 && !goingLeft)
         {
             Vector3 scale = transform.localScale;
             scale.x *= -1;
             transform.localScale = scale;
+            goingLeft = true;
+        }
+        else if(input > 0 && goingLeft)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+            goingLeft = false;
         }
 
     }
