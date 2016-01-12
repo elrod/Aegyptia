@@ -42,10 +42,14 @@ public class LevelManager : MonoBehaviour {
 		// to the last activated chekpoint 
 		yield return new WaitForSeconds (respawnDelay);
 		if (playerGovernor.IsP1Active ()) {
-			player.transform.position = currentCheckpointP1.transform.position;
+            Vector3 respawnPos = currentCheckpointP1.transform.position;
+            respawnPos.z = -2;
+            player.transform.position = respawnPos;
 		} else {
-			player.transform.position = currentCheckpointP2.transform.position;
-		}
+            Vector3 respawnPos = currentCheckpointP2.transform.position;
+            respawnPos.z = -2;
+            player.transform.position = respawnPos;
+        }
 		player.GetComponent<Player> ().enabled = true;
 		player.GetComponent<Renderer> ().enabled = true;
 		Instantiate (respawnParticle, player.transform.position, player.transform.rotation);
