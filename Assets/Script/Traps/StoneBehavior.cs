@@ -8,12 +8,12 @@ public class StoneBehavior : MonoBehaviour {
     public GameObject fragments;
 	// Use this for initialization
 	void Start () {
-	    rb = gameObject.GetComponent<Rigidbody2D>();
+	   
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    
 	}
 
 	void OnBecameInvisible(){
