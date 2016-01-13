@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour {
 	public GameObject deathParticle;
 	public GameObject respawnParticle;
 	public float respawnDelay;
+	bool respawning = false;
 
 	GameObject player;
 	PlayerGovernor playerGovernor;
@@ -23,13 +24,15 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void RespawnPlayer(){
-
-		// To insert the respawn delay the code must be executed in a coroutine
-		StartCoroutine ("RespawnPlayerCo");
-
+		if (!respawning) {
+			// To insert the respawn delay the code must be executed in a coroutine
+			StartCoroutine ("RespawnPlayerCo");
+		}
 	}
 
 	public IEnumerator RespawnPlayerCo(){
+
+		respawning = true;
 
 		// Instantiate the particle system representing the death of the player
 		Instantiate (deathParticle, player.transform.position, player.transform.rotation);
@@ -54,5 +57,6 @@ public class LevelManager : MonoBehaviour {
 		player.GetComponent<Renderer> ().enabled = true;
 		Instantiate (respawnParticle, player.transform.position, player.transform.rotation);
 
+		respawning = false;
 	}
 }
