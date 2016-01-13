@@ -6,7 +6,9 @@ public class DangerArea : MonoBehaviour {
 
 	public Image filter;
 	public float fadingTime = .5f;
-	bool active = false;
+    public float startAlpha = 0f;
+    public float endAlpha = .5f;
+    bool active = false;
 	bool red = false;
 	float stepTime = 0f;
 	
@@ -23,15 +25,14 @@ public class DangerArea : MonoBehaviour {
 	}
 	
 	void Fade () { //define Fade parmeters
-		float start = 0f;
-		float end = .8f;
+
 		float transparency = 0f;
 		stepTime += Time.deltaTime;
 		float percTime = stepTime / fadingTime;
 		if (!red) {
-			transparency = Mathf.Lerp (start, end, percTime);
+			transparency = Mathf.Lerp (startAlpha, endAlpha, percTime);
 		} else {
-			transparency = Mathf.Lerp (end, start, percTime);		
+			transparency = Mathf.Lerp (endAlpha, startAlpha, percTime);		
 		}
 		Color endColor = filter.color;
 		endColor.a = transparency;
