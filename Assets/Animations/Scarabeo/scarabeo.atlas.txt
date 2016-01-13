@@ -1,0 +1,139 @@
+
+scarabeo.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Path
+  rotate: true
+  xy: 288, 164
+  size: 88, 206
+  orig: 90, 208
+  offset: 1, 1
+  index: -1
+antenne
+  rotate: false
+  xy: 2, 17
+  size: 137, 50
+  orig: 139, 52
+  offset: 1, 1
+  index: -1
+corpo
+  rotate: true
+  xy: 2, 69
+  size: 183, 284
+  orig: 185, 286
+  offset: 1, 1
+  index: -1
+zampa1_sopra
+  rotate: true
+  xy: 2, 2
+  size: 13, 91
+  orig: 15, 93
+  offset: 1, 1
+  index: -1
+zampa1_sotto
+  rotate: true
+  xy: 381, 76
+  size: 35, 64
+  orig: 37, 66
+  offset: 1, 1
+  index: -1
+zampa2_sopra
+  rotate: true
+  xy: 141, 18
+  size: 49, 88
+  orig: 51, 90
+  offset: 1, 1
+  index: -1
+zampa2_sotto
+  rotate: false
+  xy: 340, 20
+  size: 48, 53
+  orig: 50, 55
+  offset: 1, 1
+  index: -1
+zampa3_sopra
+  rotate: false
+  xy: 589, 168
+  size: 49, 84
+  orig: 51, 86
+  offset: 1, 1
+  index: -1
+zampa3_sotto
+  rotate: true
+  xy: 231, 17
+  size: 50, 55
+  orig: 52, 57
+  offset: 1, 1
+  index: -1
+zampa4_sopra
+  rotate: true
+  xy: 691, 233
+  size: 19, 97
+  orig: 21, 99
+  offset: 1, 1
+  index: -1
+zampa4_sotto
+  rotate: false
+  xy: 288, 75
+  size: 91, 87
+  orig: 93, 89
+  offset: 1, 1
+  index: -1
+zampa5_sopra
+  rotate: true
+  xy: 790, 239
+  size: 13, 91
+  orig: 15, 93
+  offset: 1, 1
+  index: -1
+zampa5_sotto
+  rotate: true
+  xy: 691, 175
+  size: 35, 64
+  orig: 37, 66
+  offset: 1, 1
+  index: -1
+zampa6_sopra
+  rotate: true
+  xy: 381, 113
+  size: 49, 88
+  orig: 51, 90
+  offset: 1, 1
+  index: -1
+zampa6_sotto
+  rotate: false
+  xy: 390, 21
+  size: 48, 53
+  orig: 50, 55
+  offset: 1, 1
+  index: -1
+zampa7_sopra
+  rotate: false
+  xy: 640, 168
+  size: 49, 84
+  orig: 51, 86
+  offset: 1, 1
+  index: -1
+zampa7_sotto
+  rotate: false
+  xy: 288, 18
+  size: 50, 55
+  orig: 52, 57
+  offset: 1, 1
+  index: -1
+zampa8_sopra
+  rotate: false
+  xy: 496, 165
+  size: 91, 87
+  orig: 93, 89
+  offset: 1, 1
+  index: -1
+zampa8_sotto
+  rotate: true
+  xy: 691, 212
+  size: 19, 97
+  orig: 21, 99
+  offset: 1, 1
+  index: -1
