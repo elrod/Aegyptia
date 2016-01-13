@@ -51,11 +51,11 @@ public class EnemyController2D : MonoBehaviour {
 		// Passing a reference to our velocity instance...
 		if (velocity.x != 0){
 			HorizontalCollisions(ref velocity);
-			HorizontalPlayer(ref velocity);
 		}
 		if (velocity.y != 0){
 			VerticalCollisions(ref velocity);
 		}
+		HorizontalPlayer (ref velocity);
 		
 		transform.Translate(velocity,Space.World);
 		
@@ -183,23 +183,18 @@ public class EnemyController2D : MonoBehaviour {
 	void HorizontalPlayer(ref Vector3 velocity){
 		float directionX = Mathf.Sign(velocity.x);
 		float rayLength = seeAtDistance;
-		
-		for (int i = 0; i < horizontalRayCount; i++){
 
+		for (int i = 0; i < horizontalRayCount; i++) {
 			Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
-			// we should add  "+ velocity.y" but it seems to generate problem, we should investigate this... 
-			rayOrigin += Vector2.up * (horizontalRaySpacing * i);     // We are adding x velocity because we want to cast from the point we will be after moving in the x direction
-			RaycastHit2D hitH = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, playerMask);
-			RaycastHit2D hitD = Physics2D.Raycast(rayOrigin, (Vector2.right * directionX) + Vector2.up, rayLength, playerMask);
-			
-			Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.green);
-			Debug.DrawRay(rayOrigin, (Vector2.right * directionX) + Vector2.up, Color.green);
-			
-			if (hitH || hitD){
+			rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+			RaycastHit2D hitH = Physics2D.Raycast (rayOrigin, Vector2.right * directionX, rayLength, playerMask);
+			Debug.DrawRay (rayOrigin, Vector2.right * directionX, Color.green);
+
+			if (hitH) {
 				collisions.enemyLeft = directionX == -1;
 				collisions.enemyRight = directionX == 1;
-			}
-		} 
+			} 
+		}
 	}
 	
 	// This actually handles slope climbing...

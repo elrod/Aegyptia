@@ -11,11 +11,13 @@ public class EnemyAI : MonoBehaviour {
 	public Transform rightPatrolPoint;
 	public float patrolSpeed;
 	public float followSpeed;
+	public float lookAroundTime = 1.5f;
 	bool goRight;
 	bool patrol = true;
+	bool lookAround = false;
+	float startLookingAround;
 
-	
-	float accelerationTimeAirborne = .2f;
+
 	float accelerationTimeGrounded = .1f;
 	
 	float gravity = -50;
@@ -45,11 +47,17 @@ public class EnemyAI : MonoBehaviour {
 		if (controller.collisions.enemyLeft || controller.collisions.enemyRight) {
 			patrol = false;
 		} else {
+			if(!patrol){
+				startLookingAround = Time.time;
+				lookAround = true;
+			}
 			patrol = true;
 		}
 
-		if (patrol) {
+		if (patrol && !lookAround) {
 			PatrolMovement ();
+		} else if (patrol && lookAround) {
+			LookAround();
 		} else {
 			FollowEnemy();
 		}
@@ -71,29 +79,46 @@ public class EnemyAI : MonoBehaviour {
 			direction = -1;
 		}
 		float targetVelocityX = direction * patrolSpeed;
-		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, accelerationTimeGrounded);
 		
 		velocity.y += gravity * Time.deltaTime;
 		controller.Move (velocity * Time.deltaTime);
 	}
 
 	void FollowEnemy(){
+		float direction;
 		if (controller.collisions.enemyRight) {
 			goRight = true;
-		} else {
+			direction = 1f;
+		} else if (controller.collisions.enemyLeft) {
 			goRight = false;
-		}
-
-		float direction;
-		if (goRight) {
-			direction = 1;
+			direction = -1f;
 		} else {
-			direction = -1;
+			direction = 0f;
 		}
 		float targetVelocityX = direction * followSpeed;
-		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, accelerationTimeGrounded);
 		
 		velocity.y += gravity * Time.deltaTime;
 		controller.Move (velocity * Time.deltaTime);
+	}
+
+	void LookAround(){
+		if (Time.time - startLookingAround < lookAroundTime) {
+			float direction;
+			if (goRight) {
+				direction = 1;
+			} else {
+				direction = -1;
+			}
+			float targetVelocityX = direction * patrolSpeed;
+			velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, accelerationTimeGrounded);
+			
+			velocity.y += gravity * Time.deltaTime;
+			controller.Move (velocity * Time.deltaTime);
+		} else {
+			lookAround = false;
+			goRight = !goRight;
+		}
 	}
 }
