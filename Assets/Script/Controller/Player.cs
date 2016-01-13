@@ -130,9 +130,8 @@ public class Player : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, 1f, LayerMask.NameToLayer("Obstacles"));*/
         if (input.x == 0)
         {
-            if (spineAnim.state.GetCurrent(0) != null && spineAnim.state.GetCurrent(0).Animation.name == walkAnimation) SetAnimation(idleAnimation, true, true);
-            if (!jumping && (currentAnimation != jumpLand || spineAnim.state.GetCurrent(0) == null)) SetAnimation(idleAnimation, true);
-        }
+			if(spineAnim.state.GetCurrent(0) == null || spineAnim.state.GetCurrent(0).Animation.name == walkAnimation) SetAnimation(idleAnimation, true);
+		}
         else
         {
             if(input.x > 0)
@@ -165,18 +164,11 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void SetAnimation(string anim, bool loop, bool reset = false)
+    void SetAnimation(string anim, bool loop)
     {
         if (currentAnimation != anim)
         {
-            Debug.Log("NUOVA ANIMAZIONE:" + anim);
-            if (reset)
-            {
-                Debug.Log("RESETTING");
-                bool currentFlipX = spineAnim.skeleton.flipX;
-                spineAnim.Reset();
-                spineAnim.skeleton.flipX = currentFlipX;
-            }
+            //Debug.Log("NUOVA ANIMAZIONE:" + anim);
             spineAnim.state.SetAnimation(0, anim, loop);
             currentAnimation = anim;
         }
