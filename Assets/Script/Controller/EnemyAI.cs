@@ -71,7 +71,9 @@ public class EnemyAI : MonoBehaviour {
 		} else if (transform.position.x >= rightPatrolPoint.position.x) {
 			goRight = false;
 		}
-		
+		if (controller.collisions.left || controller.collisions.right) {
+			goRight = !goRight;
+		}
 		float direction;
 		if (goRight) {
 			direction = 1;

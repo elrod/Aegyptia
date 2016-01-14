@@ -213,7 +213,11 @@ public class Lever : Tool {
 			}
 			if (transform.eulerAngles.z < 300){
 				transform.eulerAngles = new Vector3(0f, 0f, 300f);
-				rotating = false;
+				if(reversible){
+					rotationDirection = false;
+				} else {
+					rotating = false;
+				}
 			}
 		} else {
 			if (transform.eulerAngles.z >= 300){
@@ -238,8 +242,8 @@ public class Lever : Tool {
 		}
 		SetMinAndMax ();
 		used = false;
-		rotating = true;
-		rotationDirection = false;
+		//rotating = true;
+		//rotationDirection = false;
 	}
 	
 	void OnTriggerEnter2D (Collider2D coll){
