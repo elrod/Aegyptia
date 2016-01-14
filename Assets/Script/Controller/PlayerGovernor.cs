@@ -7,9 +7,10 @@ public class PlayerGovernor : MonoBehaviour {
 	public GameObject player1;
 	public GameObject player2;
 
+    public bool canSwitchPlayer = true;
+
 	bool isP1Active;
 	bool enabled = true;
-
 	
 	// Use this for initialization
 	void Start () {
@@ -34,25 +35,31 @@ public class PlayerGovernor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 		// Check if the player is changed
-		if (Input.GetButtonDown("SwitchPlayer") && enabled) {
-			if (isP1Active) { 
-				SwitchPlayer(player1, player2);
-				if(FindObjectOfType<LevelEventsManager>() != null){
-					FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
-				}
-            }
-            else { 
-				SwitchPlayer(player2, player1);
-				if(FindObjectOfType<LevelEventsManager>() != null){
-					FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
-				}
-            }
+		if (Input.GetButtonDown("SwitchPlayer") && enabled && canSwitchPlayer) {
+            PerformSwitch();
         }
-
 	}
 	
+    void PerformSwitch()
+    {
+        if (isP1Active)
+        {
+            SwitchPlayer(player1, player2);
+            if (FindObjectOfType<LevelEventsManager>() != null)
+            {
+                FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
+            }
+        }
+        else {
+            SwitchPlayer(player2, player1);
+            if (FindObjectOfType<LevelEventsManager>() != null)
+            {
+                FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
+            }
+        }
+    }
+
 	void SwitchPlayer (GameObject activeBefore, GameObject activeNow){
 		//activeBefore.transform.gameObject.tag = "InactivePlayer";
 		//activeNow.transform.gameObject.tag = "Player";
@@ -84,4 +91,10 @@ public class PlayerGovernor : MonoBehaviour {
 			player2.GetComponent<Player> ().TurnOn ();
 		}
 	}
+
+    public void ForcePlayerSwitch()
+    {
+        PerformSwitch();
+    }
+
 }

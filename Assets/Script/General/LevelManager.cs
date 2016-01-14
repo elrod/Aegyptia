@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour {
 	public float respawnDelay;
 	bool respawning = false;
 
+    int activeCharacters = 2;
+
 	GameObject player;
 	PlayerGovernor playerGovernor;
 	
@@ -18,7 +20,6 @@ public class LevelManager : MonoBehaviour {
 
 		// Find the active player
 		player = GameObject.FindGameObjectWithTag ("Player");
-
 		playerGovernor = FindObjectOfType<PlayerGovernor> ();
 
 	}
@@ -59,4 +60,20 @@ public class LevelManager : MonoBehaviour {
 
 		respawning = false;
 	}
+
+    public void PlayerExit()
+    {
+        player.GetComponent<Renderer>().enabled = false;
+        playerGovernor.canSwitchPlayer = false;
+        activeCharacters--;
+        if(activeCharacters > 0)
+        {
+            playerGovernor.ForcePlayerSwitch();
+        }
+        else
+        {
+            Application.LoadLevel("Credits");
+        }
+        
+    }
 }

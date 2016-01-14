@@ -4,14 +4,14 @@ using System.Collections;
 public class MainMenu : MonoBehaviour {
 
 	public string startLevel;
-	public string sceneSelect;
+	public string creditScene;
 
 	public void NewGame () {
 		Application.LoadLevel (startLevel);
 	}
 	
-	public void SceneSelect () {
-		Application.LoadLevel (sceneSelect);
+	public void Credits () {
+		Application.LoadLevel (creditScene);
 	}
 
 	public void QuitGame () {
