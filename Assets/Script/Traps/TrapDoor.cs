@@ -37,16 +37,8 @@ public class TrapDoor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (trapInfo.isActive && opening) {
-			//leftShutter.RotateAround (leftRotCenter.position, Vector3.forward, -speed * Time.deltaTime);
-			//rightShutter.RotateAround (rightRotCenter.position, Vector3.forward, speed * Time.deltaTime);
 			Open ();
 		}
-		/*if (rightShutter.eulerAngles.z > 90f && opening) {
-			opening = false;
-			waiting = true;
-			rightShutter.eulerAngles = new Vector3(rightShutter.eulerAngles.x, rightShutter.eulerAngles.y, 90f);
-			leftShutter.eulerAngles = new Vector3(leftShutter.eulerAngles.x, leftShutter.eulerAngles.y, 270f);
-		}*/
 		if (waiting && closeAgain) {
 			if (elapsedTime > interval){
 				closing = true;
@@ -56,19 +48,8 @@ public class TrapDoor : MonoBehaviour {
 			}
 		}
 		if (trapInfo.isActive && closing) {
-			//leftShutter.RotateAround (leftRotCenter.position, Vector3.forward, speed * Time.deltaTime);
-			//rightShutter.RotateAround (rightRotCenter.position, Vector3.forward, -speed * Time.deltaTime);
-			//leftShutter.GetComponent<BoxCollider2D>().enabled = false;
-			//rightShutter.GetComponent<BoxCollider2D>().enabled = false;
 			Close ();
 		}
-		/*if (Mathf.Abs (rightShutter.eulerAngles.z - 0f) < 1f && closing) {
-			closing = false;
-			leftShutter.GetComponent<BoxCollider2D>().enabled = true;
-			rightShutter.GetComponent<BoxCollider2D>().enabled = true;
-			rightShutter.eulerAngles = new Vector3(rightShutter.eulerAngles.x, rightShutter.eulerAngles.y, 0f);
-			leftShutter.eulerAngles = new Vector3(leftShutter.eulerAngles.x, leftShutter.eulerAngles.y, 0f);
-		}*/
 		if (!oneTime && !opening && !waiting && !closing) {
 			Reset ();
 		}
@@ -104,14 +85,6 @@ public class TrapDoor : MonoBehaviour {
 			rightShutter.GetComponent<BoxCollider2D>().enabled = true;
 			rightShutter.eulerAngles = new Vector3(rightShutter.eulerAngles.x, rightShutter.eulerAngles.y, 0f);
 			leftShutter.eulerAngles = new Vector3(leftShutter.eulerAngles.x, leftShutter.eulerAngles.y, 0f);
-		}
-	}
-
-	void OnCollisionEnter2D(Collision2D coll){
-		if(coll.gameObject.CompareTag ("Player")){
-			if(!playerCanStep){
-				Open ();
-			}
 		}
 	}
 }
