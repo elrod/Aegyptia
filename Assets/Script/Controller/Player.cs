@@ -196,7 +196,7 @@ public class Player : MonoBehaviour {
         anim = Instantiate<GameObject>(NewShape) as GameObject; //create the new shape
         //Vector3 pos = transform.position;
         Vector3 pos = tranformationPoint;
-        pos.z = 1;
+        //pos.z = 1;
         gameObject.transform.position = pos;
         anim.transform.position = pos; //the new shape's position is the same of the player and the spawnpoint
         gameObject.GetComponent<MeshRenderer>().enabled = false; //unactive the player and make it invisible
