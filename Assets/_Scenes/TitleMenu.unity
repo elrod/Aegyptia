@@ -759,7 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d443e31b8771b46af5a4fc4557e8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLevel: DemoLevel
+  startLevel: Tutorial
   creditScene: Credits
 --- !u!1 &1934217952
 GameObject:

@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour {
 	public GameObject deathParticle;
 	public GameObject respawnParticle;
 	public float respawnDelay;
+	public string nextLevel = "Credits";
 	bool respawning = false;
 
     int activeCharacters = 2;
@@ -72,7 +73,7 @@ public class LevelManager : MonoBehaviour {
         }
         else
         {
-            Application.LoadLevel("Credits");
+            Application.LoadLevel(nextLevel);
         }
         
     }
