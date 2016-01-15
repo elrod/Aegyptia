@@ -47,29 +47,15 @@ zampa2_sopra
   offset: 1, 1
   index: -1
 zampa2_sotto
-  rotate: false
-  xy: 340, 20
+  rotate: true
+  xy: 231, 19
   size: 48, 53
   orig: 50, 55
   offset: 1, 1
   index: -1
-zampa3_sopra
-  rotate: false
-  xy: 589, 168
-  size: 49, 84
-  orig: 51, 86
-  offset: 1, 1
-  index: -1
-zampa3_sotto
-  rotate: true
-  xy: 231, 17
-  size: 50, 55
-  orig: 52, 57
-  offset: 1, 1
-  index: -1
 zampa4_sopra
   rotate: true
-  xy: 691, 233
+  xy: 589, 233
   size: 19, 97
   orig: 21, 99
   offset: 1, 1
@@ -83,14 +69,14 @@ zampa4_sotto
   index: -1
 zampa5_sopra
   rotate: true
-  xy: 790, 239
+  xy: 688, 239
   size: 13, 91
   orig: 15, 93
   offset: 1, 1
   index: -1
 zampa5_sotto
   rotate: true
-  xy: 691, 175
+  xy: 589, 175
   size: 35, 64
   orig: 37, 66
   offset: 1, 1
@@ -103,24 +89,10 @@ zampa6_sopra
   offset: 1, 1
   index: -1
 zampa6_sotto
-  rotate: false
-  xy: 390, 21
+  rotate: true
+  xy: 688, 189
   size: 48, 53
   orig: 50, 55
-  offset: 1, 1
-  index: -1
-zampa7_sopra
-  rotate: false
-  xy: 640, 168
-  size: 49, 84
-  orig: 51, 86
-  offset: 1, 1
-  index: -1
-zampa7_sotto
-  rotate: false
-  xy: 288, 18
-  size: 50, 55
-  orig: 52, 57
   offset: 1, 1
   index: -1
 zampa8_sopra
@@ -132,7 +104,7 @@ zampa8_sopra
   index: -1
 zampa8_sotto
   rotate: true
-  xy: 691, 212
+  xy: 589, 212
   size: 19, 97
   orig: 21, 99
   offset: 1, 1
