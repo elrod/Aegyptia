@@ -45,9 +45,10 @@ public class NewEnemyAI : MonoBehaviour {
 		if(controller.collisions.above || controller.collisions.below){
 			velocity.y = 0;
 		}
-        if(controller.collisions.danger){
-			goRight = !goRight; //se stai per cadere cambia direzione
-		}
+        if (controller.collisions.left || controller.collisions.right)
+        {
+            goRight = !goRight; 
+        }
 
 
 		if (controller.collisions.enemyLeft || controller.collisions.enemyRight) {
@@ -78,14 +79,15 @@ public class NewEnemyAI : MonoBehaviour {
 	}
 
 	void PatrolMovement(){
+        //Debug.Log("Patrol");
 		if (transform.position.x <= leftPatrolPoint.position.x) {
 			goRight = true;
 		} else if (transform.position.x >= rightPatrolPoint.position.x) {
 			goRight = false;
 		}
-		if (controller.collisions.left || controller.collisions.right) {
-			goRight = !goRight;
-		}
+        //if (controller.collisions.left || controller.collisions.right) {
+        //    goRight = !goRight;
+        //}
 		float direction;
 		if (goRight) {
 			direction = 1;
@@ -100,6 +102,7 @@ public class NewEnemyAI : MonoBehaviour {
 	}
 
 	void FollowEnemy(){
+        //Debug.Log("follow");
 		float direction;
 		if (controller.collisions.enemyRight) {
 			goRight = true;
@@ -141,7 +144,17 @@ public class NewEnemyAI : MonoBehaviour {
     {
         if (Time.time - startLookingAround < lookAroundTime)
         {
-            Debug.Log("followGuessed");
+            if (transform.position.x <= leftPatrolPoint.position.x)
+            {
+                PatrolMovement();
+                return;
+            }
+            else if (transform.position.x >= rightPatrolPoint.position.x)
+            {
+                PatrolMovement();
+                return;
+            }
+            //Debug.Log("followGuessed " + (Time.time - startLookingAround));
             // Check the distance between the enemy and its current target
             float distance = playerToFollow.transform.position.x - transform.position.x;
 
@@ -156,7 +169,7 @@ public class NewEnemyAI : MonoBehaviour {
             {
                 //    following = false;
                 //    tempPosition = playerToFollow.transform.position + (new Vector3(Random.Range(-movementRange, movementRange), 0f, 0f));
-                patrol = true;
+               // patrol = true;
             }
 
 

@@ -7,7 +7,7 @@ public class TrapDoor : MonoBehaviour {
 	Trap trapInfo;
 	public float speed = 50f;
 	public bool oneTime = false;
-	public bool playerCanStep;
+	public bool playerCanStep = true;
 	public bool closeAgain = true;
 	public float interval = 1f;
 	float elapsedTime = 0f;
@@ -17,29 +17,38 @@ public class TrapDoor : MonoBehaviour {
 	Transform rightRotCenter;
 	Vector3 leftShutterInitPos;
 	Vector3 rightShutterInitPos;
-	bool opening = true;
+    bool ready = true;
+	bool opening = false;
 	bool closing = false;
 	bool waiting = false;
 
 	// Use this for initialization
 	void Start () {
 		trapInfo = GetComponent<Trap> ();
-		if (transform.childCount == 4) {
-			leftShutter = transform.GetChild(0);
-			rightShutter = transform.GetChild (1);
-			leftShutterInitPos = leftShutter.position;
-			rightShutterInitPos = rightShutter.position;
-			leftRotCenter = transform.GetChild(2);
-			rightRotCenter = transform.GetChild (3);
+		if (transform.childCount >= 2) {
+
+            rightRotCenter = transform.GetChild(0);
+            rightShutter = rightRotCenter.transform.GetChild(0);
+			leftRotCenter = transform.GetChild(1);
+            leftShutter = leftRotCenter.transform.GetChild(0);
+            rightShutterInitPos = rightRotCenter.rotation.eulerAngles;
+            leftShutterInitPos = leftRotCenter.rotation.eulerAngles;
+            leftShutter.GetComponent<BoxCollider2D>().enabled = true;
+            rightShutter.GetComponent<BoxCollider2D>().enabled = true;
+          
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (trapInfo.isActive && opening) {
+        
+
+		if (trapInfo.isActive && ( ready || opening )) {
+           // Debug.Log("opening " +  opening);
 			Open ();
 		}
 		if (waiting && closeAgain) {
+           // Debug.Log("wait " + waiting);
 			if (elapsedTime > interval){
 				closing = true;
 				waiting = false;
@@ -48,43 +57,59 @@ public class TrapDoor : MonoBehaviour {
 			}
 		}
 		if (trapInfo.isActive && closing) {
+          //  Debug.Log("close " + closing);
 			Close ();
 		}
-		if (!oneTime && !opening && !waiting && !closing) {
-			Reset ();
-		}
+
+        ready = !opening && !closing && !waiting;
+        if (ready)
+        {
+            leftShutter.GetComponent<BoxCollider2D>().enabled = true;
+            rightShutter.GetComponent<BoxCollider2D>().enabled = true;
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            Reset();
+        }
+        else {
+            leftShutter.GetComponent<BoxCollider2D>().enabled = false;
+            rightShutter.GetComponent<BoxCollider2D>().enabled = false;
+            gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        }
 	}
 
 	void Reset(){
 		trapInfo.TurnOff();
-		opening = true;
+		ready = true;
 		elapsedTime = 0f;
-		leftShutter.position = leftShutterInitPos;
-		rightShutter.position = rightShutterInitPos;
 	}
 
 	public void Open(){
-		leftShutter.RotateAround (leftRotCenter.position, Vector3.forward, -speed * Time.deltaTime);
-		rightShutter.RotateAround (rightRotCenter.position, Vector3.forward, speed * Time.deltaTime);
-		if (rightShutter.eulerAngles.z > 90f && opening) {
-			opening = false;
-			waiting = true;
-			rightShutter.eulerAngles = new Vector3(rightShutter.eulerAngles.x, rightShutter.eulerAngles.y, 90f);
-			leftShutter.eulerAngles = new Vector3(leftShutter.eulerAngles.x, leftShutter.eulerAngles.y, 270f);
-		}
+
+        float angle = Mathf.MoveTowardsAngle(leftRotCenter.eulerAngles.z, 290, speed * Time.deltaTime);
+        leftRotCenter.eulerAngles = new Vector3(0, 0, angle);
+        angle = Mathf.MoveTowardsAngle(rightRotCenter.eulerAngles.z, 70, speed * Time.deltaTime);
+        rightRotCenter.eulerAngles = new Vector3(0, 0, angle);
+        
+        opening = true;
+       // Debug.Log("DX " + rightRotCenter.eulerAngles.z + "SX " + leftRotCenter.eulerAngles.z);
+        if (Mathf.RoundToInt(rightRotCenter.eulerAngles.z) == 70 && Mathf.RoundToInt(leftRotCenter.eulerAngles.z) == 290)
+        {
+            opening = false;
+            waiting = true;
+        }
 	}
 
 	void Close(){
-		leftShutter.RotateAround (leftRotCenter.position, Vector3.forward, speed * Time.deltaTime);
-		rightShutter.RotateAround (rightRotCenter.position, Vector3.forward, -speed * Time.deltaTime);
-		leftShutter.GetComponent<BoxCollider2D>().enabled = false;
-		rightShutter.GetComponent<BoxCollider2D>().enabled = false;
-		if (Mathf.Abs (rightShutter.eulerAngles.z - 0f) < 1f && closing) {
+
+            float angle = Mathf.MoveTowardsAngle(leftRotCenter.eulerAngles.z, leftShutterInitPos.z, speed * Time.deltaTime);
+            leftRotCenter.eulerAngles = new Vector3(0, 0, angle);
+            angle = Mathf.MoveTowardsAngle(rightRotCenter.eulerAngles.z, rightShutterInitPos.z, speed * Time.deltaTime);
+            rightRotCenter.eulerAngles = new Vector3(0, 0, angle);
+            closing = true;
+
+        if (Mathf.RoundToInt(rightRotCenter.eulerAngles.z) == rightShutterInitPos.z && Mathf.RoundToInt(leftRotCenter.eulerAngles.z) == leftShutterInitPos.z)
+        {
 			closing = false;
-			leftShutter.GetComponent<BoxCollider2D>().enabled = true;
-			rightShutter.GetComponent<BoxCollider2D>().enabled = true;
-			rightShutter.eulerAngles = new Vector3(rightShutter.eulerAngles.x, rightShutter.eulerAngles.y, 0f);
-			leftShutter.eulerAngles = new Vector3(leftShutter.eulerAngles.x, leftShutter.eulerAngles.y, 0f);
 		}
+        
 	}
 }

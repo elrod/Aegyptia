@@ -65,7 +65,7 @@ public class EnemyController2D : MonoBehaviour {
 	void VerticalCollisions(ref Vector3 velocity){
 		float directionY = Mathf.Sign(velocity.y);
 		float rayLength = Mathf.Abs(velocity.y) + skinWidth;
-        bool checkDanger = false;
+        int checkDanger = 0;
 
 		for (int i = 0; i < verticalRayCount; i++){
 			// If we are moving down we want to check collisions above us, if we are moving up we want to check collisions above us...
@@ -104,12 +104,17 @@ public class EnemyController2D : MonoBehaviour {
             }
             else 
             { 
-                checkDanger = true;
+                checkDanger++;
             }
 		}
+        if (checkDanger >= 4)
+        {
+            collisions.danger = true;
 
-        collisions.danger = checkDanger;
-        checkDanger = false;
+        }
+        else collisions.danger = false;
+        checkDanger = 0;
+        
 		// Another little fix here... it appears that sometimes when we have two different slopes angles in the same climb,
 		// Sometimes our character penetrate a little in the second slope causing it to stuck for a few frames
 		// A quick fix is to cast another ray to check if the slopeAngle has changed, if so, we update our velocity.x

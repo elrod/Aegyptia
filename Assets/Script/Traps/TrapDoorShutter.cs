@@ -7,8 +7,8 @@ public class TrapDoorShutter : MonoBehaviour {
 	Trap trapInfo;
 
 	void Start(){
-		trapDoor = transform.parent.GetComponent<TrapDoor> ();
-		trapInfo = transform.parent.GetComponent<Trap> ();
+		trapDoor = transform.parent.parent.GetComponent<TrapDoor> ();
+		trapInfo = transform.parent.parent.GetComponent<Trap> ();
 	}
 
 	void OnCollisionEnter2D (Collision2D coll){
