@@ -77,7 +77,7 @@ public class Lever : Tool {
 		
 		// Surely not the best way to call it, but I've rewritten this so many times that 
 		// at the moement I don't want to change it.
-		if (Input.GetKeyDown(KeyCode.Q)){
+		if (Input.GetButtonDown("Use")){
 			if (active) {
 				start = true;
 				rotating = true;

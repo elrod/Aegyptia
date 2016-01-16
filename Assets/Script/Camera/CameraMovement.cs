@@ -49,7 +49,7 @@ public class CameraMovement : MonoBehaviour {
 		
 		if (!moving && !comingBack) {
 			float posX = Mathf.SmoothDamp (transform.position.x, activePlayer.transform.position.x + offset.x, ref velocity.x, smoothTimeX);
-			float posY = Mathf.SmoothDamp (transform.position.y, activePlayer.transform.position.y + offset.y, ref velocity.y, smoothTimeY);
+			float posY = Mathf.SmoothDamp (transform.position.y, activePlayer.transform.position.y + offset.y +2f, ref velocity.y, smoothTimeY);
 			
 			transform.position = new Vector3 (posX, posY, transform.position.z);
 		}

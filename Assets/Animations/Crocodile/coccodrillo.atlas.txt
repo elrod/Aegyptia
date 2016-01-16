@@ -1,0 +1,83 @@
+
+coccodrillo.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Bocca_sotto
+  rotate: false
+  xy: 1543, 599
+  size: 326, 102
+  orig: 328, 104
+  offset: 1, 1
+  index: -1
+Coda
+  rotate: false
+  xy: 2, 186
+  size: 622, 383
+  orig: 624, 385
+  offset: 1, 1
+  index: -1
+bocca_sopra
+  rotate: false
+  xy: 2, 25
+  size: 342, 159
+  orig: 344, 161
+  offset: 1, 1
+  index: -1
+corpo
+  rotate: false
+  xy: 2, 571
+  size: 1198, 390
+  orig: 1200, 392
+  offset: 1, 1
+  index: -1
+naso
+  rotate: false
+  xy: 2, 2
+  size: 10, 21
+  orig: 12, 23
+  offset: 1, 1
+  index: -1
+occhio
+  rotate: false
+  xy: 1881, 927
+  size: 129, 34
+  orig: 131, 36
+  offset: 1, 1
+  index: -1
+sopracciglio
+  rotate: false
+  xy: 626, 215
+  size: 129, 25
+  orig: 131, 27
+  offset: 1, 1
+  index: -1
+zampadavanti_dietro
+  rotate: false
+  xy: 1202, 634
+  size: 339, 327
+  orig: 341, 329
+  offset: 1, 1
+  index: -1
+zampadietro_dietro
+  rotate: false
+  xy: 626, 242
+  size: 339, 327
+  orig: 341, 329
+  offset: 1, 1
+  index: -1
+zampe_Dietro_davanti
+  rotate: false
+  xy: 967, 234
+  size: 258, 335
+  orig: 260, 337
+  offset: 1, 1
+  index: -1
+zampedavanti_davanti
+  rotate: true
+  xy: 1543, 703
+  size: 258, 336
+  orig: 260, 338
+  offset: 1, 1
+  index: -1
