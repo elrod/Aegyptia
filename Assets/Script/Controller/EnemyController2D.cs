@@ -65,7 +65,8 @@ public class EnemyController2D : MonoBehaviour {
 	void VerticalCollisions(ref Vector3 velocity){
 		float directionY = Mathf.Sign(velocity.y);
 		float rayLength = Mathf.Abs(velocity.y) + skinWidth;
-		
+        bool checkDanger = false;
+
 		for (int i = 0; i < verticalRayCount; i++){
 			// If we are moving down we want to check collisions above us, if we are moving up we want to check collisions above us...
 			Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
@@ -73,34 +74,42 @@ public class EnemyController2D : MonoBehaviour {
 			RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
 			
 			Debug.DrawRay(rayOrigin, Vector2.up * directionY, Color.red);
-			
-			if (hit){
-				// Ok this should make avoid penetrating objects... this set the next velocity to the distance between
-				// the ray origin and the hit point.
-				velocity.y = (hit.distance - skinWidth) * directionY;
-				// we should also update rayLength with the latest hit distance, to avoid cases in which a ray detects a collision
-				// in a point that is closer to our character, but another ray detects another collision further up that is
-				// more distance causing it to update velocity with an higher value, we don't want something like this:
-				// PLAYER
-				// ------
-				// |    |
-				// V    |
-				// --   |
-				//      V
-				// -----------
-				rayLength = hit.distance;
-				
-				// This should prevent our character to vibrate left to right when hitting an obstacle above him
-				// while climbing a slope
-				if (collisions.climbingSlope)
-				{
-					velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);
-				}
-				
-				collisions.below = directionY == -1;
-				collisions.above = directionY == 1;
-			}
+
+            if (hit)
+            {
+                // Ok this should make avoid penetrating objects... this set the next velocity to the distance between
+                // the ray origin and the hit point.
+                velocity.y = (hit.distance - skinWidth) * directionY;
+                // we should also update rayLength with the latest hit distance, to avoid cases in which a ray detects a collision
+                // in a point that is closer to our character, but another ray detects another collision further up that is
+                // more distance causing it to update velocity with an higher value, we don't want something like this:
+                // PLAYER
+                // ------
+                // |    |
+                // V    |
+                // --   |
+                //      V
+                // -----------
+                rayLength = hit.distance;
+
+                // This should prevent our character to vibrate left to right when hitting an obstacle above him
+                // while climbing a slope
+                if (collisions.climbingSlope)
+                {
+                    velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);
+                }
+
+                collisions.below = directionY == -1;
+                collisions.above = directionY == 1;
+            }
+            else 
+            { 
+                checkDanger = true;
+            }
 		}
+
+        collisions.danger = checkDanger;
+        checkDanger = false;
 		// Another little fix here... it appears that sometimes when we have two different slopes angles in the same climb,
 		// Sometimes our character penetrate a little in the second slope causing it to stuck for a few frames
 		// A quick fix is to cast another ray to check if the slopeAngle has changed, if so, we update our velocity.x
@@ -291,7 +300,7 @@ public class EnemyController2D : MonoBehaviour {
 		public float slopeAngle, slopeAngleOld;
 		public Vector3 velocityOld;
 		public Vector3 oldPos;
-		
+        public bool danger;
 		public void Reset(){
 			above = below = false;
 			left = right = false;

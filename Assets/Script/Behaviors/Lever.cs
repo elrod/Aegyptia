@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Lever : Tool {
 
@@ -10,9 +11,19 @@ public class Lever : Tool {
 		public float minY;
 		public float maxY;
 	}
-	
+    [System.Serializable]
+    public struct TranslateObject
+    {
+        public GameObject area;
+        public Vector3 deltaDestination;
+        public float moveSpeed;
+    }
+
+    public TranslateObject[] translateAreas;
 	public TileArea[] destroyAreas;
 	public TileArea[] createAreas;
+
+    List<Vector3> startingPoints;
 	
 	int currentArea = 0;
 	bool currentAreaChanged = true;
@@ -23,10 +34,11 @@ public class Lever : Tool {
 	bool active = false;
 	bool used = false;
 	
-	public float interval = 1f;
+	public float interval = 1.2f;
 	float elapsedTime = 0f;
 	bool destroying = false;
 	bool creating = false;
+    bool translate = false;
 	bool start = false;
 
 	public float rotationSpeed = 20f;
@@ -39,6 +51,12 @@ public class Lever : Tool {
 	
 	// Use this for initialization
 	void Start () {
+        startingPoints = new List<Vector3>();
+        foreach (TranslateObject t in translateAreas)
+        {
+            startingPoints.Add(t.area.transform.position);
+        }
+
 		if (destroyAreas.Length > 0) {
 			destroying = true;
 		} else if (createAreas.Length > 0) {
@@ -47,6 +65,10 @@ public class Lever : Tool {
 		if (destroying || creating) {
 			SetMinAndMax ();
 		}
+        if (translateAreas.Length > 0)
+        {
+            translate = true;
+        }
 		rotationCentre = transform.GetChild (0);
 	}
 	
@@ -82,8 +104,12 @@ public class Lever : Tool {
 				CreateRow();
 			}
 			
+            if(translate)
+            {
+                Translate();
+            }
 			// Finally use the tools
-			if (!destroying && !creating){
+			if (!destroying && !creating && !translate){
 				foreach(Tool tool in toolsToUse){
 					tool.Use();
 				}
@@ -229,6 +255,19 @@ public class Lever : Tool {
 			}
 		}
 	}
+
+    void Translate()
+    {
+        for (int i = 0; i < translateAreas.Length; i++)
+        {
+            Vector3 currentPos = translateAreas[i].area.transform.position;
+            translateAreas[i].area.transform.position = Vector3.MoveTowards(currentPos, startingPoints[i] + translateAreas[i].deltaDestination, Time.deltaTime * translateAreas[i].moveSpeed);
+            if(currentPos == startingPoints[i] + translateAreas[i].deltaDestination)
+            {
+                translate = false;
+            }
+        }
+    }
 
 	void Init(){
 		TileArea[] tmp = destroyAreas;
