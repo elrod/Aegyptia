@@ -15,9 +15,11 @@ public class Fragments : MonoBehaviour {
 
 	// Use this for initialization
 	public void ShowParticles () {
-        particles.Play();
-        Invoke("SelfDisable", timer);
-	}
+        if(particles != null) { 
+            particles.Play();
+            Invoke("SelfDisable", timer);
+        }
+    }
 	
 	void SelfDisable(){
         particles.Stop();

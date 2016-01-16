@@ -22,7 +22,11 @@ TagManager:
   - Obstacles
   - 
   - Enemy
+<<<<<<< HEAD
   - AI_Obstacle
+=======
+  - DarkArea
+>>>>>>> 7babda291d8a06e4f373c99d594b33e4018c9c47
   - 
   - 
   - 

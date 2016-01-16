@@ -6,6 +6,7 @@ public class StoneBehavior : MonoBehaviour {
 
     Rigidbody2D rb;
     public GameObject fragments;
+    public bool persistentStone = true;
 	// Use this for initialization
 	void Start () {
 	   
@@ -17,7 +18,10 @@ public class StoneBehavior : MonoBehaviour {
 	}
 
 	void OnBecameInvisible(){
-		SelfDestroy();
+        if (!persistentStone)
+        {
+            SelfDestroy();
+        }
 	}
 
 	void SelfDestroy(){
