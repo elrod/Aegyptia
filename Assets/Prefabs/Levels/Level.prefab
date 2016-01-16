@@ -119,13 +119,67 @@ MonoBehaviour:
     - {fileID: 185346, guid: f1139c1c7d7d4324a9aa51412482a3ce, type: 2}
     - {fileID: 158050, guid: 3150ed325c231404cbab07633a71b9aa, type: 2}
     - {fileID: 143058, guid: 14964addd8e831040881389c1fc7ab6c, type: 2}
+  - loopName: Decorations
+    tiles:
+    - {fileID: 139686, guid: d504cee3ea45f7c439d079ed22a2e446, type: 2}
+    - {fileID: 112634, guid: 166345cfdfaca3f41b3f1e3e8356770a, type: 2}
+    - {fileID: 137160, guid: 565ae20947645104e9716a7cc6edaa25, type: 2}
+    - {fileID: 100008, guid: ac429bb6e5b648f42922abb536137fc3, type: 2}
+    - {fileID: 164064, guid: 577e163e2d3e2274d8d4dbc25cb55ef5, type: 2}
+    - {fileID: 152058, guid: f3987dc7cfaf18e43aea3106de9e7b04, type: 2}
+    - {fileID: 148670, guid: 930ee316265720f48968176baa091d03, type: 2}
+    - {fileID: 161054, guid: 0682e720d9c07ab4f9880a202d45d705, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: randomLoops.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: randomLoops.Array.data[4].tiles.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: randomLoops.Array.data[4].loopName
+      value: Decorations
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: randomLoops.Array.data[4].tiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 139686, guid: d504cee3ea45f7c439d079ed22a2e446, type: 2}
+    - target: {fileID: 0}
+      propertyPath: randomLoops.Array.data[4].tiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 112634, guid: 166345cfdfaca3f41b3f1e3e8356770a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: randomLoops.Array.data[4].tiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 137160, guid: 565ae20947645104e9716a7cc6edaa25, type: 2}
+    - target: {fileID: 0}
+      propertyPath: randomLoops.Array.data[4].tiles.Array.data[3]
+      value: 
+      objectReference: {fileID: 100008, guid: ac429bb6e5b648f42922abb536137fc3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: randomLoops.Array.data[4].tiles.Array.data[4]
+      value: 
+      objectReference: {fileID: 164064, guid: 577e163e2d3e2274d8d4dbc25cb55ef5, type: 2}
+    - target: {fileID: 0}
+      propertyPath: randomLoops.Array.data[4].tiles.Array.data[5]
+      value: 
+      objectReference: {fileID: 152058, guid: f3987dc7cfaf18e43aea3106de9e7b04, type: 2}
+    - target: {fileID: 0}
+      propertyPath: randomLoops.Array.data[4].tiles.Array.data[6]
+      value: 
+      objectReference: {fileID: 148670, guid: 930ee316265720f48968176baa091d03, type: 2}
+    - target: {fileID: 0}
+      propertyPath: randomLoops.Array.data[4].tiles.Array.data[7]
+      value: 
+      objectReference: {fileID: 161054, guid: 0682e720d9c07ab4f9880a202d45d705, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 122484}

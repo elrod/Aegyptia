@@ -31,7 +31,7 @@ public class FishBehavior : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D col){
-		if(!collisionLock && LayerMask.LayerToName(col.gameObject.layer).Equals("Obstacles")){
+        if (!collisionLock && LayerMask.LayerToName(col.gameObject.layer).Equals("Obstacles")){
 			dir.x *= -1;
 			collisionLock = true;
 			Invoke("UnlockCollision", collisionLockTime);

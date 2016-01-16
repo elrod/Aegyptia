@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - InactivePlayer
+  - MovingPlatform
+  - ArrowShoter
+  - Sfinge
+  - ZoomArea
   layers:
   - Default
   - TransparentFX
@@ -13,11 +18,12 @@ TagManager:
   - UI
   - 
   - 
+  - Player
+  - Obstacles
   - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - AI_Obstacle
+  - DarkArea
   - 
   - 
   - 

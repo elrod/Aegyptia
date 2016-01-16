@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour {
         //{
         //    FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "ISIS_KEY_OBTAINED");
         //}
-        Debug.Log (inventObj.name + " in inventory");
+        //Debug.Log (inventObj.name + " in inventory");
 	}
 
 	public bool Use(string name){
