@@ -117,7 +117,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4608
+    m_Bits: 8704
   m_Lightmapping: 4
   m_BounceIntensity: 0
   m_ShadowRadius: 0
@@ -166,6 +166,13 @@ MonoBehaviour:
   jumpHeight: 6
   timeToJumpApex: .400000006
   moveSpeed: 6
+  idleAnimation: idle
+  walkAnimation: walk
+  jumpStart: jump1
+  jumpClimb: jump2
+  jumpTurn: jump3
+  jumpDescend: jump4
+  jumpLand: jump5
 --- !u!212 &21226058
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -220,6 +227,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Color.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_CullingMask.m_Bits
+      value: 8704
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

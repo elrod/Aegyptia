@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof (AudioSource))]
 public class LevelManager : MonoBehaviour {
 
 	public GameObject currentCheckpointP1 = null;
@@ -8,6 +9,8 @@ public class LevelManager : MonoBehaviour {
 	public GameObject deathParticle;
 	public GameObject respawnParticle;
 	public float respawnDelay;
+	public AudioClip isisDeathClip;
+	public AudioClip osirisDeathClip;
 	public string nextLevel = "Credits";
 	bool respawning = false;
 
@@ -15,6 +18,7 @@ public class LevelManager : MonoBehaviour {
 
 	GameObject player;
 	PlayerGovernor playerGovernor;
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -38,6 +42,12 @@ public class LevelManager : MonoBehaviour {
 
 		// Instantiate the particle system representing the death of the player
 		Instantiate (deathParticle, player.transform.position, player.transform.rotation);
+		if (playerGovernor.IsP1Active ()) {
+			GetComponent<AudioSource> ().clip = osirisDeathClip;
+		} else {
+			GetComponent<AudioSource>().clip = isisDeathClip;
+		}
+		GetComponent<AudioSource> ().Play ();
 		player.GetComponent<Player>().ManageShapeOnRespawn();
 		player.GetComponent<Player> ().enabled = false;
 		player.GetComponent<Renderer> ().enabled = false;
