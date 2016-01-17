@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof (AudioSource))]
 public class ArrowShoter : MonoBehaviour {
 
     public GameObject arrowPrefab;
@@ -9,12 +10,14 @@ public class ArrowShoter : MonoBehaviour {
 	public float maxSpawnTime;
 	public bool applyYOffset;
 	public float yOffsetMagnitude = 0.2f;
+	public AudioClip arrowSpawn;
+	AudioSource audio;
 
     private int spawnedArrows = 0;
 
 	// Use this for initialization
 	void Start () {
-
+		audio = GetComponent<AudioSource> ();
         Invoke("SpawnArrow",Random.Range (minSpawnTime, maxSpawnTime));
 	
 	}
@@ -24,8 +27,9 @@ public class ArrowShoter : MonoBehaviour {
 	    
 	}
 
-    void SpawnArrow()
-    {
+    void SpawnArrow(){
+		audio.clip = arrowSpawn;
+		audio.Play ();
         GameObject go = Instantiate<GameObject>(arrowPrefab) as GameObject;
         Vector3 arrowPosition = transform.position;
         if (applyYOffset)
