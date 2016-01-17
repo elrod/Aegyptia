@@ -33168,7 +33168,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 491860, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 11438572, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
       propertyPath: player1
@@ -55717,7 +55717,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 472556, guid: d1f8caf9d262744f5b3ba4fe65c20596, type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1f8caf9d262744f5b3ba4fe65c20596, type: 2}
