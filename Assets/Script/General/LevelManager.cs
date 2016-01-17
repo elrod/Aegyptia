@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [RequireComponent (typeof (AudioSource))]
@@ -11,6 +12,9 @@ public class LevelManager : MonoBehaviour {
 	public float respawnDelay;
 	public AudioClip isisDeathClip;
 	public AudioClip osirisDeathClip;
+    public GameObject endLevelPanel;
+    public Text endLevelFound;
+    public Text endLevelTotal;
 	public string nextLevel = "Credits";
 	bool respawning = false;
 
@@ -26,6 +30,10 @@ public class LevelManager : MonoBehaviour {
 		// Find the active player
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerGovernor = FindObjectOfType<PlayerGovernor> ();
+        if(endLevelPanel == null)
+        {
+            Debug.LogError("Please drag endLevelPanel from GUI to inspector in LevelManager");
+        }
 
 	}
 
@@ -83,7 +91,12 @@ public class LevelManager : MonoBehaviour {
         }
         else
         {
-            Application.LoadLevel(nextLevel);
+            //Application.LoadLevel(nextLevel);
+            player.GetComponent<Player>().enabled = false;
+            player.GetComponent<Controller2D>().enabled = false;
+            endLevelFound.text = FindObjectOfType<Collector>().getCollected().ToString();
+            endLevelTotal.text = FindObjectOfType<Collector>().getTotal().ToString();
+            endLevelPanel.SetActive(true);
         }
         
     }
