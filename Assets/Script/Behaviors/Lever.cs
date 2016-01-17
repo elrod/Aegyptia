@@ -40,6 +40,7 @@ public class Lever : Tool {
 	bool creating = false;
     bool translate = false;
 	bool start = false;
+    bool tools = false;
 
 	public float rotationSpeed = 20f;
 	bool rotating = false;
@@ -69,7 +70,14 @@ public class Lever : Tool {
         {
             translate = true;
         }
+
+        if (toolsToUse.Length > 0)
+        { 
+            tools = true;
+        }
+
 		rotationCentre = transform.GetChild (0);
+
 	}
 	
 	// Update is called once per frame
@@ -96,7 +104,15 @@ public class Lever : Tool {
 		// the lever is designed to be used only one time.
 		if (!used){
 			// First there is the part in which we destroy the existing tiles (if it has to be done)
-			if(destroying){
+            if (tools)
+            {
+                foreach (Tool tool in toolsToUse)
+                {
+                    tool.Use();
+                }
+            }
+            
+            if(destroying){
 				DestroyRow();
 			}
 			
@@ -108,17 +124,19 @@ public class Lever : Tool {
             {
                 Translate();
             }
-			// Finally use the tools
-			if (!destroying && !creating && !translate){
-				foreach(Tool tool in toolsToUse){
-					tool.Use();
-				}
-				used = true;
-				start = false;
-				if(reversible){
-					Init();
-				}
-			}
+
+
+            if (!destroying && !creating && !translate)
+            {
+                used = true;
+                start = false;
+                if (reversible)
+                {
+                    Init();
+                }
+            }
+        
+			
 		}
 	}
 	
