@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent (typeof (Controller2D))]
-
+[RequireComponent (typeof (AudioSource))]
 public class Player : MonoBehaviour {
 
     Controller2D controller;
@@ -18,6 +18,10 @@ public class Player : MonoBehaviour {
     public string jumpStart = "jump-salto";
     public string jumpFly = "jump-volo";
     public string jumpLand = "jump-atterro";
+
+	public AudioClip[] audioClip;
+	AudioSource audio;
+	int clip_jump = 0;
 
     public bool frontRight = true;
 
@@ -49,6 +53,7 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         controller = GetComponent<Controller2D>();
+		audio = GetComponent<AudioSource> ();
 
         // Ok we should get gravity and jumpVelocity from jumpHeight and timeToJumpApex
         // For gravity we will use the motion equation: delta(Movement) = v0 * time + (acceleration * time^2) / 2
@@ -84,6 +89,7 @@ public class Player : MonoBehaviour {
 
                 if (Input.GetButtonDown("Jump") && controller.collisions.below)
                 {
+					PlaySound (clip_jump);
                     velocity.y = jumpVelocity;
                 }
 
@@ -261,4 +267,8 @@ public class Player : MonoBehaviour {
         tranformationPoint = point;
     }
 
+	void PlaySound(int clipIndex){
+		audio.clip = audioClip [clipIndex];
+		audio.Play ();
+	}
 }
