@@ -1,0 +1,97 @@
+
+gatto_egizio_levels.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Group
+  rotate: true
+  xy: 1871, 565
+  size: 239, 91
+  orig: 241, 93
+  offset: 1, 1
+  index: -1
+coda
+  rotate: true
+  xy: 1350, 806
+  size: 194, 597
+  orig: 196, 599
+  offset: 1, 1
+  index: -1
+collare
+  rotate: true
+  xy: 1699, 500
+  size: 304, 170
+  orig: 306, 172
+  offset: 1, 1
+  index: -1
+collare2
+  rotate: false
+  xy: 2, 2
+  size: 256, 123
+  orig: 258, 125
+  offset: 1, 1
+  index: -1
+corpo
+  rotate: false
+  xy: 2, 676
+  size: 814, 324
+  orig: 816, 326
+  offset: 1, 1
+  index: -1
+occhio
+  rotate: true
+  xy: 1949, 847
+  size: 153, 62
+  orig: 155, 64
+  offset: 1, 1
+  index: -1
+orecchio_back
+  rotate: false
+  xy: 1050, 573
+  size: 104, 140
+  orig: 106, 142
+  offset: 1, 1
+  index: -1
+orecchio_front
+  rotate: false
+  xy: 818, 517
+  size: 230, 196
+  orig: 232, 198
+  offset: 1, 1
+  index: -1
+testa
+  rotate: true
+  xy: 1350, 483
+  size: 321, 347
+  orig: 323, 349
+  offset: 1, 1
+  index: -1
+zampa_ant-front
+  rotate: false
+  xy: 322, 148
+  size: 228, 526
+  orig: 230, 528
+  offset: 1, 1
+  index: -1
+zampa_ant_back
+  rotate: false
+  xy: 552, 148
+  size: 228, 526
+  orig: 230, 528
+  offset: 1, 1
+  index: -1
+zampa_post_back
+  rotate: false
+  xy: 2, 127
+  size: 318, 547
+  orig: 320, 549
+  offset: 1, 1
+  index: -1
+zampa_post_front
+  rotate: true
+  xy: 818, 715
+  size: 285, 530
+  orig: 287, 532
+  offset: 1, 1
+  index: -1
