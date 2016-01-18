@@ -9,6 +9,7 @@ TagManager:
   - ArrowShoter
   - Sfinge
   - ZoomArea
+  - PiPCamera
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,6 @@ TagManager:
   - Enemy
   - AI_Obstacle
   - DarkArea
-  - 
   - 
   - 
   - 

@@ -9,8 +9,11 @@ public class CameraMovement : MonoBehaviour {
 	public float smoothTimeX = 0.2f;
 	
 	public float switchTime = 3f;
+	public float waitTimeOnFocus = 1.5f;
 	float elapsedTime;
-	
+	float waitedTime = 0f;
+	int weight = 0;
+
 	public float cameraSize = 5f;
 	public float zoomOutSize = 10f;
 	public Vector2 offsetBase;
@@ -69,7 +72,13 @@ public class CameraMovement : MonoBehaviour {
 	
 	// Used to set the variables to execute the routine associated to the temporarary change of the focused element
 	public void SwitchFocus(Vector3 dest){
-		destPos = dest;
+		if (moveFocus) {
+			weight++;
+			destPos = (weight*destPos + dest)/2;
+		} else {
+			weight = 0;
+			destPos = dest;
+		}
 		startPos = transform.position;
 		moveFocus = true;
 		moving = true;
@@ -106,18 +115,23 @@ public class CameraMovement : MonoBehaviour {
 	}
 	
 	void ComeBack(){
-		bool isArrived = elapsedTime >= switchTime;
-		if (!isArrived) {
-			elapsedTime += 2*Time.deltaTime;
-			float percTime = elapsedTime/switchTime;
-			float posX = Mathf.Lerp(destPos.x, startPos.x, percTime);
-			float posY = Mathf.Lerp(destPos.y, startPos.y, percTime);
-			
-			transform.position = new Vector3 (posX, posY, transform.position.z);
+		if (waitedTime < waitTimeOnFocus) {
+			waitedTime += Time.deltaTime;
 		} else {
-			elapsedTime = 0;
-			comingBack = false;
-			FindObjectOfType<PlayerGovernor> ().EnableInput ();
+			bool isArrived = elapsedTime >= switchTime;
+			if (!isArrived) {
+				elapsedTime += 2 * Time.deltaTime;
+				float percTime = elapsedTime / switchTime;
+				float posX = Mathf.Lerp (destPos.x, startPos.x, percTime);
+				float posY = Mathf.Lerp (destPos.y, startPos.y, percTime);
+			
+				transform.position = new Vector3 (posX, posY, transform.position.z);
+			} else {
+				waitedTime = 0f;
+				elapsedTime = 0;
+				comingBack = false;
+				FindObjectOfType<PlayerGovernor> ().EnableInput ();
+			}
 		}
 	}
 

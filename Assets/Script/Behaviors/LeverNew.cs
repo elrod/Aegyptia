@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -49,10 +49,13 @@ public class LeverNew : Tool {
 	bool rotationDirection = true;
 	
 	public bool reversible;
+
+	Camera pipCamera;
 	
 	
 	// Use this for initialization
 	void Start () {
+		pipCamera = GameObject.FindGameObjectWithTag ("PiPCamera").GetComponent<Camera> ();
 		startingPoints = new List<Vector3>();
 		foreach (TranslateObject t in translateAreas)
 		{
@@ -106,7 +109,7 @@ public class LeverNew : Tool {
 		if (!used){
 			// First there is the part in which we destroy the existing tiles (if it has to be done)
 			if (tools){
-				if(!Camera.main.GetComponent<CameraMovement>().IsMoving()){
+				if(!pipCamera.enabled){
 					toolsToUse[usedTool].Use();
 					usedTool++;
 					if(usedTool == toolsToUse.Length){
