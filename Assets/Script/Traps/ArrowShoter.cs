@@ -18,10 +18,13 @@ public class ArrowShoter : MonoBehaviour {
     bool infiniteArrows = false;
     Trap trapInfo;
     bool burstStart = false;
-
+    float initialMinTime;
+    float initialMaxTime;
     // Use this for initialization
     void Start()
     {
+        initialMinTime = minSpawnTime;
+        initialMaxTime= maxSpawnTime;
         trapInfo = transform.GetComponent<Trap>();
         if (arrowToSpawn == 0)
         {
@@ -92,5 +95,11 @@ public class ArrowShoter : MonoBehaviour {
             Invoke("SpawnArrow", Random.Range(minSpawnTime, maxSpawnTime));
         }
         
+    }
+
+    public void Reset()
+    {
+        minSpawnTime = initialMinTime;
+        maxSpawnTime = initialMaxTime;
     }
 }

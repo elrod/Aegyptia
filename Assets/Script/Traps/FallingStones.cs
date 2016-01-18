@@ -20,9 +20,13 @@ public class FallingStones : MonoBehaviour {
 	private int spawnedStones = 0;
 
 	Trap trapInfo;
-
-	// Use this for initialization
-	void Start () {
+    float initialMinTime;
+    float initialMaxTime;
+    // Use this for initialization
+    void Start()
+    {
+        initialMinTime = minSpawnTime;
+        initialMaxTime = maxSpawnTime;
 		trapInfo = transform.GetComponent<Trap> ();
 		if (stonesToSpawn == 0) {
 			infiniteStones = true;
@@ -36,15 +40,33 @@ public class FallingStones : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (trapInfo.isActive && spawnedStones < stonesToSpawn && stonesToSpawn != 0) {
-			Invoke("SpawnStone", Random.Range (minSpawnTime, maxSpawnTime));
-			spawnedStones++;
-		}
+        if (trapInfo.isActive)
+        {
+            if (spawnedStones < stonesToSpawn && stonesToSpawn != 0)
+            {
+                Invoke("SpawnStone", Random.Range(minSpawnTime, maxSpawnTime));
+                spawnedStones++;
+            }
 
-		if (trapInfo.isActive && infiniteStones) {
-			Invoke("SpawnStone", Random.Range (minSpawnTime, maxSpawnTime));
-			infiniteStones = false;
-		}
+            if (infiniteStones)
+            {
+                Invoke("SpawnStone", Random.Range(minSpawnTime, maxSpawnTime));
+                infiniteStones = false;
+            }
+        }
+        else
+        {
+            spawnedStones = 0;
+            if (stonesToSpawn == 0)
+            {
+                infiniteStones = true;
+            }
+
+        }
+        if (spawnedStones >= stonesToSpawn && stonesToSpawn != 0)
+        {
+            trapInfo.isActive = false;
+        }
 	}
 
 	void SpawnStone(){
@@ -60,4 +82,9 @@ public class FallingStones : MonoBehaviour {
 			Invoke("SpawnStone", Random.Range (minSpawnTime, maxSpawnTime));
 		}
 	}
+    public void Reset()
+    {
+        minSpawnTime = initialMinTime;
+        maxSpawnTime = initialMaxTime;
+    }
 }
