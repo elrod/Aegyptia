@@ -120,4 +120,8 @@ public class CameraMovement : MonoBehaviour {
 			FindObjectOfType<PlayerGovernor> ().EnableInput ();
 		}
 	}
+
+	public bool IsMoving(){
+		return moving || comingBack;
+	}
 }

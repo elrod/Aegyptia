@@ -17,6 +17,7 @@ public class NewEnemyAI : MonoBehaviour {
 	bool goRight;
 	bool patrol = true;
 	bool lookAround = false;
+	bool looking = false;
 	float startLookingAround;
 
     public float movementRange = 2f;
@@ -69,10 +70,9 @@ public class NewEnemyAI : MonoBehaviour {
 		if (patrol) {
 			PatrolMovement ();
 		} else if (lookAround) {
-			    followGuessedEnemy();
-		    } 
-            else {
-			    FollowEnemy();
+			followGuessedEnemy ();
+		} else {
+		    FollowEnemy();
 		}
 
 
@@ -102,7 +102,6 @@ public class NewEnemyAI : MonoBehaviour {
 	}
 
 	void FollowEnemy(){
-        //Debug.Log("follow");
 		float direction;
 		if (controller.collisions.enemyRight) {
 			goRight = true;
@@ -141,36 +140,43 @@ public class NewEnemyAI : MonoBehaviour {
     }
 
     void followGuessedEnemy()
-    {
+	{
         if (Time.time - startLookingAround < lookAroundTime)
         {
-            if (transform.position.x <= leftPatrolPoint.position.x)
-            {
+            if (transform.position.x <= leftPatrolPoint.position.x && looking){
+				looking = false;
                 PatrolMovement();
                 return;
-            }
-            else if (transform.position.x >= rightPatrolPoint.position.x)
-            {
+			} else if (transform.position.x - leftPatrolPoint.position.x < movementRange && !looking){
+				PatrolMovement();
+				return;
+			} else if (transform.position.x >= rightPatrolPoint.position.x && looking){
+				looking = false;
                 PatrolMovement();
                 return;
-            }
+			} else if (transform.position.x - rightPatrolPoint.position.x > -movementRange && !looking){
+				PatrolMovement();
+				return;
+			} else {
+				looking = true;
+			}
             //Debug.Log("followGuessed " + (Time.time - startLookingAround));
             // Check the distance between the enemy and its current target
             float distance = playerToFollow.transform.position.x - transform.position.x;
 
             // If the enemy is arrived then pick a random target if it is followin the player or return following him
-            if (Mathf.Abs(distance) < 0.1f)
-            {
-                tempPosition = playerToFollow.transform.position + (new Vector3(Random.Range(-movementRange, movementRange), 0f, 0f));
-            }
+            //if (Mathf.Abs(distance) < 0.1f)
+            //{
+            //    tempPosition = playerToFollow.transform.position + (new Vector3(Random.Range(-movementRange, movementRange), 0f, 0f));
+            //}
 
             // If there is a collision that forbid the enemy to move pick a new random target
-            if (controller.collisions.left || controller.collisions.right)
-            {
+            //if (controller.collisions.left || controller.collisions.right)
+            //{
                 //    following = false;
                 //    tempPosition = playerToFollow.transform.position + (new Vector3(Random.Range(-movementRange, movementRange), 0f, 0f));
                // patrol = true;
-            }
+            //}
 
 
             float directionX = Mathf.Sign(distance);
