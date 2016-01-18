@@ -29,6 +29,10 @@ public class LevelManager : MonoBehaviour {
     bool selectingLevel = false;
     int selectedLevel = 0;
 
+    // Self-kill
+    float selfKillStartTime = 0f;
+    bool killingYourself = false;
+
     // Update is called once per frame
     void Update () {
 
@@ -39,6 +43,80 @@ public class LevelManager : MonoBehaviour {
         {
             Debug.LogError("Please drag endLevelPanel from GUI to inspector in LevelManager");
         }
+
+        SecretCommandsUpdate();
+
+    }
+
+	public void RespawnPlayer(){
+		if (!respawning) {
+			// To insert the respawn delay the code must be executed in a coroutine
+			StartCoroutine ("RespawnPlayerCo");
+		}
+	}
+
+	public IEnumerator RespawnPlayerCo(){
+
+		respawning = true;
+
+		// Instantiate the particle system representing the death of the player
+		Instantiate (deathParticle, player.transform.position, player.transform.rotation);
+		if (playerGovernor.IsP1Active ()) {
+			GetComponent<AudioSource> ().clip = osirisDeathClip;
+		} else {
+			GetComponent<AudioSource>().clip = isisDeathClip;
+		}
+		GetComponent<AudioSource> ().Play ();
+		player.GetComponent<Player>().ManageShapeOnRespawn();
+		player.GetComponent<Player> ().enabled = false;
+		player.GetComponent<Renderer> ().enabled = false;
+		//Debug.Log ("Player respawn");
+	
+		// Now we wait the respawn delay so the death animation can be seen and then the player respawn
+		// to the last activated chekpoint 
+		yield return new WaitForSeconds (respawnDelay);
+		if (playerGovernor.IsP1Active ()) {
+            Vector3 respawnPos = currentCheckpointP1.transform.position;
+            respawnPos.z = -2;
+            player.transform.position = respawnPos;
+		} else {
+            Vector3 respawnPos = currentCheckpointP2.transform.position;
+            respawnPos.z = -2;
+            player.transform.position = respawnPos;
+        }
+		player.GetComponent<Player> ().enabled = true;
+		player.GetComponent<Renderer> ().enabled = true;
+		Instantiate (respawnParticle, player.transform.position, player.transform.rotation);
+
+		respawning = false;
+	}
+
+    public void PlayerExit()
+    {
+        player.GetComponent<Renderer>().enabled = false;
+        playerGovernor.canSwitchPlayer = false;
+        activeCharacters--;
+        if(activeCharacters > 0)
+        {
+            playerGovernor.ForcePlayerSwitch();
+        }
+        else
+        {
+            //Application.LoadLevel(nextLevel);
+            player.GetComponent<Player>().enabled = false;
+            player.GetComponent<Controller2D>().enabled = false;
+            endLevelFound.text = FindObjectOfType<Collector>().getCollected().ToString();
+            endLevelTotal.text = FindObjectOfType<Collector>().getTotal().ToString();
+            endLevelPanel.SetActive(true);
+        }
+        
+    }
+
+    // TRICKS AREA:
+
+    void SecretCommandsUpdate()
+    {
+        // Manual level switch check
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -70,76 +148,22 @@ public class LevelManager : MonoBehaviour {
             ManuallyLoadLevel(selectedLevel);
         }
 
-	}
-
-	public void RespawnPlayer(){
-		if (!respawning) {
-			// To insert the respawn delay the code must be executed in a coroutine
-			StartCoroutine ("RespawnPlayerCo");
-		}
-	}
-
-	public IEnumerator RespawnPlayerCo(){
-
-		respawning = true;
-
-		// Instantiate the particle system representing the death of the player
-		Instantiate (deathParticle, player.transform.position, player.transform.rotation);
-		if (playerGovernor.IsP1Active ()) {
-			GetComponent<AudioSource> ().clip = osirisDeathClip;
-		} else {
-			GetComponent<AudioSource>().clip = isisDeathClip;
-		}
-		GetComponent<AudioSource> ().Play ();
-		player.GetComponent<Player>().ManageShapeOnRespawn();
-		player.GetComponent<Player> ().enabled = false;
-		player.GetComponent<Renderer> ().enabled = false;
-        playerGovernor.canSwitchPlayer = false;
-		//Debug.Log ("Player respawn");
-	
-		// Now we wait the respawn delay so the death animation can be seen and then the player respawn
-		// to the last activated chekpoint 
-		yield return new WaitForSeconds (respawnDelay);
-		if (playerGovernor.IsP1Active ()) {
-            Vector3 respawnPos = currentCheckpointP1.transform.position;
-            respawnPos.z = -2;
-            player.transform.position = respawnPos;
-		} else {
-            Vector3 respawnPos = currentCheckpointP2.transform.position;
-            respawnPos.z = -2;
-            player.transform.position = respawnPos;
-        }
-        playerGovernor.canSwitchPlayer = true;
-		player.GetComponent<Player> ().enabled = true;
-		player.GetComponent<Renderer> ().enabled = true;
-        playerGovernor.canSwitchPlayer = true;
-		Instantiate (respawnParticle, player.transform.position, player.transform.rotation);
-
-		respawning = false;
-	}
-
-    public void PlayerExit()
-    {
-        player.GetComponent<Renderer>().enabled = false;
-        playerGovernor.canSwitchPlayer = false;
-        activeCharacters--;
-        if(activeCharacters > 0)
+        // Kill yourself check
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            playerGovernor.ForcePlayerSwitch();
+            killingYourself = true;
+            selfKillStartTime = Time.time;
         }
-        else
+        if (Input.GetKeyUp(KeyCode.K))
         {
-            //Application.LoadLevel(nextLevel);
-            player.GetComponent<Player>().enabled = false;
-            player.GetComponent<Controller2D>().enabled = false;
-            endLevelFound.text = FindObjectOfType<Collector>().getCollected().ToString();
-            endLevelTotal.text = FindObjectOfType<Collector>().getTotal().ToString();
-            endLevelPanel.SetActive(true);
+            killingYourself = false;
+            selfKillStartTime = Time.time;
         }
-        
+        if (killingYourself && (Time.time - selfKillStartTime >= timeToSelect))
+        {
+            RespawnPlayer();
+        }
     }
-
-    // TRICKS AREA:
 
     // Keep pressed the number of the level for 3 seconds to load it:
     void ManuallyLoadLevel(int selectedLevel)
