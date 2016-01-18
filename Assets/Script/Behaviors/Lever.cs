@@ -303,12 +303,12 @@ public class Lever : Tool {
 		//rotationDirection = false;
 	}
 	
-	void OnTriggerStay2D (Collider2D coll){
+	void OnTriggerEnter2D (Collider2D coll){
 		if (coll.gameObject.CompareTag ("Player")) {
 			active = true;
-		} else {
+		} /*else {
 			active = false;
-		}
+		}*/
 	}
 	
 	void OnTriggerExit2D (Collider2D coll){
