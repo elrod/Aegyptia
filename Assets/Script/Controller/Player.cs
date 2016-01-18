@@ -211,6 +211,7 @@ public class Player : MonoBehaviour {
         gameObject.transform.parent = anim.transform; //the player became the child of the new shape
         gameObject.GetComponent<BoxCollider2D>().size = new Vector2(Mathf.Abs(anim.GetComponent<BoxCollider2D>().size.x / gameObject.transform.localScale.x), Mathf.Abs(anim.GetComponent<BoxCollider2D>().size.y / gameObject.transform.localScale.y));
         gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0);
+        
         oldGravity = gravity;
         gravity = 0;
         isHuman = false;

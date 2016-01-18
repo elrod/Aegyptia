@@ -36,8 +36,8 @@ public class ArrowBehavior : MonoBehaviour {
 			moving = false;
 			GetComponent<Renderer>().enabled = false;
 			GetComponent<BoxCollider2D>().enabled = false;
-			audio.clip = arrowHit;
-			audio.Play ();
+            //audio.clip = arrowHit;
+            //audio.Play ();
 			hit = true;
         }
     }
