@@ -94,6 +94,7 @@ public class LevelManager : MonoBehaviour {
 		player.GetComponent<Player>().ManageShapeOnRespawn();
 		player.GetComponent<Player> ().enabled = false;
 		player.GetComponent<Renderer> ().enabled = false;
+        playerGovernor.canSwitchPlayer = false;
 		//Debug.Log ("Player respawn");
 	
 		// Now we wait the respawn delay so the death animation can be seen and then the player respawn
@@ -108,8 +109,10 @@ public class LevelManager : MonoBehaviour {
             respawnPos.z = -2;
             player.transform.position = respawnPos;
         }
+        playerGovernor.canSwitchPlayer = true;
 		player.GetComponent<Player> ().enabled = true;
 		player.GetComponent<Renderer> ().enabled = true;
+        playerGovernor.canSwitchPlayer = true;
 		Instantiate (respawnParticle, player.transform.position, player.transform.rotation);
 
 		respawning = false;
