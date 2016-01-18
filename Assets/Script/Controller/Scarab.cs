@@ -60,7 +60,13 @@ public class Scarab : Animal {
             // We use smoothDamp to gradually reach our top velocity
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, smoothMove);
             velocity.y = Mathf.SmoothDamp(velocity.y, targetVelocityY, ref velocityYSmoothing, smoothMove);
+			if(!input.Equals(Vector2.zero) && !GetComponent<AudioSource>().isPlaying){
+				GetComponent<AudioSource>().Play();
+			} else {
+				GetComponent<AudioSource>().Pause ();
+			}
         }
+
         controller.Move(velocity * Time.deltaTime);
     }
 

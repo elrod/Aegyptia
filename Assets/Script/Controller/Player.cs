@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
 
 	public AudioClip[] audioClip;
 	AudioSource audio;
-	int clip_jump = 0;
+	int[] clip_jump = new int[]{0, 1, 2};
 
     public bool frontRight = true;
 
@@ -89,7 +89,8 @@ public class Player : MonoBehaviour {
 
                 if (Input.GetButtonDown("Jump") && controller.collisions.below)
                 {
-					PlaySound (clip_jump);
+					int i = Random.Range(0, clip_jump.Length);
+					PlaySound (clip_jump[i]);
                     velocity.y = jumpVelocity;
                 }
 
