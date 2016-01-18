@@ -13,7 +13,9 @@ public class CameraMovement : MonoBehaviour {
 	
 	public float cameraSize = 5f;
 	public float zoomOutSize = 10f;
+	public Vector2 offsetBase;
 	public Vector2 offset;
+
 	
 	bool switchingPlayer = false;
 	bool moveFocus = false;
@@ -48,8 +50,8 @@ public class CameraMovement : MonoBehaviour {
 		}
 		
 		if (!moving && !comingBack) {
-			float posX = Mathf.SmoothDamp (transform.position.x, activePlayer.transform.position.x + offset.x, ref velocity.x, smoothTimeX);
-			float posY = Mathf.SmoothDamp (transform.position.y, activePlayer.transform.position.y + offset.y +2f, ref velocity.y, smoothTimeY);
+			float posX = Mathf.SmoothDamp (transform.position.x, activePlayer.transform.position.x + offset.x + offsetBase.x, ref velocity.x, smoothTimeX);
+			float posY = Mathf.SmoothDamp (transform.position.y, activePlayer.transform.position.y + offset.y + offsetBase.y, ref velocity.y, smoothTimeY);
 			
 			transform.position = new Vector3 (posX, posY, transform.position.z);
 		}
@@ -58,7 +60,7 @@ public class CameraMovement : MonoBehaviour {
 	// Used to set the variables to execute the routine associated to the change of the active player
 	public void SwitchPlayer(Vector3 dest){
 		activePlayer = GameObject.FindGameObjectWithTag ("Player");
-		destPos = dest;
+		destPos = dest + new Vector3(offsetBase.x, offsetBase.y, 0);
 		startPos = transform.position;
 		switchingPlayer = true;
 		moving = true;
