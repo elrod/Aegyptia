@@ -2,6 +2,7 @@
 using System.Collections;
 
 [RequireComponent (typeof (AudioSource))]
+[RequireComponent(typeof(Trap))]
 public class ArrowShoter : MonoBehaviour {
 
     public GameObject arrowPrefab;
@@ -14,17 +15,63 @@ public class ArrowShoter : MonoBehaviour {
 	AudioSource audio;
 
     private int spawnedArrows = 0;
+    bool infiniteArrows = false;
+    Trap trapInfo;
+    bool burstStart = false;
 
-	// Use this for initialization
-	void Start () {
-		audio = GetComponent<AudioSource> ();
-        Invoke("SpawnArrow",Random.Range (minSpawnTime, maxSpawnTime));
+    // Use this for initialization
+    void Start()
+    {
+        trapInfo = transform.GetComponent<Trap>();
+        if (arrowToSpawn == 0)
+        {
+            infiniteArrows = true;
+        }
+        audio = GetComponent<AudioSource> ();
+        //Invoke("SpawnArrow",Random.Range (minSpawnTime, maxSpawnTime));
+        
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    
+        //if (trapInfo.isActive && (spawnedArrows < arrowToSpawn || infiniteArrows))
+        //{
+        //    Invoke("SpawnArrow", Random.Range(minSpawnTime, maxSpawnTime));
+        //}
+        //else spawnedArrows = 0;
+        //if (trapInfo.isActive && spawnedArrows < arrowToSpawn && arrowToSpawn != 0)
+        //{
+        //    Invoke("SpawnArrow", Random.Range(minSpawnTime, maxSpawnTime));
+        //    spawnedArrows++;
+        //}
+
+        if (trapInfo.isActive)
+        {
+            if (spawnedArrows< arrowToSpawn && arrowToSpawn != 0)
+            {
+                Invoke("SpawnArrow", Random.Range(minSpawnTime, maxSpawnTime));
+                spawnedArrows++;
+            }
+            if (infiniteArrows)
+            {
+                Invoke("SpawnArrow", Random.Range(minSpawnTime, maxSpawnTime));
+                infiniteArrows = false;
+            }
+        }
+        else
+        {
+            spawnedArrows = 0;
+            if (arrowToSpawn == 0)
+            {
+                infiniteArrows = true;
+            }
+
+        }
+        if (spawnedArrows >= arrowToSpawn && arrowToSpawn != 0)
+        {
+            trapInfo.isActive = false;
+        }
 	}
 
     void SpawnArrow(){
@@ -38,7 +85,12 @@ public class ArrowShoter : MonoBehaviour {
         }
         go.transform.position = arrowPosition;
         go.transform.parent = transform;
-        spawnedArrows++;
-        Invoke("SpawnArrow", Random.Range(minSpawnTime, maxSpawnTime));
+        //spawnedArrows++;
+        //Debug.Log(gameObject.name + " Active " + trapInfo.isActive);
+        if (trapInfo.isActive && arrowToSpawn == 0)
+        {
+            Invoke("SpawnArrow", Random.Range(minSpawnTime, maxSpawnTime));
+        }
+        
     }
 }

@@ -62,11 +62,11 @@ public class TrapDoor : MonoBehaviour {
         
 
 		if (trapInfo.isActive && ( ready || opening )) {
-           Debug.Log("opening " +  opening);
+           //Debug.Log("opening " +  opening);
 			Open ();
 		}
 		if (waiting && closeAgain) {
-            Debug.Log("wait " + waiting);
+            //Debug.Log("wait " + waiting);
 			if (elapsedTime > interval){
 				closing = true;
 				waiting = false;
@@ -75,7 +75,7 @@ public class TrapDoor : MonoBehaviour {
 			}
 		}
 		if (trapInfo.isActive && closing) {
-            Debug.Log("close " + closing);
+            //Debug.Log("close " + closing);
 			Close ();
 		}
 
@@ -123,8 +123,6 @@ public class TrapDoor : MonoBehaviour {
             angle = Mathf.MoveTowardsAngle(rightRotCenter.eulerAngles.z, rightShutterInitPos.z, speed * Time.deltaTime);
             rightRotCenter.eulerAngles = new Vector3(0, 0, angle);
             closing = true;
-            Debug.Log("init dx " + rightShutterInitPos.z + "init sx " + leftShutterInitPos.z);
-            Debug.Log("Dx " + rightRotCenter.eulerAngles.z + "Sx " + leftRotCenter.eulerAngles.z);
             if (Mathf.RoundToInt(rightRotCenter.eulerAngles.z) == Mathf.RoundToInt(rightShutterInitPos.z) && Mathf.RoundToInt(leftRotCenter.eulerAngles.z) == Mathf.RoundToInt(leftShutterInitPos.z))
         {
 			closing = false;
