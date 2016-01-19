@@ -114,10 +114,12 @@ public class EnemyAI : MonoBehaviour {
 		if (controller.collisions.enemyRight) {
 			goRight = true;
 			direction = 1f;
-		} else if (controller.collisions.enemyLeft) {
+            spineAnim.skeleton.flipX = false;
+        } else if (controller.collisions.enemyLeft) {
 			goRight = false;
 			direction = -1f;
-		} else {
+            spineAnim.skeleton.flipX = true;
+        } else {
 			direction = 0f;
 		}
 		float targetVelocityX = direction * followSpeed;

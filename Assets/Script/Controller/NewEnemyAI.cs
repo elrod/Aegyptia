@@ -29,11 +29,19 @@ public class NewEnemyAI : MonoBehaviour {
 	Vector3 velocity;
 	float velocityXSmoothing;
 
+    public string idleAnimation = "idle";
+    public string walkAnimation = "cammina";
+    public string runAnimation = "corre";
 
-	// Use this for initialization
-	void Start () {
+    string currentAnimation = "";
+    SkeletonAnimation spineAnim;
+
+
+    // Use this for initialization
+    void Start () {
 		controller = GetComponent<EnemyController2D>();
-		if (transform.position.x >= rightPatrolPoint.position.x) {
+        spineAnim = GetComponent<SkeletonAnimation>();
+        if (transform.position.x >= rightPatrolPoint.position.x) {
 			goRight = false;
 		} else {
 			goRight = true;
@@ -80,7 +88,8 @@ public class NewEnemyAI : MonoBehaviour {
 
 	void PatrolMovement(){
         //Debug.Log("Patrol");
-		if (transform.position.x <= leftPatrolPoint.position.x) {
+        SetAnimation(walkAnimation, true);
+        if (transform.position.x <= leftPatrolPoint.position.x) {
 			goRight = true;
 		} else if (transform.position.x >= rightPatrolPoint.position.x) {
 			goRight = false;
@@ -102,14 +111,17 @@ public class NewEnemyAI : MonoBehaviour {
 	}
 
 	void FollowEnemy(){
-		float direction;
-		if (controller.collisions.enemyRight) {
+        SetAnimation(runAnimation, true);
+        float direction;
+        if (controller.collisions.enemyRight) {
 			goRight = true;
 			direction = 1f;
-		} else if (controller.collisions.enemyLeft) {
+            spineAnim.skeleton.flipX = false;
+        } else if (controller.collisions.enemyLeft) {
 			goRight = false;
 			direction = -1f;
-		} else {
+            spineAnim.skeleton.flipX = true;
+        } else {
 			direction = 0f;
 		}
 		float targetVelocityX = direction * followSpeed;
@@ -124,9 +136,11 @@ public class NewEnemyAI : MonoBehaviour {
 			float direction;
 			if (goRight) {
 				direction = 1;
-			} else {
+                spineAnim.skeleton.flipX = false;
+            } else {
 				direction = -1;
-			}
+                spineAnim.skeleton.flipX = true;
+            }
 			float targetVelocityX = direction * patrolSpeed;
 			velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, accelerationTimeGrounded);
 			
@@ -190,6 +204,16 @@ public class NewEnemyAI : MonoBehaviour {
         {
             lookAround = false;
             patrol = true;
+        }
+    }
+
+    void SetAnimation(string anim, bool loop)
+    {
+        if (currentAnimation != anim)
+        {
+            //Debug.Log("NUOVA ANIMAZIONE:" + anim);
+            spineAnim.state.SetAnimation(0, anim, loop);
+            currentAnimation = anim;
         }
     }
 }
