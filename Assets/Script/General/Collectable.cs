@@ -4,6 +4,7 @@ using System.Collections;
 public class Collectable : MonoBehaviour {
 
     Collector collector;
+	bool destroy = false;
 
 	// Use this for initialization
 	void Start () {
@@ -14,12 +15,22 @@ public class Collectable : MonoBehaviour {
         }
 	}
 
+	void Update() {
+		if (destroy && !GetComponent<AudioSource>().isPlaying) {
+			Destroy (gameObject);
+		}
+	}
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
+			GetComponent<AudioSource>().Play ();
+
             collector.ObjectCollected();
-            Destroy(gameObject);
+			destroy = true;
+			GetComponent<Renderer>().enabled = false;
+			GetComponent<Collider2D>().enabled = false;
         }
     }
 }
