@@ -57329,7 +57329,7 @@ GameObject:
   - 124: {fileID: 1037969292}
   - 92: {fileID: 1037969291}
   m_Layer: 0
-  m_Name: PicInPic Camera
+  m_Name: PicInPicCamera
   m_TagString: PiPCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

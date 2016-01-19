@@ -12,7 +12,6 @@ public class Door : Tool {
 	bool closing = false;
 	GameObject door;
 
-
 	void Start () {
 		door = transform.GetChild (0).gameObject;
 	}
@@ -34,6 +33,7 @@ public class Door : Tool {
 			closing = true;
 			opening = false;
 		}
+		GetComponent<AudioSource> ().Play ();
 	}
 	
 	void Open(){

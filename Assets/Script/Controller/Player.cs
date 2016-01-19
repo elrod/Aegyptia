@@ -19,9 +19,10 @@ public class Player : MonoBehaviour {
     public string jumpFly = "jump-volo";
     public string jumpLand = "jump-atterro";
 
-	public AudioClip[] audioClip;
+	public AudioClip[] audioClip = new AudioClip[4];
 	AudioSource audio;
 	int[] clip_jump = new int[]{0, 1, 2};
+	int clip_land = 3;
 
     public bool frontRight = true;
 
@@ -49,6 +50,8 @@ public class Player : MonoBehaviour {
     SkeletonAnimation spineAnim;
     string curr_anim;
     bool jumping = false;
+
+	bool hasToLand = false;
 
 	// Use this for initialization
 	void Start () {
@@ -84,13 +87,18 @@ public class Player : MonoBehaviour {
 
             if (isHuman)
             {
+				if (!controller.collisions.below && !jumping){
+					hasToLand = true;
+				}
+				if(controller.collisions.below && hasToLand){
+					PlaySound(clip_land);
+					hasToLand = false;
+				}
                 // Getting input
                 Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
                 if (Input.GetButtonDown("Jump") && controller.collisions.below)
                 {
-					int i = Random.Range(0, clip_jump.Length);
-					PlaySound (clip_jump[i]);
                     velocity.y = jumpVelocity;
                 }
 
@@ -153,13 +161,16 @@ public class Player : MonoBehaviour {
         }
         if (Input.GetButtonDown("Jump") && controller.collisions.below)
         {
-            //Debug.Log("salto");
+			//Debug.Log("salto");
+			int i = Random.Range(0, clip_jump.Length);
+			PlaySound (clip_jump[i]);
             SetAnimation(jumpStart, false);
             jumping = true;
         }
         else if (jumping && controller.collisions.below)
         {
             //Debug.Log("atterro");
+			PlaySound (clip_land);
             SetAnimation(jumpLand, false);
             jumping = false;
         }

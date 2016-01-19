@@ -115,8 +115,11 @@ MonoBehaviour:
   deathParticle: {fileID: 160806, guid: cbf96c2cfc272cf4cab20feddd379c03, type: 2}
   respawnParticle: {fileID: 159772, guid: 4817360be785b1e4f9eac029311ca963, type: 2}
   respawnDelay: 1
-  isisDeathClip: {fileID: 8300000, guid: 111b1aa88b0fe2d4492f1f2ae970cf48, type: 3}
-  osirisDeathClip: {fileID: 8300000, guid: 111b1aa88b0fe2d4492f1f2ae970cf48, type: 3}
+  isisDeathClip: {fileID: 8300000, guid: b469b3245b4d8b04293e4999b7af7011, type: 3}
+  osirisDeathClip: {fileID: 8300000, guid: b469b3245b4d8b04293e4999b7af7011, type: 3}
+  endLevelPanel: {fileID: 0}
+  endLevelFound: {fileID: 0}
+  endLevelTotal: {fileID: 0}
   nextLevel: Credits
 --- !u!1001 &100100000
 Prefab:
@@ -128,11 +131,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: isisDeathClip
       value: 
-      objectReference: {fileID: 8300000, guid: 111b1aa88b0fe2d4492f1f2ae970cf48, type: 3}
+      objectReference: {fileID: 8300000, guid: b469b3245b4d8b04293e4999b7af7011, type: 3}
     - target: {fileID: 0}
       propertyPath: osirisDeathClip
       value: 
-      objectReference: {fileID: 8300000, guid: 111b1aa88b0fe2d4492f1f2ae970cf48, type: 3}
+      objectReference: {fileID: 8300000, guid: b469b3245b4d8b04293e4999b7af7011, type: 3}
     - target: {fileID: 0}
       propertyPath: m_PlayOnAwake
       value: 0

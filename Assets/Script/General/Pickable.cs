@@ -22,6 +22,7 @@ public class Pickable : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D col){
 		if(col.tag == "Player"){
 			col.gameObject.GetComponent<Inventory>().PickUp(gameObject, inventoryPicture);
+			GetComponent<AudioSource>().Play ();
 			theCollider.enabled = false;
 			theRenderer.enabled = false;
 		}
