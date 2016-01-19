@@ -40,13 +40,18 @@ public class Crocodile : Animal
 
     bool goingLeft = true;
 
+	
+	float randomBark;
+	float elapsedTime = 0f;
+
     // Use this for initialization
     void Start()
     {
         spineAnim = GetComponentInChildren<SkeletonAnimation>();
         controller = GetComponent<Controller2D>();
         gravity = -(2 * swimHeight) / Mathf.Pow(timeToJumpApex, 2);
-        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+		jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+		randomBark = Random.Range (1.5f, 3f);
     }
 
     // Update is called once per frame
@@ -56,6 +61,14 @@ public class Crocodile : Animal
         UpdateAnimation(new Vector2(input, Input.GetAxis("Vertical")));
         if (isActive)
         {
+			if(elapsedTime>randomBark && !GetComponent<AudioSource>().isPlaying){
+				GetComponent<AudioSource>().Play();
+				randomBark = Random.Range (7f, 9f);
+				elapsedTime = 0f;
+			} else {
+				elapsedTime += Time.deltaTime;
+			}
+
             if (controller.collisions.above || controller.collisions.below)
             {
                 velocity.y = 0;

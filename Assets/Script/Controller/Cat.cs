@@ -37,13 +37,16 @@ public class Cat : Animal
     bool descending = false;
     float jumpStartTime = 0f;
 
+	float randomMeow;
+	float elapsedTime = 0f;
+
     void Start()
     {
         controller = GetComponent<Controller2D>();
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         spineAnim = GetComponent<SkeletonAnimation>();
-
+		randomMeow = Random.Range (1.5f, 3f);
     }
 
     // Update is called once per frame
@@ -55,6 +58,13 @@ public class Cat : Animal
         }
         if (isActive)
         {
+			if(elapsedTime>randomMeow && !GetComponent<AudioSource>().isPlaying){
+				GetComponent<AudioSource>().Play();
+				randomMeow = Random.Range (4f, 5f);
+				elapsedTime = 0f;
+			} else {
+				elapsedTime += Time.deltaTime;
+			}
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             UpdateAnimation(input);
             if (Input.GetButtonDown("Jump") && controller.collisions.below)
