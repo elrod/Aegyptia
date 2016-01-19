@@ -342,6 +342,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2faf787aa0104ec4da31a2732a4ce3d6, type: 3}
   - {fileID: 8300000, guid: c5ca6585a9e9908459bac265091c4fbf, type: 3}
   - {fileID: 8300000, guid: d0107dc5896fd784499a0dad8f362902, type: 3}
+  - {fileID: 8300000, guid: d06965fc98aa48942a2b3031cac5804e, type: 3}
   frontRight: 1
 --- !u!114 &11496978
 MonoBehaviour:
@@ -376,7 +377,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: audioClip.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
@@ -418,6 +419,10 @@ Prefab:
       propertyPath: calculateTangents
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: audioClip.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: d06965fc98aa48942a2b3031cac5804e, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 137746}

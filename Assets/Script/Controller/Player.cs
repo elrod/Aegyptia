@@ -19,10 +19,11 @@ public class Player : MonoBehaviour {
     public string jumpFly = "jump-volo";
     public string jumpLand = "jump-atterro";
 
-	public AudioClip[] audioClip = new AudioClip[4];
+	public AudioClip[] audioClip = new AudioClip[5];
 	AudioSource audio;
 	int[] clip_jump = new int[]{0, 1, 2};
 	int clip_land = 3;
+	int clip_walk = 4;
 
     public bool frontRight = true;
 
@@ -145,6 +146,9 @@ public class Player : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, 1f, LayerMask.NameToLayer("Obstacles"));*/
         if (input.x == 0)
         {
+			if(audio.isPlaying && audio.clip == audioClip[clip_walk]){
+				audio.Stop();
+			}
 			if(spineAnim.state.GetCurrent(0) == null || spineAnim.state.GetCurrent(0).Animation.name == walkAnimation) SetAnimation(idleAnimation, true);
 		}
         else
@@ -157,7 +161,12 @@ public class Player : MonoBehaviour {
             {
                spineAnim.skeleton.FlipX = frontRight ? true : false;
             }
-            if (!jumping) SetAnimation(walkAnimation, true);
+            if (!jumping) {
+				if(!audio.isPlaying){
+					PlaySound(clip_walk);
+				}
+				SetAnimation(walkAnimation, true);
+			}
         }
         if (Input.GetButtonDown("Jump") && controller.collisions.below)
         {
