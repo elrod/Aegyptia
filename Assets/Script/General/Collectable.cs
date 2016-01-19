@@ -29,6 +29,8 @@ public class Collectable : MonoBehaviour {
 
             collector.ObjectCollected();
 			destroy = true;
+			GetComponent<Renderer>().enabled = false;
+			GetComponent<Collider2D>().enabled = false;
         }
     }
 }
