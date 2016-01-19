@@ -530,7 +530,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113502}
-  m_LocalRotation: {x: 0, y: 0, z: .209889948, w: .977725029}
+  m_LocalRotation: {x: 0, y: 0, z: .209886447, w: .977725804}
   m_LocalPosition: {x: .540199995, y: .00249999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -542,7 +542,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164334}
-  m_LocalRotation: {x: 0, y: 0, z: -.0830461234, w: .996545732}
+  m_LocalRotation: {x: 0, y: 0, z: -.0830248669, w: .996547461}
   m_LocalPosition: {x: 1.54009986, y: .0144000007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -594,7 +594,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.573899984, y: .346899986, z: 0}
+  m_LocalPosition: {x: -.930199921, y: .314599991, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 466014}
@@ -683,7 +683,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153800}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 161.479919, y: .63228035, z: -1}
+  m_LocalPosition: {x: -1.04999995, y: -.657719612, z: 0}
   m_LocalScale: {x: .400000006, y: .400000006, z: 1}
   m_Children:
   - {fileID: 449060}
@@ -696,7 +696,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .930199921, y: -.314599991, z: 0}
+  m_LocalPosition: {x: .35619998, y: .0322999991, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 438632}
@@ -719,7 +719,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101092}
-  m_LocalRotation: {x: 0, y: 0, z: .559320927, w: .82895124}
+  m_LocalRotation: {x: 0, y: 0, z: .559326291, w: .828947604}
   m_LocalPosition: {x: 2.11389995, y: -.00039999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -841,7 +841,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129128}
-  m_LocalRotation: {x: 0, y: 0, z: .999963701, w: .00851997919}
+  m_LocalRotation: {x: 0, y: 0, z: .999963522, w: .00854608603}
   m_LocalPosition: {x: .189699993, y: .173899993, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -883,7 +883,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: d9dfd3c712ba2354e868a9b1bd643507, type: 2}
+  - {fileID: 2100000, guid: 07adcb14509bdf24097c13c7aeee93fb, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1353,7 +1353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 2dbd0bccd79f0ed498408143b83b1df2, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 1a09c869bdac32e4baaa8c6351607421, type: 2}
   initialSkinName: default
   calculateNormals: 0
   calculateTangents: 0
@@ -1363,7 +1363,7 @@ MonoBehaviour:
   frontFacing: 0
   logErrors: 0
   submeshSeparators: []
-  timeScale: 1
+  timeScale: .5
   loop: 1
   _animationName: pesta-lancia
 --- !u!114 &11469330
