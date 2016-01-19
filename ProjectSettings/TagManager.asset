@@ -11,6 +11,7 @@ TagManager:
   - ZoomArea
   - PiPCamera
   - Seth
+  - Stone
   layers:
   - Default
   - TransparentFX
