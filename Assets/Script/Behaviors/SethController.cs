@@ -15,6 +15,7 @@ public class SethController : MonoBehaviour {
     public float minSpawnTime = 0.5f;
     public float maxSpawnTime = 0.8f;
     public float attackTime = 3;
+    public ParticleSystem deathParticle;
 
     Rigidbody2D rb;
 	// Use this for initialization
@@ -118,5 +119,12 @@ public class SethController : MonoBehaviour {
             Invoke("AttackArrow", attackTime);
         }
 
+    }
+    public void SethDeath()
+    {
+        Debug.Log("muori");
+        Instantiate(deathParticle, gameObject.transform.position, gameObject.transform.rotation);
+        //yield return new WaitForSeconds(2);
+        Destroy(gameObject);
     }
 }

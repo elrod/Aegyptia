@@ -129,4 +129,14 @@ public class TrapDoor : MonoBehaviour {
 		}
         
 	}
+
+    void OnTriggerEnter2d(Collider coll)
+    {
+        Debug.Log("Collider enter");
+        if (coll.gameObject.tag == "Seth")
+        {
+            Debug.Log("seth");
+            coll.gameObject.GetComponent<SethController>().SethDeath();
+        }
+    }
 }
