@@ -47,6 +47,7 @@ public class Crocodile : Animal
     // Use this for initialization
     void Start()
     {
+		transform.parent = null;
         spineAnim = GetComponentInChildren<SkeletonAnimation>();
         controller = GetComponent<Controller2D>();
         gravity = -(2 * swimHeight) / Mathf.Pow(timeToJumpApex, 2);

@@ -41,7 +41,8 @@ public class Cat : Animal
 	float elapsedTime = 0f;
 
     void Start()
-    {
+	{
+		transform.parent = null;
         controller = GetComponent<Controller2D>();
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
