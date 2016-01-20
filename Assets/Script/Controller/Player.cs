@@ -158,12 +158,10 @@ public class Player : MonoBehaviour {
             if(input.x > 0)
             {
                 spineAnim.skeleton.FlipX = frontRight ? false : true;
-				Debug.Log ("§§§§"+spineAnim.skeleton.FlipX);
             }
             else if(input.x < 0)
             {
 				spineAnim.skeleton.FlipX = frontRight ? true : false;
-				Debug.Log ("§§§§"+spineAnim.skeleton.FlipX);
             }
             if (!jumping) {
 				if(!audio.isPlaying){
