@@ -103,13 +103,16 @@ public class Crocodile : Animal
             Vector3 scale = transform.localScale;
             scale.x *= -1;
             transform.localScale = scale;
+			//spineAnim.skeleton.FlipX = false;
             goingLeft = true;
         }
         else if(input > 0 && goingLeft)
         {
+
             Vector3 scale = transform.localScale;
             scale.x *= -1;
             transform.localScale = scale;
+			//spineAnim.skeleton.FlipX = true;
             goingLeft = false;
         }
 
@@ -181,4 +184,7 @@ public class Crocodile : Animal
             isInTheWater = false;
         }
     }
+
+
+
 }

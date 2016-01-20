@@ -53,11 +53,13 @@ public class Player : MonoBehaviour {
     bool jumping = false;
 
 	bool hasToLand = false;
+	Vector3 scale;
 
 	// Use this for initialization
 	void Start () {
         controller = GetComponent<Controller2D>();
 		audio = GetComponent<AudioSource> ();
+		scale = transform.localScale;
 
         // Ok we should get gravity and jumpVelocity from jumpHeight and timeToJumpApex
         // For gravity we will use the motion equation: delta(Movement) = v0 * time + (acceleration * time^2) / 2
@@ -156,10 +158,12 @@ public class Player : MonoBehaviour {
             if(input.x > 0)
             {
                 spineAnim.skeleton.FlipX = frontRight ? false : true;
+				Debug.Log ("§§§§"+spineAnim.skeleton.FlipX);
             }
             else if(input.x < 0)
             {
-               spineAnim.skeleton.FlipX = frontRight ? true : false;
+				spineAnim.skeleton.FlipX = frontRight ? true : false;
+				Debug.Log ("§§§§"+spineAnim.skeleton.FlipX);
             }
             if (!jumping) {
 				if(!audio.isPlaying){
@@ -252,6 +256,7 @@ public class Player : MonoBehaviour {
         pos.z = -2;
         gameObject.transform.position = pos;
         gameObject.transform.rotation = Quaternion.Euler(rot);
+		transform.localScale = scale;
         Destroy(anim);
     }
 
