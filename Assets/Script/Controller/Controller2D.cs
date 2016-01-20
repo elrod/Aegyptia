@@ -57,10 +57,6 @@ public class Controller2D : MonoBehaviour {
 
         transform.Translate(velocity,Space.World);
 
-        Vector3 scale = transform.localScale;
-        if ((collisions.oldPos.x < transform.position.x && !collisions.right && scale.x < 0) || 
-            (collisions.oldPos.x > transform.position.x && !collisions.left && scale.x > 0)) scale.x *= -1;
-        transform.localScale = scale;
     }
 
     // This takes a reference to the velocity vector, so that every change to the velocity vector, will affect the instance of velocity from caller

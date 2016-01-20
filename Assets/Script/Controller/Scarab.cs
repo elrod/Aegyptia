@@ -3,6 +3,12 @@ using System.Collections;
 
 public class Scarab : Animal {
 
+	public string idleAnimation = "idle";
+	public string walkAnimation = "walk";
+
+	string currentAnimation = "";
+	SkeletonAnimation spineAnim;
+
     Controller2D controller;
 
     bool isActive = true;
@@ -18,6 +24,7 @@ public class Scarab : Animal {
     void Start()
     {
         controller = GetComponent<Controller2D>();
+		spineAnim = GetComponent<SkeletonAnimation>();
     }
 
     // Update is called once per frame
@@ -29,6 +36,7 @@ public class Scarab : Animal {
             // Getting input
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             Vector3 rot = transform.rotation.eulerAngles;
+			UpdateAnimation(input);
             if(input.x > 0 && Mathf.Abs(input.x) >= Mathf.Abs(input.y))
             {
                 rot.z = -90;
@@ -52,9 +60,34 @@ public class Scarab : Animal {
             // We use smoothDamp to gradually reach our top velocity
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, smoothMove);
             velocity.y = Mathf.SmoothDamp(velocity.y, targetVelocityY, ref velocityYSmoothing, smoothMove);
+			if(!input.Equals(Vector2.zero) && !GetComponent<AudioSource>().isPlaying){
+				GetComponent<AudioSource>().Play();
+			} else {
+				GetComponent<AudioSource>().Pause ();
+			}
         }
+
         controller.Move(velocity * Time.deltaTime);
     }
+
+	void UpdateAnimation(Vector2 input){
+		if(input.Equals(Vector2.zero)){
+			SetAnimation(idleAnimation, true);
+		}
+		else{
+			SetAnimation(walkAnimation, true);
+		}
+	}
+
+	void SetAnimation(string anim, bool loop)
+	{
+		if (currentAnimation != anim)
+		{
+			//Debug.Log("NUOVA ANIMAZIONE:" + anim);
+			spineAnim.state.SetAnimation(0, anim, loop);
+			currentAnimation = anim;
+		}
+	}
 
     public override void TurnOn()
     {

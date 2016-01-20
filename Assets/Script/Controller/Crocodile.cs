@@ -4,6 +4,18 @@ using System.Collections;
 public class Crocodile : Animal
 {
 
+    public string idleAnimation = "Idle";
+    public string waterIdleAnimation = "Idle-in-acqua";
+    public string walkAnimation = "camminata";
+    public string enteringWaterAnimation = "entra-in-acqua";
+    public string exitWaterAnimation = "esce-in-acqua";
+    public string divingWaterAnimation = "nuota-in-acqua-giu";
+    public string swimAnimation = "nuota-in-acqua-lato";
+    public string ascendWaterAnimation = "nuota-in-acqua-su";
+
+    string currentAnimation = "";
+    SkeletonAnimation spineAnim;
+
     Controller2D controller;
 
     bool isActive = true;
@@ -26,21 +38,38 @@ public class Crocodile : Animal
     float velocityXSmoothing;
     float velocityYSmoothing;
 
+    bool goingLeft = true;
+
+	
+	float randomBark;
+	float elapsedTime = 0f;
+
     // Use this for initialization
     void Start()
     {
+		transform.parent = null;
+        spineAnim = GetComponentInChildren<SkeletonAnimation>();
         controller = GetComponent<Controller2D>();
         gravity = -(2 * swimHeight) / Mathf.Pow(timeToJumpApex, 2);
-        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+		jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+		randomBark = Random.Range (1.5f, 3f);
     }
 
     // Update is called once per frame
     void Update()
     {
         float input = Input.GetAxisRaw("Horizontal");
-
+        UpdateAnimation(new Vector2(input, Input.GetAxis("Vertical")));
         if (isActive)
         {
+			if(elapsedTime>randomBark && !GetComponent<AudioSource>().isPlaying){
+				GetComponent<AudioSource>().Play();
+				randomBark = Random.Range (7f, 9f);
+				elapsedTime = 0f;
+			} else {
+				elapsedTime += Time.deltaTime;
+			}
+
             if (controller.collisions.above || controller.collisions.below)
             {
                 velocity.y = 0;
@@ -65,20 +94,64 @@ public class Crocodile : Animal
                 gravity = gravityOutOfWater;
                 targetVelocityX = input * moveSpeed;
             }
-
-
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (isInTheWater) ? acceletarionTimeWaterborne : accelerationTimeGrounded);
-
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-        if(input < 0)
+        if(input < 0 && !goingLeft)
         {
             Vector3 scale = transform.localScale;
             scale.x *= -1;
             transform.localScale = scale;
+			//spineAnim.skeleton.FlipX = false;
+            goingLeft = true;
+        }
+        else if(input > 0 && goingLeft)
+        {
+
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+			//spineAnim.skeleton.FlipX = true;
+            goingLeft = false;
         }
 
+    }
+
+    void UpdateAnimation(Vector2 input)
+    {
+        if(isInTheWater)
+        {
+            if(input.x == 0)
+            {
+                SetAnimation(waterIdleAnimation, true);
+            }
+            else
+            {
+                SetAnimation(swimAnimation, true);
+            }
+        }
+        else
+        {
+            if(input.x == 0)
+            {
+                SetAnimation(idleAnimation, true);
+            }
+            else
+            {
+                SetAnimation(walkAnimation, true);
+            }
+        }
+    }
+
+    void SetAnimation(string anim, bool loop)
+    {
+        if (currentAnimation != anim)
+        {
+            //Debug.Log("NUOVA ANIMAZIONE:" + anim);
+            spineAnim.state.SetAnimation(0, anim, loop);
+            currentAnimation = anim;
+        }
     }
 
     public override void TurnOn()
@@ -111,4 +184,7 @@ public class Crocodile : Animal
             isInTheWater = false;
         }
     }
+
+
+
 }

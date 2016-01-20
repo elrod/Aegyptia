@@ -1,0 +1,34 @@
+
+skeleton.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+animali-02
+  rotate: false
+  xy: 2, 551
+  size: 871, 413
+  orig: 1067, 1067
+  offset: 98, 327
+  index: -1
+animali-03
+  rotate: false
+  xy: 2, 2
+  size: 366, 132
+  orig: 1067, 1067
+  offset: 350, 468
+  index: -1
+animali-04
+  rotate: false
+  xy: 2, 136
+  size: 871, 413
+  orig: 1067, 1067
+  offset: 98, 327
+  index: -1
+animali-05
+  rotate: false
+  xy: 875, 735
+  size: 635, 229
+  orig: 1067, 1067
+  offset: 216, 419
+  index: -1

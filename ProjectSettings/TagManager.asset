@@ -9,6 +9,9 @@ TagManager:
   - ArrowShoter
   - Sfinge
   - ZoomArea
+  - PiPCamera
+  - Seth
+  - Stone
   layers:
   - Default
   - TransparentFX
@@ -21,9 +24,9 @@ TagManager:
   - Player
   - Obstacles
   - 
-  - 
-  - 
-  - 
+  - Enemy
+  - AI_Obstacle
+  - DarkArea
   - 
   - 
   - 

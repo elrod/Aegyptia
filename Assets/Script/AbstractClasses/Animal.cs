@@ -10,4 +10,5 @@ public abstract class Animal : MonoBehaviour {
 
 	public abstract void TurnOff ();
 
+	//public abstract bool IsGoingLeft();
 }

@@ -1,0 +1,20 @@
+
+serpenti.png
+size: 2048,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+serpente 1
+  rotate: false
+  xy: 704, 28
+  size: 716, 143
+  orig: 718, 145
+  offset: 1, 1
+  index: -1
+serpente 2
+  rotate: false
+  xy: 2, 2
+  size: 700, 169
+  orig: 702, 171
+  offset: 1, 1
+  index: -1

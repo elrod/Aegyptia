@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent (typeof (Controller2D))]
-
+[RequireComponent (typeof (AudioSource))]
 public class Player : MonoBehaviour {
 
     Controller2D controller;
@@ -12,6 +12,23 @@ public class Player : MonoBehaviour {
     public float jumpHeight = 4;           // How many unity units we want our player to jump
     public float timeToJumpApex = .4f;     // How much time our player will take to reach the top of the jump curve.
     public float moveSpeed = 6;            // Max movement speed
+
+    public string idleAnimation = "idle";
+    public string walkAnimation = "walk";
+    public string jumpStart = "jump-salto";
+    public string jumpFly = "jump-volo";
+    public string jumpLand = "jump-atterro";
+
+	public AudioClip[] audioClip = new AudioClip[5];
+	AudioSource audio;
+	int[] clip_jump = new int[]{0, 1, 2};
+	int clip_land = 3;
+	int clip_walk = 4;
+
+    public bool frontRight = true;
+
+    string currentAnimation = "";
+
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
     
@@ -35,9 +52,14 @@ public class Player : MonoBehaviour {
     string curr_anim;
     bool jumping = false;
 
+	bool hasToLand = false;
+	Vector3 scale;
+
 	// Use this for initialization
 	void Start () {
         controller = GetComponent<Controller2D>();
+		audio = GetComponent<AudioSource> ();
+		scale = transform.localScale;
 
         // Ok we should get gravity and jumpVelocity from jumpHeight and timeToJumpApex
         // For gravity we will use the motion equation: delta(Movement) = v0 * time + (acceleration * time^2) / 2
@@ -68,43 +90,22 @@ public class Player : MonoBehaviour {
 
             if (isHuman)
             {
+				if (!controller.collisions.below && !jumping){
+					hasToLand = true;
+				}
+				if(controller.collisions.below && hasToLand){
+					PlaySound(clip_land);
+					hasToLand = false;
+				}
                 // Getting input
                 Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-                // TODO FIX THIS... we should put some kind of transition smooth between animation
-                // I did bruteforce here, because it was late and I was tired
-                if (input.x != 0 && curr_anim != "walk")
-                {
-                    spineAnim.Reset();
-                    spineAnim.state.SetAnimation(0, "walk", true);
-                    curr_anim = "walk";
-                }
-                else if (input.x == 0 && curr_anim != "idle")
-                {
-                    spineAnim.Reset();
-                    spineAnim.state.SetAnimation(0, "idle", true);
-                    curr_anim = "idle";
-                }
-
-                // Jumping logic
                 if (Input.GetButtonDown("Jump") && controller.collisions.below)
                 {
                     velocity.y = jumpVelocity;
-                    //Debug.Log("salto");
-                    spineAnim.state.SetAnimation(1, "jump-salto", false);
-                    jumping = true;
                 }
-                else if (jumping && controller.collisions.below)
-                {
-                    //Debug.Log("atterro");
-                    spineAnim.state.SetAnimation(1, "jump-atterro", false);
-                    jumping = false;
-                }
-                else if (jumping)
-                {
-                    //Debug.Log("volo");
-                    spineAnim.state.SetAnimation(1, "jump-volo", true);
-                }
+
+                UpdateAnimation(input);
 
                 float targetVelocityX = input.x * moveSpeed;
                 // We use smoothDamp to gradually reach our top velocity
@@ -138,7 +139,71 @@ public class Player : MonoBehaviour {
 
 	}
 
-	public void TurnOn(){
+    void UpdateAnimation(Vector2 input)
+    {
+        /*Bounds bounds = GetComponent<Collider2D>().bounds;
+        bounds.Expand(-0.30f);
+        Vector3 rayOrigin = new Vector3((bounds.min.x + bounds.max.x) / 2f, bounds.min.y, transform.position.z);
+        Debug.DrawRay(rayOrigin, Vector3.down, Color.green, 1f);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, 1f, LayerMask.NameToLayer("Obstacles"));*/
+        if (input.x == 0)
+        {
+			if(audio.isPlaying && audio.clip == audioClip[clip_walk]){
+				audio.Stop();
+			}
+			if(spineAnim.state.GetCurrent(0) == null || spineAnim.state.GetCurrent(0).Animation.name == walkAnimation) SetAnimation(idleAnimation, true);
+		}
+        else
+        {
+            if(input.x > 0)
+            {
+                spineAnim.skeleton.FlipX = frontRight ? false : true;
+            }
+            else if(input.x < 0)
+            {
+				spineAnim.skeleton.FlipX = frontRight ? true : false;
+            }
+            if (!jumping) {
+				if(!audio.isPlaying){
+					PlaySound(clip_walk);
+				}
+				SetAnimation(walkAnimation, true);
+			}
+        }
+        if (Input.GetButtonDown("Jump") && controller.collisions.below)
+        {
+			//Debug.Log("salto");
+			int i = Random.Range(0, clip_jump.Length);
+			PlaySound (clip_jump[i]);
+            SetAnimation(jumpStart, false);
+            jumping = true;
+        }
+        else if (jumping && controller.collisions.below)
+        {
+            //Debug.Log("atterro");
+			PlaySound (clip_land);
+            SetAnimation(jumpLand, false);
+            jumping = false;
+        }
+        else if (jumping)
+        {
+            //Debug.Log("volo");
+            SetAnimation(jumpFly, true);
+
+        }
+    }
+
+    void SetAnimation(string anim, bool loop)
+    {
+        if (currentAnimation != anim)
+        {
+            //Debug.Log("NUOVA ANIMAZIONE:" + anim);
+            spineAnim.state.SetAnimation(0, anim, loop);
+            currentAnimation = anim;
+        }
+    }
+
+    public void TurnOn(){
 		isActive = true;
 		gameObject.tag = "Player";
 		if (transform.parent != null && transform.parent.GetComponent<Animal>() != null) {
@@ -160,7 +225,7 @@ public class Player : MonoBehaviour {
         anim = Instantiate<GameObject>(NewShape) as GameObject; //create the new shape
         //Vector3 pos = transform.position;
         Vector3 pos = tranformationPoint;
-        pos.z = 1;
+        //pos.z = 1;
         gameObject.transform.position = pos;
         anim.transform.position = pos; //the new shape's position is the same of the player and the spawnpoint
         gameObject.GetComponent<MeshRenderer>().enabled = false; //unactive the player and make it invisible
@@ -169,6 +234,7 @@ public class Player : MonoBehaviour {
         gameObject.transform.parent = anim.transform; //the player became the child of the new shape
         gameObject.GetComponent<BoxCollider2D>().size = new Vector2(Mathf.Abs(anim.GetComponent<BoxCollider2D>().size.x / gameObject.transform.localScale.x), Mathf.Abs(anim.GetComponent<BoxCollider2D>().size.y / gameObject.transform.localScale.y));
         gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0);
+        
         oldGravity = gravity;
         gravity = 0;
         isHuman = false;
@@ -185,9 +251,10 @@ public class Player : MonoBehaviour {
         Vector3 pos = gameObject.transform.position;
         Vector3 rot = gameObject.transform.rotation.eulerAngles;
         rot.z = 0;
-        pos.z = 0;
+        pos.z = -2;
         gameObject.transform.position = pos;
         gameObject.transform.rotation = Quaternion.Euler(rot);
+		transform.localScale = scale;
         Destroy(anim);
     }
 
@@ -225,4 +292,8 @@ public class Player : MonoBehaviour {
         tranformationPoint = point;
     }
 
+	void PlaySound(int clipIndex){
+		audio.clip = audioClip [clipIndex];
+		audio.Play ();
+	}
 }

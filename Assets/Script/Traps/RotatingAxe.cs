@@ -33,6 +33,10 @@ public class RotatingAxe : MonoBehaviour {
 					goRight = !goRight;
 				}
 			}
+			if((Mathf.Abs (transform.eulerAngles.z - (minAngle + (maxAngle - minAngle)/4)) < 3*tolerance && goRight) || 
+			   (Mathf.Abs (transform.eulerAngles.z - (maxAngle - (maxAngle - minAngle)/4)) < 3*tolerance && !goRight)){
+				GetComponent<AudioSource>().Play ();
+			}
 		}
 	}
 }

@@ -12,7 +12,9 @@ GameObject:
   - 114: {fileID: 11452078}
   - 114: {fileID: 11437378}
   - 50: {fileID: 5062138}
-  - 212: {fileID: 21292298}
+  - 23: {fileID: 2376362}
+  - 33: {fileID: 3364166}
+  - 114: {fileID: 11497868}
   m_Layer: 0
   m_Name: Crocodile
   m_TagString: Untagged
@@ -27,11 +29,44 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.50999999, y: -2.67000008, z: 0}
-  m_LocalScale: {x: .280000001, y: .280000001, z: .280000001}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: .140000001, y: .140000001, z: .140000001}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!23 &2376362
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130232}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: be0eed5e5fb01914d8eca67f1923c6e5, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &3364166
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130232}
+  m_Mesh: {fileID: 0}
 --- !u!50 &5062138
 Rigidbody2D:
   serializedVersion: 2
@@ -58,9 +93,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 5.0999999, y: 2}
   serializedVersion: 2
-  m_Size: {x: 10, y: 2}
+  m_Size: {x: 20.2000008, y: 4}
 --- !u!114 &11437378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -72,6 +107,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45b46f3df2a8b14998ba27cf6448652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleAnimation: Idle
+  waterIdleAnimation: Idle-in-acqua
+  walkAnimation: camminata
+  enteringWaterAnimation: entra-in-acqua
+  exitWaterAnimation: esce-in-acqua
+  divingWaterAnimation: nuota-in-acqua-giu
+  swimAnimation: nuota-in-acqua-lato
+  ascendWaterAnimation: nuota-in-acqua-su
   swimHeight: 1
   timeToJumpApex: .5
   gravityOutOfWater: -50
@@ -91,34 +134,30 @@ MonoBehaviour:
     m_Bits: 512
   horizontalRayCount: 4
   verticalRayCount: 4
---- !u!212 &21292298
-SpriteRenderer:
+--- !u!114 &11497868
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130232}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 0
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 11177bf6f16cea54580b93bb879c9397, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonDataAsset: {fileID: 11400000, guid: 5507d8771ef757c44b71863a1897d1dc, type: 2}
+  initialSkinName: default
+  calculateNormals: 0
+  calculateTangents: 0
+  zSpacing: 0
+  renderMeshes: 1
+  immutableTriangles: 0
+  frontFacing: 0
+  logErrors: 0
+  submeshSeparators: []
+  timeScale: 1
+  loop: 1
+  _animationName: Idle
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -162,6 +201,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Size.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: walkAnimation
+      value: camminata
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

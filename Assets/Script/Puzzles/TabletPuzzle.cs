@@ -14,6 +14,8 @@ public class TabletPuzzle : MonoBehaviour {
     int tileToPlaceIndex = 0;
     bool moved = false;
 
+	public PuzzleTrigger trigger;
+
 	// Use this for initialization
     void OnStart()
     {
@@ -69,6 +71,7 @@ public class TabletPuzzle : MonoBehaviour {
                             //Debug.Log("SOLVED!");
                             GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().enabled = true;
                             gameObject.SetActive(false);
+							trigger.SetCanMove(true);
                             FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_LEVEL_FINISHED");
                         }
                         else

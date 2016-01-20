@@ -29,8 +29,8 @@ public class PauseMenu : MonoBehaviour {
 			isPaused = false;
 	}
 	
-	public void SceneSelect () {
-		Application.LoadLevel (sceneSelect);
+	public void ResetLevel () {
+		Application.LoadLevel (Application.loadedLevel);
 	}
 	
 	public void MainMenu () {

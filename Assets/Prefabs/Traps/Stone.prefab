@@ -15,7 +15,7 @@ GameObject:
   - 212: {fileID: 21236854}
   m_Layer: 0
   m_Name: Stone
-  m_TagString: Untagged
+  m_TagString: Stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 148.585922, y: 44.6905594, z: -1}
+  m_LocalPosition: {x: 20.7299995, y: 15.6199999, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,9 +58,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -.150000006}
   serializedVersion: 2
-  m_Radius: .5
+  m_Radius: .349999994
 --- !u!114 &11472502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,6 +73,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fragments: {fileID: 185396, guid: 6fbf656f3877dac478d523e8f4fafe0b, type: 2}
+  persistentStone: 1
+  destroyAfterTime: 0
 --- !u!114 &11492772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,6 +135,22 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 8153e4a62fdd64aa6abdbb6451677bab,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b6a29096b2e6e1641b7497c63c34ff50, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Stone
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182472}

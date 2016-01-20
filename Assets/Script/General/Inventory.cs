@@ -45,23 +45,23 @@ public class Inventory : MonoBehaviour {
 		GUIItemPic.enabled = true;
 		GUIItemText.text = inventObj.name;
         // TODO: fix this... its all hardcoded for the demo!
-        if(gameObject.name == "Osiris" && inventObj.name == "Osiris Key")
-        {
-            FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_KEY_FOUND");
-        }
-        if(gameObject.name == "Isis" && inventObj.name == "Isis Board")
-        {
-            FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_TABLET_FOUND");
-        }
-        if(gameObject.name == "Osiris" && inventObj.name == "Isis Board")
-        {
-            FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_TABLET_OBTAINED");
-        }
-        if (gameObject.name == "Isis" && inventObj.name == "Osiris Key")
-        {
-            FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "ISIS_KEY_OBTAINED");
-        }
-        Debug.Log (inventObj.name + " in inventory");
+        //if(gameObject.name == "Osiris" && inventObj.name == "Osiris Key")
+        //{
+        //    FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_KEY_FOUND");
+        //}
+        //if(gameObject.name == "Isis" && inventObj.name == "Isis Board")
+        //{
+        //    FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_TABLET_FOUND");
+        //}
+        //if(gameObject.name == "Osiris" && inventObj.name == "Isis Board")
+        //{
+        //    FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_TABLET_OBTAINED");
+        //}
+        //if (gameObject.name == "Isis" && inventObj.name == "Osiris Key")
+        //{
+        //    FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "ISIS_KEY_OBTAINED");
+        //}
+        //Debug.Log (inventObj.name + " in inventory");
 	}
 
 	public bool Use(string name){

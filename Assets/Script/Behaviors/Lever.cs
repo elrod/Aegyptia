@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Lever : Tool {
 
@@ -10,9 +11,19 @@ public class Lever : Tool {
 		public float minY;
 		public float maxY;
 	}
-	
+    [System.Serializable]
+    public struct TranslateObject
+    {
+        public GameObject area;
+        public Vector3 deltaDestination;
+        public float moveSpeed;
+    }
+
+    public TranslateObject[] translateAreas;
 	public TileArea[] destroyAreas;
 	public TileArea[] createAreas;
+
+    List<Vector3> startingPoints;
 	
 	int currentArea = 0;
 	bool currentAreaChanged = true;
@@ -23,11 +34,13 @@ public class Lever : Tool {
 	bool active = false;
 	bool used = false;
 	
-	public float interval = 1f;
+	public float interval = 1.2f;
 	float elapsedTime = 0f;
 	bool destroying = false;
 	bool creating = false;
+    bool translate = false;
 	bool start = false;
+    bool tools = false;
 
 	public float rotationSpeed = 20f;
 	bool rotating = false;
@@ -39,6 +52,12 @@ public class Lever : Tool {
 	
 	// Use this for initialization
 	void Start () {
+        startingPoints = new List<Vector3>();
+        foreach (TranslateObject t in translateAreas)
+        {
+            startingPoints.Add(t.area.transform.position);
+        }
+
 		if (destroyAreas.Length > 0) {
 			destroying = true;
 		} else if (createAreas.Length > 0) {
@@ -47,7 +66,18 @@ public class Lever : Tool {
 		if (destroying || creating) {
 			SetMinAndMax ();
 		}
+        if (translateAreas.Length > 0)
+        {
+            translate = true;
+        }
+
+        if (toolsToUse.Length > 0)
+        { 
+            tools = true;
+        }
+
 		rotationCentre = transform.GetChild (0);
+
 	}
 	
 	// Update is called once per frame
@@ -55,7 +85,7 @@ public class Lever : Tool {
 		
 		// Surely not the best way to call it, but I've rewritten this so many times that 
 		// at the moement I don't want to change it.
-		if (Input.GetKeyDown(KeyCode.Q)){
+		if (Input.GetButtonDown("Use")){
 			if (active) {
 				start = true;
 				rotating = true;
@@ -74,7 +104,15 @@ public class Lever : Tool {
 		// the lever is designed to be used only one time.
 		if (!used){
 			// First there is the part in which we destroy the existing tiles (if it has to be done)
-			if(destroying){
+            if (tools)
+            {
+                foreach (Tool tool in toolsToUse)
+                {
+                    tool.Use();
+                }
+            }
+            
+            if(destroying){
 				DestroyRow();
 			}
 			
@@ -82,17 +120,23 @@ public class Lever : Tool {
 				CreateRow();
 			}
 			
-			// Finally use the tools
-			if (!destroying && !creating){
-				foreach(Tool tool in toolsToUse){
-					tool.Use();
-				}
-				used = true;
-				start = false;
-				if(reversible){
-					Init();
-				}
-			}
+            if(translate)
+            {
+                Translate();
+            }
+
+
+            if (!destroying && !creating && !translate)
+            {
+                used = true;
+                start = false;
+                if (reversible)
+                {
+                    Init();
+                }
+            }
+        
+			
 		}
 	}
 	
@@ -213,7 +257,11 @@ public class Lever : Tool {
 			}
 			if (transform.eulerAngles.z < 300){
 				transform.eulerAngles = new Vector3(0f, 0f, 300f);
-				rotating = false;
+				if(reversible){
+					rotationDirection = false;
+				} else {
+					rotating = false;
+				}
 			}
 		} else {
 			if (transform.eulerAngles.z >= 300){
@@ -225,6 +273,19 @@ public class Lever : Tool {
 			}
 		}
 	}
+
+    void Translate()
+    {
+        for (int i = 0; i < translateAreas.Length; i++)
+        {
+            Vector3 currentPos = translateAreas[i].area.transform.position;
+            translateAreas[i].area.transform.position = Vector3.MoveTowards(currentPos, startingPoints[i] + translateAreas[i].deltaDestination, Time.deltaTime * translateAreas[i].moveSpeed);
+            if(currentPos == startingPoints[i] + translateAreas[i].deltaDestination)
+            {
+                translate = false;
+            }
+        }
+    }
 
 	void Init(){
 		TileArea[] tmp = destroyAreas;
@@ -238,14 +299,16 @@ public class Lever : Tool {
 		}
 		SetMinAndMax ();
 		used = false;
-		rotating = true;
-		rotationDirection = false;
+		//rotating = true;
+		//rotationDirection = false;
 	}
 	
 	void OnTriggerEnter2D (Collider2D coll){
 		if (coll.gameObject.CompareTag ("Player")) {
 			active = true;
-		}
+		} /*else {
+			active = false;
+		}*/
 	}
 	
 	void OnTriggerExit2D (Collider2D coll){

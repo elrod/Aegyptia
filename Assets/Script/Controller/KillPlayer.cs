@@ -8,6 +8,7 @@ public class KillPlayer : MonoBehaviour {
 	public bool killOnlyHumans = false;
 
 	LevelManager levelManager;
+    PlayerGovernor playerGovernor;
     bool inTrap;
     float inTrapTime;
 
@@ -16,6 +17,7 @@ public class KillPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		levelManager = FindObjectOfType<LevelManager> ();
+        playerGovernor = FindObjectOfType<PlayerGovernor>();
 	}
 	
 	// Update is called once per frame
@@ -31,11 +33,13 @@ public class KillPlayer : MonoBehaviour {
 	                /* This should happen only for poison right now... */
 	                inTrap = true;
 	                inTrapTime = Time.time;
+                    playerGovernor.canSwitchPlayer = false;
 	            }
 	            else { 
 				    levelManager.RespawnPlayer();
 	            }
 			}
+            
         }
 	}
 
@@ -49,8 +53,14 @@ public class KillPlayer : MonoBehaviour {
 	                levelManager.RespawnPlayer();
 	                inTrap = false;
 	            }
+                
 			}
+            if (killAfterTime)
+            {
+                playerGovernor.canSwitchPlayer = false;
+            }
         }
+        
     }
 
     void OnTriggerExit2D(Collider2D coll)
@@ -59,6 +69,7 @@ public class KillPlayer : MonoBehaviour {
         {
             inTrap = false;
         }
+        playerGovernor.canSwitchPlayer = true;
     }
 
 }

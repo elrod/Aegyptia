@@ -15,11 +15,19 @@ public class Fragments : MonoBehaviour {
 
 	// Use this for initialization
 	public void ShowParticles () {
-        particles.Play();
-        Invoke("SelfDisable", timer);
-	}
+        if(particles != null) { 
+			particles.Play();
+            Invoke("SelfDisable", timer);
+        }
+    }
 	
 	void SelfDisable(){
         particles.Stop();
     }
+
+	void OnTriggerEnter2D(Collider2D coll){
+		if(coll.gameObject.CompareTag ("Stone")){
+			GetComponent<AudioSource>().Play ();
+		}
+	}
 }
