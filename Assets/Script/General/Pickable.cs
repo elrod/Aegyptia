@@ -24,7 +24,7 @@ public class Pickable : MonoBehaviour {
 			col.gameObject.GetComponent<Inventory>().PickUp(gameObject, inventoryPicture);
 			GetComponent<AudioSource>().Play ();
 			theCollider.enabled = false;
-			theRenderer.enabled = false;
+			//theRenderer.enabled = false;
 		}
 	}
 }
