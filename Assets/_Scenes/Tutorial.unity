@@ -27192,6 +27192,10 @@ Prefab:
       propertyPath: tool
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 11494240, guid: 1bf06b919a787aa4eb8905358b5a4fe6, type: 2}
+      propertyPath: rotationSpeed
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1bf06b919a787aa4eb8905358b5a4fe6, type: 2}
   m_IsPrefabParent: 0
@@ -47927,6 +47931,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: badf092c51479a5458ae7819eaefff82, type: 2}
+    - target: {fileID: 11497086, guid: 7df1aa25eaae05e4987d64cc7c482a03, type: 2}
+      propertyPath: rotationSpeed
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7df1aa25eaae05e4987d64cc7c482a03, type: 2}
   m_IsPrefabParent: 0
