@@ -20,7 +20,9 @@ public class SethController : MonoBehaviour {
     Rigidbody2D rb;
 	// Use this for initialization
 	void Start () {
+
         currentPoint = points[moveToPoint];
+       
         rb = gameObject.GetComponent<Rigidbody2D>();
         Attack();
 
@@ -32,10 +34,7 @@ public class SethController : MonoBehaviour {
         {
             Float();
         }
-        else
-        {
-            
-        }
+        
 	
 	}
 
@@ -47,15 +46,16 @@ public class SethController : MonoBehaviour {
                                                             Time.deltaTime * moveSpeed);
 
         
-        if (Mathf.Abs(gameObject.transform.position.x - currentPoint.position.x) < 0.1)
+        if (Vector2.Distance(gameObject.transform.position,currentPoint.position) < 0.001)
         {
             moveToPoint++;
             if (moveToPoint == points.Length)
             {
                 moveToPoint = 0;
             }
+            currentPoint = points[moveToPoint];
         }
-        currentPoint = points[moveToPoint];
+      
     }
 
     void StartFloating()
@@ -72,10 +72,15 @@ public class SethController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        
         if (col.gameObject.GetComponent<KillPlayer>()!= null)
         {
             FallDown();
             Invoke("StartFloating", ShokedTime);
+        }
+        if (col.gameObject.tag == "SethKiller")
+        {
+            SethDeath();
         }
     }
 
@@ -122,7 +127,6 @@ public class SethController : MonoBehaviour {
     }
     public void SethDeath()
     {
-        Debug.Log("muori");
         Instantiate(deathParticle, gameObject.transform.position, gameObject.transform.rotation);
         //yield return new WaitForSeconds(2);
         Destroy(gameObject);

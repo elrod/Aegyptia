@@ -12,6 +12,7 @@ TagManager:
   - PiPCamera
   - Seth
   - Stone
+  - SethKiller
   layers:
   - Default
   - TransparentFX
