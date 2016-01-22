@@ -50,6 +50,7 @@ public class LevelManager : MonoBehaviour {
 
 	public void RespawnPlayer(){
 		if (!respawning) {
+            playerGovernor.canSwitchPlayer = false;
 			// To insert the respawn delay the code must be executed in a coroutine
 			StartCoroutine ("RespawnPlayerCo");
 		}
@@ -58,7 +59,8 @@ public class LevelManager : MonoBehaviour {
 	public IEnumerator RespawnPlayerCo(){
 
 		respawning = true;
-		playerGovernor.canSwitchPlayer = false;
+		
+        Debug.Log("1: " +playerGovernor.canSwitchPlayer);
 		// Instantiate the particle system representing the death of the player
 		Instantiate (deathParticle, player.transform.position, player.transform.rotation);
 		if (playerGovernor.IsP1Active ()) {
@@ -71,10 +73,13 @@ public class LevelManager : MonoBehaviour {
 		player.GetComponent<Player> ().enabled = false;
 		player.GetComponent<Renderer> ().enabled = false;
 		//Debug.Log ("Player respawn");
-	
+
 		// Now we wait the respawn delay so the death animation can be seen and then the player respawn
 		// to the last activated chekpoint 
+        Debug.Log("A: " + playerGovernor.canSwitchPlayer);
 		yield return new WaitForSeconds (respawnDelay);
+        playerGovernor.canSwitchPlayer = false;
+        Debug.Log("B: " + playerGovernor.canSwitchPlayer);
 		if (playerGovernor.IsP1Active ()) {
             Vector3 respawnPos = currentCheckpointP1.transform.position;
             respawnPos.z = -2;
@@ -88,8 +93,8 @@ public class LevelManager : MonoBehaviour {
 		player.GetComponent<Renderer> ().enabled = true;
 		Instantiate (respawnParticle, player.transform.position, player.transform.rotation);
 		playerGovernor.canSwitchPlayer = true;
-
 		respawning = false;
+
 	}
 
     public void PlayerExit()

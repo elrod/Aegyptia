@@ -47,6 +47,7 @@ public class PlayerGovernor : MonoBehaviour {
 	void Update () {
 		// Check if the player is changed
 		if (Input.GetButtonDown("SwitchPlayer") && enabled && canSwitchPlayer) {
+            Debug.Log("WTF: " + canSwitchPlayer);
             PerformSwitch();
         }
 		if (switchAudio) {

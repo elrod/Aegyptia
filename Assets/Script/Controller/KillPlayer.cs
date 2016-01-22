@@ -69,7 +69,10 @@ public class KillPlayer : MonoBehaviour {
         {
             inTrap = false;
         }
-        playerGovernor.canSwitchPlayer = true;
+        if (killAfterTime)
+        {
+            playerGovernor.canSwitchPlayer = true;
+        } 
     }
 
 }
