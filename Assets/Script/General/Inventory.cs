@@ -16,13 +16,6 @@ public class Inventory : MonoBehaviour {
 	public Image GUIItemPic;
 	public Text GUIItemText;
 
-	bool pickingUp = false;
-	GameObject obj;
-	public float pickUpTime = .5f;
-	float elapsedTime = 0f;
-	Vector3 initPosition;
-	InventoryObject objToAdd;
-
 	string selectedObject;
 
 	List<InventoryObject> inventory;	
@@ -37,39 +30,20 @@ public class Inventory : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.F)){
 			Use (selectedObject);
 		}
-
-		if (pickingUp) {
-			ShowItem();
-		}
-	}
-
-	void ShowItem(){
-		if (elapsedTime < pickUpTime) {
-			elapsedTime += Time.deltaTime;
-			float percTime = elapsedTime / pickUpTime;
-			float newScale = Mathf.Lerp (1f, 4f, percTime);
-			obj.transform.localScale = new Vector3 (newScale, newScale, newScale);
-		} else {
-			obj.GetComponent<Renderer>().enabled = false;
-			selectedObject = objToAdd.name;
-			GUIItemPic.sprite = objToAdd.itemPic;
-			GUIItemPic.enabled = true;
-			GUIItemText.text = objToAdd.name;
-			pickingUp = false;
-			elapsedTime = 0f;
-		}
 	}
 
 	public void PickUp(GameObject theObject, Sprite GUIPic){
+		InventoryObject objToAdd;
 		objToAdd.tool = theObject.GetComponent<Tool>();
 		objToAdd.itemPic = GUIPic;
 		objToAdd.name = theObject.name;
 		objToAdd.autoConsume = true;
 		inventory.Add(objToAdd);
-		obj = theObject;
-		initPosition = theObject.transform.position;
-		pickingUp = true;
-        // TODO: fix this... its all hardcoded for the demo!
+		selectedObject = objToAdd.name;
+		GUIItemPic.sprite = objToAdd.itemPic;
+		GUIItemPic.enabled = true;
+		GUIItemText.text = objToAdd.name;
+		// TODO: fix this... its all hardcoded for the demo!
         //if(gameObject.name == "Osiris" && inventObj.name == "Osiris Key")
         //{
         //    FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_KEY_FOUND");
