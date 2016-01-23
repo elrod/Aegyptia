@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: SpriteLightMaterial
   m_Shader: {fileID: 4800000, guid: 7f849bd19d66743778d425fe404e5a07, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: PIXELSNAP_ON
   m_LightmapFlags: 5
   m_CustomRenderQueue: 3000
   stringTagMap: {}
@@ -94,7 +94,7 @@ Material:
       data:
         first:
           name: PixelSnap
-        second: 0
+        second: 1
       data:
         first:
           name: _Parallax
@@ -139,6 +139,10 @@ Material:
         first:
           name: _BlendDst
         second: 1
+      data:
+        first:
+          name: _AlphaCutoff
+        second: .5
     m_Colors:
       data:
         first:
