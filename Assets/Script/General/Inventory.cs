@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour {
 	}
 
 	public Image GUIItemPic;
-	public Text GUIItemText;
+	// public Text GUIItemText;
 
 	string selectedObject;
 
@@ -42,7 +42,7 @@ public class Inventory : MonoBehaviour {
 		selectedObject = objToAdd.name;
 		GUIItemPic.sprite = objToAdd.itemPic;
 		GUIItemPic.enabled = true;
-		GUIItemText.text = objToAdd.name;
+		// GUIItemText.text = objToAdd.name;
 		// TODO: fix this... its all hardcoded for the demo!
         //if(gameObject.name == "Osiris" && inventObj.name == "Osiris Key")
         //{
@@ -97,7 +97,7 @@ public class Inventory : MonoBehaviour {
                 GameObject toGive = obj.tool.gameObject;
                 inventory.Remove(obj);
                 updateInventoryGui();
-                Debug.Log(inventory.Count);
+                // Debug.Log(inventory.Count);
                 return toGive;
             }
         }
@@ -111,14 +111,14 @@ public class Inventory : MonoBehaviour {
         {
             GUIItemPic.sprite = null;
             GUIItemPic.enabled = false;
-            GUIItemText.text = "Inventory Empty";
+            // GUIItemText.text = "Inventory Empty";
         }
         else
         {
             selectedObject = inventory[inventory.Count - 1].name;
             GUIItemPic.sprite = inventory[inventory.Count - 1].itemPic;
             GUIItemPic.enabled = true;
-            GUIItemText.text = inventory[inventory.Count - 1].name;
+            // GUIItemText.text = inventory[inventory.Count - 1].name;
         }
     }
 }

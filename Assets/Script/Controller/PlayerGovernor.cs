@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 
@@ -9,6 +10,9 @@ public class PlayerGovernor : MonoBehaviour {
 
     public bool canSwitchPlayer = true;
 	public float musicVolume = .1f;
+
+    public GameObject p1Panel;
+    public GameObject p2Panel;
 
 	AudioSource[] audioSources;
 	bool switchAudio;
@@ -59,6 +63,8 @@ public class PlayerGovernor : MonoBehaviour {
         if (isP1Active)
         {
             SwitchPlayer(player1, player2);
+            p1Panel.SetActive(false);
+            p2Panel.SetActive(true);
             if (FindObjectOfType<LevelEventsManager>() != null)
             {
                 FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
@@ -66,6 +72,8 @@ public class PlayerGovernor : MonoBehaviour {
         }
         else {
             SwitchPlayer(player2, player1);
+            p1Panel.SetActive(true);
+            p2Panel.SetActive(false);
             if (FindObjectOfType<LevelEventsManager>() != null)
             {
                 FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
