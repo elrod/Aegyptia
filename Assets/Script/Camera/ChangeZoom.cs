@@ -9,7 +9,8 @@ public class ChangeZoom : MonoBehaviour {
 	public bool withOffset;
 	public Vector2 offset;
 	public bool moveFocus;
-	public Transform positionToReach;
+    public bool stopFollow;
+    public Transform positionToReach;
 	bool focusMoved = false;
 	float cameraSize;
 	bool zoomIn = false;
@@ -61,7 +62,11 @@ public class ChangeZoom : MonoBehaviour {
 				zoomIn = true;
 				zoomOut = false;
 			}
-			Camera.main.GetComponent<CameraMovement> ().offset = Vector2.zero;
+            if (stopFollow)
+            {
+                Camera.main.GetComponent<CameraMovement>().FollowPlayer(true, positionToReach.position);
+            }
+            Camera.main.GetComponent<CameraMovement> ().offset = Vector2.zero;
 		}
 	}
 	
@@ -71,6 +76,10 @@ public class ChangeZoom : MonoBehaviour {
 				Camera.main.GetComponent<CameraMovement>().SwitchFocus(positionToReach.position);
 				focusMoved = true;
 			}
+            if (stopFollow)
+            {
+                Camera.main.GetComponent<CameraMovement>().FollowPlayer(false, positionToReach.position);
+            }
 		}
 	}
 	
