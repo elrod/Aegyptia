@@ -76,10 +76,10 @@ public class LevelManager : MonoBehaviour {
 
 		// Now we wait the respawn delay so the death animation can be seen and then the player respawn
 		// to the last activated chekpoint 
-        Debug.Log("A: " + playerGovernor.canSwitchPlayer);
+       
 		yield return new WaitForSeconds (respawnDelay);
         playerGovernor.canSwitchPlayer = false;
-        Debug.Log("B: " + playerGovernor.canSwitchPlayer);
+
 		if (playerGovernor.IsP1Active ()) {
             Vector3 respawnPos = currentCheckpointP1.transform.position;
             respawnPos.z = -2;
