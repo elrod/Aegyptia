@@ -13,11 +13,15 @@ public class Pickable : MonoBehaviour {
 	Collider2D theCollider;
 	bool showPickUp = false;
 	float elapsedTime = 0f;
+	Vector3 initScale;
+	Quaternion initRot;
 
 	// Use this for initialization
 	void Start () {
 		theRenderer = GetComponent<Renderer>();
 		theCollider = GetComponent<Collider2D>();
+		initScale = transform.localScale;
+		initRot = transform.rotation;
 	}
 	
 	// Update is called once per frame
@@ -31,14 +35,14 @@ public class Pickable : MonoBehaviour {
 		if (elapsedTime < pickUpTime) {
 			elapsedTime += Time.deltaTime;
 			float percTime = elapsedTime / pickUpTime;
-			float newScale = Mathf.Lerp (1f, resizeFactor, percTime);
+			float newScale = Mathf.Lerp (initScale.x, resizeFactor*initScale.x, percTime);
 			transform.localScale = new Vector3 (newScale, newScale, newScale);
 			transform.position += new Vector3 (0f, movementStep, 0f);
 			transform.Rotate(new Vector3(0f, rotationSpeed, 0f));
 		} else if (elapsedTime < 2 * pickUpTime) {
 			elapsedTime += Time.deltaTime;
 			float percTime = (elapsedTime - pickUpTime) / pickUpTime;
-			float newScale = Mathf.Lerp (resizeFactor, 1f, percTime);
+			float newScale = Mathf.Lerp (resizeFactor*initScale.x, initScale.x, percTime);
 			transform.localScale = new Vector3 (newScale, newScale, newScale);
 			transform.position += new Vector3 (0f, -movementStep, 0f);
 			transform.Rotate(new Vector3(0f, rotationSpeed, 0f));
@@ -46,6 +50,8 @@ public class Pickable : MonoBehaviour {
 			elapsedTime = 0f;
 			theRenderer.enabled = false;
 			showPickUp = false;
+			transform.localScale = initScale;
+			transform.rotation = initRot;
 			transform.position += new Vector3(0f, 0f, +2f);
 		}
 	}
