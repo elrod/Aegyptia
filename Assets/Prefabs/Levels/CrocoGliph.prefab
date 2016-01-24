@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 199004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 173.025482, y: 4.21665525, z: 0}
+  m_LocalPosition: {x: -261.66394, y: -7.9256916, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc65765b3a9f4bb42a61ed98982b1c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shape: {fileID: 130232, guid: 60a3176ba4eb27d43a27bfffa97337df, type: 2}
+  shape: {fileID: 137930, guid: c70de49b41699874ebecacc4a078ac16, type: 2}
   spawnPoint: {x: 2, y: -1, z: -2}
 --- !u!114 &11487292
 MonoBehaviour:
@@ -122,9 +122,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
