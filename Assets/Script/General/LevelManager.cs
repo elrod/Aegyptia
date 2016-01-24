@@ -117,6 +117,20 @@ public class LevelManager : MonoBehaviour {
         
     }
 
+    public void ExitBothPlayer()
+    {
+        playerGovernor.canSwitchPlayer = false;
+        foreach (Player p in FindObjectsOfType<Player>()){
+            p.gameObject.GetComponent<Renderer>().enabled = false;
+            activeCharacters--;
+            p.enabled = false;
+            p.gameObject.GetComponent<Controller2D>().enabled = false;
+        }
+        endLevelFound.text = FindObjectOfType<Collector>().getCollected().ToString();
+        endLevelTotal.text = FindObjectOfType<Collector>().getTotal().ToString();
+        endLevelPanel.SetActive(true);
+    }
+
     // TRICKS AREA:
 
     void SecretCommandsUpdate()

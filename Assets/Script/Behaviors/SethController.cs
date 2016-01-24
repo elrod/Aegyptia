@@ -128,6 +128,8 @@ public class SethController : MonoBehaviour {
     public void SethDeath()
     {
         Instantiate(deathParticle, gameObject.transform.position, gameObject.transform.rotation);
+        // exiting the two characters
+        FindObjectOfType<LevelManager>().ExitBothPlayer();
         //yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
