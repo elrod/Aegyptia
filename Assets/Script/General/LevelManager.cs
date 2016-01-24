@@ -60,7 +60,6 @@ public class LevelManager : MonoBehaviour {
 
 		respawning = true;
 		
-        Debug.Log("1: " +playerGovernor.canSwitchPlayer);
 		// Instantiate the particle system representing the death of the player
 		Instantiate (deathParticle, player.transform.position, player.transform.rotation);
 		if (playerGovernor.IsP1Active ()) {

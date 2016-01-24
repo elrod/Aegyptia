@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 199004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 173.025482, y: 4.21665525, z: 0}
+  m_LocalPosition: {x: 6.02784061, y: -2.16468978, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -90,6 +90,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape: {fileID: 130232, guid: 60a3176ba4eb27d43a27bfffa97337df, type: 2}
   spawnPoint: {x: 2, y: -1, z: -2}
+  transormaionParticleIN: {fileID: 0}
+  transormaionParticleOUT: {fileID: 0}
 --- !u!114 &11487292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -122,9 +124,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
