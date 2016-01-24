@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 442630}
   - 198: {fileID: 19801758}
   - 199: {fileID: 19965858}
+  - 114: {fileID: 11444890}
   m_Layer: 0
   m_Name: TransformationParticleOUT
   m_TagString: Untagged
@@ -24,11 +25,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122272}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.150000006, y: -2.33999991, z: -2}
+  m_LocalPosition: {x: 75.1624451, y: 67.7954102, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11444890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8add0195dce7e4bd8b0f08734a7e4a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 1.5
 --- !u!198 &19801758
 ParticleSystem:
   m_ObjectHideFlags: 1
