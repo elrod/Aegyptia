@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour {
     public Text endLevelFound;
     public Text endLevelTotal;
 	public string nextLevel = "Credits";
+	public bool speedRun = false;
 	bool respawning = false;
 
     int activeCharacters = 2;
@@ -113,6 +114,9 @@ public class LevelManager : MonoBehaviour {
             endLevelFound.text = FindObjectOfType<Collector>().getCollected().ToString();
             endLevelTotal.text = FindObjectOfType<Collector>().getTotal().ToString();
             endLevelPanel.SetActive(true);
+			if(speedRun){
+				FindObjectOfType<SpeedRunManager>().UpdateTimes();
+			}
         }
         
     }
@@ -130,6 +134,10 @@ public class LevelManager : MonoBehaviour {
         endLevelTotal.text = FindObjectOfType<Collector>().getTotal().ToString();
         endLevelPanel.SetActive(true);
     }
+
+	public void RemoveOneCharacter(){
+		activeCharacters--;
+	}
 
     // TRICKS AREA:
 
