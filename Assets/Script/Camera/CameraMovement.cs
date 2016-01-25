@@ -46,29 +46,30 @@ public class CameraMovement : MonoBehaviour {
 	// was moving. FixedUpdate should be used for physics only... It could be called more than once per frame, so this could result
 	// in a camera moving faster than it should and vibrating when the player is moving!
 	void Update(){
+		if (activePlayer != null) {
+			if (moving) {
+				ReachNewPosition ();
+			}
 		
-		if (moving) {
-			ReachNewPosition();
-		}
-		
-		if (comingBack) {
-			ComeBack();
-		}
+			if (comingBack) {
+				ComeBack ();
+			}
 
-        if (!moving && !comingBack) {
-            if (follow) {
-                float posX = Mathf.SmoothDamp(transform.position.x, activePlayer.transform.position.x + offset.x + offsetBase.x, ref velocity.x, smoothTimeX);
-                float posY = Mathf.SmoothDamp(transform.position.y, activePlayer.transform.position.y + offset.y + offsetBase.y, ref velocity.y, smoothTimeY);
+			if (!moving && !comingBack) {
+				if (follow) {
+					float posX = Mathf.SmoothDamp (transform.position.x, activePlayer.transform.position.x + offset.x + offsetBase.x, ref velocity.x, smoothTimeX);
+					float posY = Mathf.SmoothDamp (transform.position.y, activePlayer.transform.position.y + offset.y + offsetBase.y, ref velocity.y, smoothTimeY);
 
-                transform.position = new Vector3(posX, posY, transform.position.z);
-            }
-            else
-            {
-                float posX = Mathf.SmoothDamp(transform.position.x, staticCameraPosition.x, ref velocity.x, smoothTimeX);
-                float posY = Mathf.SmoothDamp(transform.position.y, staticCameraPosition.y, ref velocity.y, smoothTimeY);
+					transform.position = new Vector3 (posX, posY, transform.position.z);
+				} else {
+					float posX = Mathf.SmoothDamp (transform.position.x, staticCameraPosition.x, ref velocity.x, smoothTimeX);
+					float posY = Mathf.SmoothDamp (transform.position.y, staticCameraPosition.y, ref velocity.y, smoothTimeY);
 
-                transform.position = new Vector3(posX, posY, transform.position.z);
-            }
+					transform.position = new Vector3 (posX, posY, transform.position.z);
+				}
+			}
+		} else {
+			activePlayer = GameObject.FindGameObjectWithTag ("Player");
 		}
 	}
 	

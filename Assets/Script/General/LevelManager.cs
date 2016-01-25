@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour {
 	public bool speedRun = false;
 	bool respawning = false;
 
-    int activeCharacters = 2;
+    public int activeCharacters = 2;
 
 	GameObject player;
 	PlayerGovernor playerGovernor;
@@ -92,7 +92,9 @@ public class LevelManager : MonoBehaviour {
 		player.GetComponent<Player> ().enabled = true;
 		player.GetComponent<Renderer> ().enabled = true;
 		Instantiate (respawnParticle, player.transform.position, player.transform.rotation);
-		playerGovernor.canSwitchPlayer = true;
+		if (!speedRun) {
+			playerGovernor.canSwitchPlayer = true;
+		}
 		respawning = false;
 
 	}
