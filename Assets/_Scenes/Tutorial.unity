@@ -76759,6 +76759,16 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0af96497a8b095742889aad40f37fb70, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!82 &1369046783 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 8261480, guid: b449eee9edf29e242b7b7a44ec43093c,
+    type: 2}
+  m_PrefabInternal: {fileID: 2022087369}
+--- !u!82 &1369046784 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 8209172, guid: b449eee9edf29e242b7b7a44ec43093c,
+    type: 2}
+  m_PrefabInternal: {fileID: 2022087369}
 --- !u!1 &1369388185
 GameObject:
   m_ObjectHideFlags: 0
@@ -115318,6 +115328,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11438572, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
+      propertyPath: audioSources.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 491860, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -115353,18 +115367,18 @@ Prefab:
     - target: {fileID: 11438572, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
       propertyPath: player1
       value: 
-      objectReference: {fileID: 497191150}
+      objectReference: {fileID: 947629330}
     - target: {fileID: 11438572, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
       propertyPath: player2
       value: 
-      objectReference: {fileID: 947629330}
+      objectReference: {fileID: 497191150}
     - target: {fileID: 8209172, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
       propertyPath: m_Volume
       value: .100000001
       objectReference: {fileID: 0}
     - target: {fileID: 11438572, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
       propertyPath: musicVolume
-      value: .100000001
+      value: .400000006
       objectReference: {fileID: 0}
     - target: {fileID: 8261480, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
       propertyPath: m_PlayOnAwake
@@ -115377,11 +115391,27 @@ Prefab:
     - target: {fileID: 11438572, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
       propertyPath: p1Panel
       value: 
-      objectReference: {fileID: 341252830}
+      objectReference: {fileID: 504806668}
     - target: {fileID: 11438572, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
       propertyPath: p2Panel
       value: 
-      objectReference: {fileID: 504806668}
+      objectReference: {fileID: 341252830}
+    - target: {fileID: 8209172, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c7824d5ca6ad3e4fa69cdd1c15f60c3, type: 3}
+    - target: {fileID: 8261480, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 276bc9c37a1f854418673ba2e30dd25f, type: 3}
+    - target: {fileID: 11438572, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
+      propertyPath: audioSources.Array.data[0]
+      value: 
+      objectReference: {fileID: 1369046784}
+    - target: {fileID: 11438572, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
+      propertyPath: audioSources.Array.data[1]
+      value: 
+      objectReference: {fileID: 1369046783}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b449eee9edf29e242b7b7a44ec43093c, type: 2}
   m_IsPrefabParent: 0

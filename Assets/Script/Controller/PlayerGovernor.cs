@@ -14,7 +14,7 @@ public class PlayerGovernor : MonoBehaviour {
     public GameObject p1Panel;
     public GameObject p2Panel;
 
-	AudioSource[] audioSources;
+	public AudioSource[] audioSources;
 	bool switchAudio;
 	float elapsedTime = 0f;
 	float switchTime;
@@ -33,16 +33,16 @@ public class PlayerGovernor : MonoBehaviour {
 			if(FindObjectOfType<LevelEventsManager>() != null){
             	FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
 			}
-			//audioSources[1].volume = musicVolume;
-			//audioSources[0].volume = 0f;
+			audioSources[0].volume = musicVolume;
+			audioSources[1].volume = 0f;
             player2.GetComponent<Player>().TurnOff();
 		} else {
 			isP1Active = false;
 			if(FindObjectOfType<LevelEventsManager>() != null){
             	FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
 			}
-			//audioSources[1].volume = 0f;
-			//audioSources[0].volume = 1f;
+			audioSources[0].volume = 0f;
+			audioSources[1].volume = 1f;
             player1.GetComponent<Player>().TurnOff();
 		}
 	}
@@ -78,8 +78,8 @@ public class PlayerGovernor : MonoBehaviour {
                 FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
             }
 		}
-		//switchAudio = true;
-		//elapsedTime = 0f;
+		switchAudio = true;
+		elapsedTime = 0f;
     }
 
 	void SwitchPlayer (GameObject activeBefore, GameObject activeNow){
@@ -123,11 +123,11 @@ public class PlayerGovernor : MonoBehaviour {
 		elapsedTime += Time.deltaTime;
 		float percTime = elapsedTime / switchTime;
 		if (isP1Active) {
-			audioSources[1].volume = Mathf.Lerp(0f, musicVolume, percTime);
-			audioSources[0].volume = Mathf.Lerp(musicVolume, 0f, percTime);
-		} else {
-			audioSources[1].volume = Mathf.Lerp(musicVolume, 0f, percTime);
 			audioSources[0].volume = Mathf.Lerp(0f, musicVolume, percTime);
+			audioSources[1].volume = Mathf.Lerp(musicVolume, 0f, percTime);
+		} else {
+			audioSources[0].volume = Mathf.Lerp(musicVolume, 0f, percTime);
+			audioSources[1].volume = Mathf.Lerp(0f, musicVolume, percTime);
 		}
 		if (elapsedTime >= switchTime) {
 			switchAudio = false;

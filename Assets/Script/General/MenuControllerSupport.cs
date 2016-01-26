@@ -22,13 +22,14 @@ public class MenuControllerSupport : MonoBehaviour {
 			if ((horizontal && input.x > 0) || (!horizontal && input.y < 0)) {
 				if (index < buttonList.Length - 1) {
 					index++;
+					buttonList [index].Select ();
 				}
 			} else if ((horizontal && input.x < 0) || (!horizontal && input.y > 0)) {
 				if (index > 0) {
 					index--;
+					buttonList [index].Select ();
 				}
 			} 
-			buttonList [index].Select ();
 			if (Input.GetButtonDown ("Jump")) {
 				buttonList [index].onClick.Invoke ();
 			}
