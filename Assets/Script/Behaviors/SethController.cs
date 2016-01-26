@@ -16,13 +16,16 @@ public class SethController : MonoBehaviour {
     public float maxSpawnTime = 0.8f;
     public float attackTime = 3;
     public ParticleSystem deathParticle;
+    public GameObject ChargeStones;
+    public GameObject ChargeArrows;
+    public GameObject BurstStones;
+    public GameObject BurstArrows;
+
 
     Rigidbody2D rb;
 	// Use this for initialization
 	void Start () {
-
         currentPoint = points[moveToPoint];
-       
         rb = gameObject.GetComponent<Rigidbody2D>();
         Attack();
 
@@ -90,19 +93,22 @@ public class SethController : MonoBehaviour {
     }
     void AttackArrow()
     {
-        foreach (GameObject stone in stoneSpawners)
+        foreach (GameObject stone in stoneSpawners) //Stops Stones
         {
             stone.GetComponent<FallingStones>().Reset();
         }
         if (isFloating)
         {
-            foreach (GameObject arrow in arrowShooters)
+            Instantiate(BurstArrows, gameObject.transform.position, gameObject.transform.rotation);
+            foreach (GameObject arrow in arrowShooters) //go arrows
             {
                 arrow.GetComponent<ArrowShoter>().minSpawnTime = minSpawnTime;
                 arrow.GetComponent<ArrowShoter>().maxSpawnTime = maxSpawnTime;
             }
             Invoke("AttackStones", attackTime);
+            Instantiate(ChargeStones, gameObject.transform.position, gameObject.transform.rotation);
         }
+
         
 
     }
@@ -115,6 +121,7 @@ public class SethController : MonoBehaviour {
         }
         if (isFloating)
         {
+            Instantiate(BurstStones, gameObject.transform.position, gameObject.transform.rotation);
             foreach (GameObject stone in stoneSpawners)
             {
                 stone.GetComponent<FallingStones>().minSpawnTime = minSpawnTime;
@@ -122,6 +129,7 @@ public class SethController : MonoBehaviour {
 
             }
             Invoke("AttackArrow", attackTime);
+            Instantiate(ChargeArrows, gameObject.transform.position, gameObject.transform.rotation);
         }
 
     }
