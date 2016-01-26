@@ -23,9 +23,10 @@ public class Key : Tool {
 	}
 
 	public override void Use(){
-        if(tool != null)
-		    tool.Use ();
+        if (tool != null)
+			tool.Use ();
 		if (respawn) {
+			gameObject.GetComponent<Pickable>().StopPick();
 			transform.position = initialPosition;
 			theCollider.enabled = true;
 			theRenderer.enabled = true;

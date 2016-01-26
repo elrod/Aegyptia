@@ -14,6 +14,7 @@ public class Pickable : MonoBehaviour {
 	bool showPickUp = false;
 	float elapsedTime = 0f;
 	Vector3 initScale;
+	Vector3 initPos;
 	Quaternion initRot;
 
 	// Use this for initialization
@@ -22,6 +23,7 @@ public class Pickable : MonoBehaviour {
 		theCollider = GetComponent<Collider2D>();
 		initScale = transform.localScale;
 		initRot = transform.rotation;
+		initPos = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -52,7 +54,7 @@ public class Pickable : MonoBehaviour {
 			showPickUp = false;
 			transform.localScale = initScale;
 			transform.rotation = initRot;
-			transform.position += new Vector3(0f, 0f, +2f);
+			transform.position = initPos;
 		}
 	}
 
@@ -65,5 +67,12 @@ public class Pickable : MonoBehaviour {
 			transform.position += new Vector3(0f, 0f, -2f);
 			//theRenderer.enabled = false;
 		}
+	}
+
+	public void StopPick(){
+		showPickUp = false;
+		transform.localScale = initScale;
+		transform.rotation = initRot;
+		elapsedTime = 0f;
 	}
 }
