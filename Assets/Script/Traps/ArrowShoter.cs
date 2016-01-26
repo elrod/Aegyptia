@@ -17,7 +17,6 @@ public class ArrowShoter : MonoBehaviour {
     private int spawnedArrows = 0;
     bool infiniteArrows = false;
     Trap trapInfo;
-    bool burstStart = false;
     float initialMinTime;
     float initialMaxTime;
     // Use this for initialization

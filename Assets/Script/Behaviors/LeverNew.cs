@@ -47,8 +47,12 @@ public class LeverNew : Tool {
 	bool rotating = false;
 	Transform rotationCentre;
 	bool rotationDirection = true;
+
+    bool resetting = false;
+    bool wait = false;
 	
 	public bool reversible;
+    public float reversibleTime = 0;
 
 	Camera pipCamera;
 	
@@ -89,19 +93,30 @@ public class LeverNew : Tool {
 		
 		// Surely not the best way to call it, but I've rewritten this so many times that 
 		// at the moement I don't want to change it.
-		if (Input.GetButtonDown("Use")){
-			if (active) {
-				start = true;
-				rotating = true;
-				rotationDirection = true;
-			}
-		}
-		if (start){
-			Use ();
-		}
-		if (rotating) {
-			RotateLever(rotationDirection);
-		}
+        if (!resetting && !wait)
+        {
+            if (Input.GetButtonDown("Use"))
+            {
+                if (active)
+                {
+                    start = true;
+                    rotating = true;
+                    rotationDirection = true;
+                }
+            }
+            if (start)
+            {
+                Use();
+            }
+            if (rotating)
+            {
+                RotateLever(rotationDirection);
+            }
+        }
+        if (resetting)
+        {
+             TranslateBack();
+        }
 	}
 	
 	public override void Use(){
@@ -113,6 +128,7 @@ public class LeverNew : Tool {
 					toolsToUse[usedTool].Use();
 					usedTool++;
 					if(usedTool == toolsToUse.Length){
+                        usedTool = 0;
 						tools = false;
 					}
 				}
@@ -126,7 +142,7 @@ public class LeverNew : Tool {
 				CreateRow();
 			}
 			
-			if(translate)
+			if(translate & !tools)
 			{
 				Translate();
 			}
@@ -134,11 +150,13 @@ public class LeverNew : Tool {
 			
 			if (!destroying && !creating && !translate && !tools)
 			{
-				used = true;
-				start = false;
-				if (reversible)
-				{
-					Init();
+                //used = true;
+                //start = false;
+				if (reversible && !resetting)
+                {
+                    wait = true;
+                    Invoke("StopWait", reversibleTime);
+                    Init();
 				}
 			}
 			
@@ -289,11 +307,21 @@ public class LeverNew : Tool {
 			if(currentPos == startingPoints[i] + translateAreas[i].deltaDestination)
 			{
 				translate = false;
+                if (reversible)
+                {
+                    //resetting = true;
+                    startingPoints[i] = translateAreas[i].area.transform.position;
+                    translateAreas[i].deltaDestination *= -1;
+                    Invoke("TranslateBack", reversibleTime);
+                }
 			}
 		}
 	}
 	
 	void Init(){
+
+        used = true;
+        start = false;
 		TileArea[] tmp = destroyAreas;
 		destroyAreas = createAreas;
 		createAreas = tmp;
@@ -306,8 +334,13 @@ public class LeverNew : Tool {
 		if (toolsToUse.Length > 0){ 
 			tools = true;
 		}
+        if (translateAreas.Length > 0)
+        {
+            translate = true;
+        }
 		SetMinAndMax ();
 		used = false;
+        resetting = false;
 		//rotating = true;
 		//rotationDirection = false;
 	}
@@ -323,7 +356,29 @@ public class LeverNew : Tool {
 			active = false;
 		}
 	}
-	
+    void TranslateBack()
+    {
+        wait = false;
+        resetting = true;
+        for (int i = 0; i < translateAreas.Length; i++)
+        {
+            //Debug.Log("x " + translateAreas[i].deltaDestination.x + " y " + translateAreas[i].deltaDestination.y + " z " + translateAreas[i].deltaDestination.z);
+            Vector3 currentPos = translateAreas[i].area.transform.position;
+            translateAreas[i].area.transform.position = Vector3.MoveTowards(currentPos, startingPoints[i] + translateAreas[i].deltaDestination, Time.deltaTime * translateAreas[i].moveSpeed);
+            if (currentPos == startingPoints[i] + translateAreas[i].deltaDestination)
+            {
+                //translate = false;
+                resetting = false;
+                startingPoints[i] = translateAreas[i].area.transform.position;
+                translateAreas[i].deltaDestination *= -1;
+            }
+        }
+    }
+
+    void StopWait()
+    {
+        wait = false;
+    }
 }
 
 
