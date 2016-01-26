@@ -53,6 +53,7 @@ public class Crocodile : Animal
         gravity = -(2 * swimHeight) / Mathf.Pow(timeToJumpApex, 2);
 		jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		randomBark = Random.Range (1.5f, 3f);
+		FindObjectOfType<PlayerGovernor> ().PlayAnimalBGM ("crocodile");
     }
 
     // Update is called once per frame
@@ -154,16 +155,17 @@ public class Crocodile : Animal
         }
     }
 
-    public override void TurnOn()
-    {
+    public override void TurnOn(){
         isActive = true;
+		FindObjectOfType<PlayerGovernor> ().PlayAnimalBGM ("crocodile");
     }
 
     public override void TurnOff()
     {
         isActive = false;
         velocity.x = 0;
-        velocity.y = 0;
+		velocity.y = 0;
+		FindObjectOfType<PlayerGovernor> ().StopAnimalBGM ();
     }
 
 
@@ -185,6 +187,8 @@ public class Crocodile : Animal
         }
     }
 
-
+	void OnDestroy(){
+		FindObjectOfType<PlayerGovernor> ().StopAnimalBGM ();
+	}
 
 }

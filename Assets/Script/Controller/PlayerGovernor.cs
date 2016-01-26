@@ -15,6 +15,8 @@ public class PlayerGovernor : MonoBehaviour {
     public GameObject p2Panel;
 
 	public AudioSource[] audioSources;
+	public AudioSource[] animalsBGM;
+	int currentAnimal = -1;
 	bool switchAudio;
 	float elapsedTime = 0f;
 	float switchTime;
@@ -42,7 +44,7 @@ public class PlayerGovernor : MonoBehaviour {
             	FindObjectOfType<LevelEventsManager>().NotifyEvent("isis", "ISIS_BEGIN");
 			}
 			audioSources[0].volume = 0f;
-			audioSources[1].volume = 1f;
+			audioSources[1].volume = musicVolume;
             player1.GetComponent<Player>().TurnOff();
 		}
 	}
@@ -59,9 +61,10 @@ public class PlayerGovernor : MonoBehaviour {
 	}
 	
     void PerformSwitch(){
+		bool activeNowIsHuman;
         if (isP1Active)
         {
-            SwitchPlayer(player1, player2);
+			activeNowIsHuman = SwitchPlayer(player1, player2);
             p1Panel.SetActive(false);
             p2Panel.SetActive(true);
             if (FindObjectOfType<LevelEventsManager>() != null)
@@ -70,7 +73,7 @@ public class PlayerGovernor : MonoBehaviour {
             }
         }
         else {
-            SwitchPlayer(player2, player1);
+			activeNowIsHuman = SwitchPlayer(player2, player1);
             p1Panel.SetActive(true);
             p2Panel.SetActive(false);
             if (FindObjectOfType<LevelEventsManager>() != null)
@@ -78,11 +81,13 @@ public class PlayerGovernor : MonoBehaviour {
                 FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_BEGIN");
             }
 		}
-		switchAudio = true;
-		elapsedTime = 0f;
+		if (activeNowIsHuman || currentAnimal == -1) {
+			switchAudio = true;
+			elapsedTime = 0f;
+		}
     }
 
-	void SwitchPlayer (GameObject activeBefore, GameObject activeNow){
+	bool SwitchPlayer (GameObject activeBefore, GameObject activeNow){
 		//activeBefore.transform.gameObject.tag = "InactivePlayer";
 		//activeNow.transform.gameObject.tag = "Player";
 		activeBefore.GetComponent<Player> ().TurnOff ();
@@ -90,6 +95,7 @@ public class PlayerGovernor : MonoBehaviour {
 		isP1Active = !isP1Active;
 		Camera.main.GetComponent<CameraMovement> ().offset = Vector2.zero;
 		Camera.main.GetComponent<CameraMovement>().SwitchPlayer(activeNow.transform.position);
+		return activeNow.GetComponent<Player> ().IsHuman ();
 	}
 
 	public bool IsP1Active(){
@@ -138,5 +144,36 @@ public class PlayerGovernor : MonoBehaviour {
 		isP1Active = active;
 		switchAudio = true;
 		elapsedTime = 0f;
+	}
+
+	public void PlayAnimalBGM(string animal){
+		if (animal.Equals ("crocodile")){
+			currentAnimal = 0;
+		} else if (animal.Equals ("scarab")){
+			currentAnimal = 1;
+		} else if (animal.Equals ("cat")){
+			currentAnimal = -1;
+		} else {
+			currentAnimal = -1;
+		}
+		if (currentAnimal != -1) {
+			if (isP1Active) {
+				audioSources [0].volume = 0f;
+			} else {
+				audioSources [1].volume = 0f;
+			}
+			animalsBGM [currentAnimal].volume = musicVolume;
+		}
+	}
+
+	public void StopAnimalBGM(){
+		if (currentAnimal != -1) {
+			if (isP1Active) {
+				audioSources [0].volume = musicVolume;
+			} else {
+				audioSources [1].volume = musicVolume;
+			}
+			animalsBGM [currentAnimal].volume = 0f;
+		}
 	}
 }
