@@ -19,6 +19,7 @@ public class CharacterSelection : MonoBehaviour {
 		osiris.GetComponent<Player> ().TurnOn ();
 		osiris.tag = "Player";
 		osirisPanel.SetActive (true);
+		FindObjectOfType<PlayerGovernor> ().SetP1Active (true);
 		gameObject.SetActive (false);
 	}
 
@@ -30,6 +31,7 @@ public class CharacterSelection : MonoBehaviour {
 		isis.GetComponent<Player> ().TurnOn ();
 		isis.tag = "Player";
 		isisPanel.SetActive (true);
+		FindObjectOfType<PlayerGovernor> ().SetP1Active (true);
 		gameObject.SetActive (false);
 	}
 }

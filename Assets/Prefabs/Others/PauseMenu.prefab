@@ -11,6 +11,7 @@ GameObject:
   - 223: {fileID: 22304052}
   - 114: {fileID: 11410470}
   - 114: {fileID: 11499032}
+  - 114: {fileID: 11493786}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -96,7 +97,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 477656}
   - 114: {fileID: 11428826}
-  - 114: {fileID: 11410034}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -219,22 +219,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: RESUME GAME
---- !u!114 &11410034
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 754a8263728b41e4ebdf45b646506cee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonList:
-  - {fileID: 11446876}
-  - {fileID: 11453746}
-  - {fileID: 11472928}
-  horizontal: 0
 --- !u!114 &11410470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -599,6 +583,22 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11493786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754a8263728b41e4ebdf45b646506cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonList:
+  - {fileID: 11446876}
+  - {fileID: 11453746}
+  - {fileID: 11472928}
+  horizontal: 0
 --- !u!114 &11499032
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -133,4 +133,10 @@ public class PlayerGovernor : MonoBehaviour {
 			switchAudio = false;
 		}
 	}
+
+	public void SetP1Active(bool active){
+		isP1Active = active;
+		switchAudio = true;
+		elapsedTime = 0f;
+	}
 }
