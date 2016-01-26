@@ -40452,6 +40452,67 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7e1b56500f4257649b930f7e8b5dcb56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &725494152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 725494155}
+  - 61: {fileID: 725494154}
+  - 114: {fileID: 725494153}
+  m_Layer: 0
+  m_Name: PlatformArea
+  m_TagString: ZoomArea
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &725494153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 725494152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2d557fe8fd761478d858c02a518154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeZoom: 0
+  newSize: 0
+  zoomTime: 1
+  withOffset: 1
+  offset: {x: 0, y: -2}
+  moveFocus: 0
+  stopFollow: 0
+  positionToReach: {fileID: 0}
+--- !u!61 &725494154
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 725494152}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 2.17266846, y: .347626686}
+  serializedVersion: 2
+  m_Size: {x: 25.2759399, y: 12.2399387}
+--- !u!4 &725494155
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 725494152}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2057733416}
+  m_RootOrder: 0
 --- !u!1 &726279322
 GameObject:
   m_ObjectHideFlags: 0
@@ -107733,6 +107794,67 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300004, guid: c5c5f96aa8c94eb46bd01baaad6a5ce7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1892036770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1892036771}
+  - 61: {fileID: 1892036773}
+  - 114: {fileID: 1892036772}
+  m_Layer: 0
+  m_Name: StepsArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1892036771
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1892036770}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.9400005, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2057733416}
+  m_RootOrder: 1
+--- !u!114 &1892036772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1892036770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2d557fe8fd761478d858c02a518154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeZoom: 0
+  newSize: 0
+  zoomTime: 1
+  withOffset: 1
+  offset: {x: 0, y: -2}
+  moveFocus: 0
+  stopFollow: 0
+  positionToReach: {fileID: 0}
+--- !u!61 &1892036773
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1892036770}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 2.55421638, y: -.115743637}
+  serializedVersion: 2
+  m_Size: {x: 19.9229126, y: 13.3070097}
 --- !u!1 &1894333104
 GameObject:
   m_ObjectHideFlags: 0
@@ -116697,6 +116819,35 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: c5c5f96aa8c94eb46bd01baaad6a5ce7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &2057733415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2057733416}
+  m_Layer: 0
+  m_Name: ZoomAreas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2057733416
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2057733415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 38.4268112, y: 7.24862289, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 725494155}
+  - {fileID: 1892036771}
+  m_Father: {fileID: 0}
+  m_RootOrder: 35
 --- !u!1 &2058096025
 GameObject:
   m_ObjectHideFlags: 0
