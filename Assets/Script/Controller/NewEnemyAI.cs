@@ -100,8 +100,10 @@ public class NewEnemyAI : MonoBehaviour {
 		float direction;
 		if (goRight) {
 			direction = 1;
+			spineAnim.skeleton.flipX = false;
 		} else {
 			direction = -1;
+			spineAnim.skeleton.flipX = true;
 		}
 		float targetVelocityX = direction * patrolSpeed;
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, accelerationTimeGrounded);

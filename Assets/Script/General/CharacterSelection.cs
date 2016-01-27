@@ -31,7 +31,7 @@ public class CharacterSelection : MonoBehaviour {
 		isis.GetComponent<Player> ().TurnOn ();
 		isis.tag = "Player";
 		isisPanel.SetActive (true);
-		FindObjectOfType<PlayerGovernor> ().SetP1Active (true);
+		FindObjectOfType<PlayerGovernor> ().SetP1Active (false);
 		gameObject.SetActive (false);
 	}
 }
