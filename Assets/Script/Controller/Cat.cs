@@ -139,7 +139,7 @@ public class Cat : Animal
     {
         if (currentAnimation != anim)
         {
-            Debug.Log("NUOVA ANIMAZIONE:" + anim);
+           
             spineAnim.state.SetAnimation(0, anim, loop);
             currentAnimation = anim;
         }

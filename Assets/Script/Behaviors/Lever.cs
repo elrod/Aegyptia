@@ -305,7 +305,6 @@ public class Lever : Tool {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        Debug.Log("Enter");
         if (coll.gameObject.CompareTag("Player"))
         {
             active = true;
@@ -318,7 +317,6 @@ public class Lever : Tool {
 
     void OnTriggerExit2D(Collider2D coll)
     {
-        Debug.Log("Exit");
         if (coll.gameObject.CompareTag("Player"))
         {
             active = false;
@@ -327,7 +325,6 @@ public class Lever : Tool {
 
     void OnTriggerStay2D(Collider2D coll)
     {
-        Debug.Log("Stay");
         if (coll.gameObject.CompareTag("Player"))
         {
             active = true;
