@@ -80,7 +80,7 @@ public class ArrowShoter : MonoBehaviour {
 		audio.clip = arrowSpawn;
 		audio.Play ();
         GameObject go = Instantiate<GameObject>(arrowPrefab) as GameObject;
-        Vector3 arrowPosition = transform.position;
+        Vector3 arrowPosition = transform.position +  new Vector3(0.5f,0f,0f);
         if (applyYOffset)
         {
             arrowPosition.y += Random.Range(-1 * yOffsetMagnitude, yOffsetMagnitude);
