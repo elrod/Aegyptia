@@ -9,10 +9,12 @@ public class Gears : Tool {
     GameObject insertedGear;
     public float velocity;
     public Tool[] toolsToUse;
+    Animator anim;
 
     bool tools = false;
 	// Use this for initialization
 	void Start () {
+        anim = GetComponent<Animator>();
         if (toolsToUse.Length > 0)
         {
             tools = true;
@@ -24,7 +26,8 @@ public class Gears : Tool {
 	void Update () {
         if (gearInserted)
         {
-            insertedGear.transform.Rotate(new Vector3(0,0, velocity));
+            anim.SetBool("gearInserted", true);
+            //insertedGear.transform.Rotate(new Vector3(0,0, velocity));
         }
 	
 	}
@@ -37,7 +40,7 @@ public class Gears : Tool {
             {
                 insertedGear = col.gameObject.GetComponent<Inventory>().Give(gear.name);
                 insertedGear.transform.position = gameObject.transform.position +  new Vector3(0.27f, 0.4f, -0.5f);
-                insertedGear.GetComponent<SpriteRenderer>().enabled = true;               
+                insertedGear.GetComponent<SpriteRenderer>().enabled = false;               
                 insertedGear.GetComponent<Collider2D>().enabled = false;
                 gearInserted = true;
                 Use();
