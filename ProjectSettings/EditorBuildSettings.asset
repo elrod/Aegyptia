@@ -45,3 +45,5 @@ EditorBuildSettings:
     path: Assets/_Scenes/FinalLevel.unity
   - enabled: 1
     path: Assets/_Scenes/RelayRace.unity
+  - enabled: 1
+    path: Assets/_Scenes/Intro.unity

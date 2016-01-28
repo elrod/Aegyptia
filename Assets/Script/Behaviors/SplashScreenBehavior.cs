@@ -9,7 +9,8 @@ public class SplashScreenBehavior : MonoBehaviour {
     public float splahScreenFadeOutTime = 0.5f;
     public float fadeOutSpeed = 10f;
 
-    string levelToLoad = "TitleMenu";
+    public string levelToLoad = "TitleMenu";
+    public bool screenFadeOut = true;
 
     bool fadeOut = false;
 
@@ -22,14 +23,20 @@ public class SplashScreenBehavior : MonoBehaviour {
 	void Update () {
         if (fadeOut)
         {
-            Color theColor = splash.color;
-            theColor.a -= fadeOutSpeed * Time.deltaTime;
-            if(theColor.a <= 0)
+            if (screenFadeOut) { 
+                Color theColor = splash.color;
+                theColor.a -= fadeOutSpeed * Time.deltaTime;
+                if(theColor.a <= 0)
+                {
+                    theColor.a = 0;
+                    Application.LoadLevel(levelToLoad);
+                }
+                splash.color = theColor;
+            }
+            else
             {
-                theColor.a = 0;
                 Application.LoadLevel(levelToLoad);
             }
-            splash.color = theColor;
         }
 	}
 
