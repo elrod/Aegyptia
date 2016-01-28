@@ -8,6 +8,10 @@ public class LevelEventsManager : MonoBehaviour {
     public Notificator isisNotificator;
 
     Dictionary<string, string> events = new Dictionary<string, string>(){
+        //TUTORIAL
+        {"OSIRIS_TUT_BEGIN","I managed to escape from Seth, I need to get out of here..."},
+        {"ISIS_TUT_BEGIN", "Looks like Osiris is trapped in this place..."},
+        // DEMO LEVEL
         {"OSIRIS_BEGIN","I should find a way out of here!"},
         {"ISIS_BEGIN", "I must find Osiris!"},
         {"OSIRIS_KEY_FOUND", "This may be useful to Isis..." },
@@ -16,6 +20,8 @@ public class LevelEventsManager : MonoBehaviour {
         {"ISIS_KEY_OBTAINED", "I can use this to get out!"},
         {"OSIRIS_TABLET_MISSING", "Mmmm, looks like I need some kind of tablet here..." },
         {"ISIS_KEY_MISSING", "I don't have the key"},
+        {"OSIRIS_CANNOT_PLACE_OBJECT", "I need to put something here"},
+        {"ISIS_CANNOT_PLACE_OBJECT", "I need to put something here"},
         {"OSIRIS_LEVEL_FINISHED", "I did it! Let's move on!" },
         {"ISIS_LEVEL_FINISHED", "I did it! Let's move on!" }
     };
@@ -29,6 +35,8 @@ public class LevelEventsManager : MonoBehaviour {
         {"ISIS_KEY_OBTAINED", false },
         {"OSIRIS_TABLET_MISSING", false },
         {"ISIS_KEY_MISSING", false},
+        {"OSIRIS_CANNOT_PLACE_OBJECT", false},
+        {"ISIS_CANNOT_PLACE_OBJECT", false},
         {"OSIRIS_LEVEL_FINISHED", false },
         {"ISIS_LEVEL_FINISHED", false }
     };
