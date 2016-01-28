@@ -258,6 +258,8 @@ MonoBehaviour:
   splashScreenTimeout: 3
   splahScreenFadeOutTime: .5
   fadeOutSpeed: .5
+  levelToLoad: TitleMenu
+  screenFadeOut: 1
 --- !u!1 &1902053382
 GameObject:
   m_ObjectHideFlags: 0
