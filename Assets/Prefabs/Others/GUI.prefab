@@ -46,6 +46,7 @@ GameObject:
   - 114: {fileID: 11488028}
   - 114: {fileID: 11457208}
   - 114: {fileID: 11411204}
+  - 114: {fileID: 11442190}
   m_Layer: 5
   m_Name: LevelEnd
   m_TagString: Untagged
@@ -744,7 +745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 1}
+  m_Color: {r: .729411781, g: .360784322, b: .192156866, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -791,6 +792,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11442190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754a8263728b41e4ebdf45b646506cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonList:
+  - {fileID: 11444650}
+  - {fileID: 11457764}
+  - {fileID: 11417772}
+  horizontal: 1
 --- !u!114 &11444202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -830,7 +847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 1}
+  m_Color: {r: .729411781, g: .360784322, b: .192156866, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
