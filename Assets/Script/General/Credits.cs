@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Credits : MonoBehaviour {
 
-    bool allowExit = false;
+    bool allowExit = true;
     float allowExitTime = 1f;
 
 	// Use this for initialization
