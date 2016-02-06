@@ -25,6 +25,7 @@ public class Scarab : Animal {
     {
         controller = GetComponent<Controller2D>();
 		spineAnim = GetComponent<SkeletonAnimation>();
+		FindObjectOfType<PlayerGovernor> ().PlayAnimalBGM ("scarab");
     }
 
     // Update is called once per frame
@@ -91,14 +92,21 @@ public class Scarab : Animal {
 
     public override void TurnOn()
     {
-        isActive = true;
+		isActive = true;
+		FindObjectOfType<PlayerGovernor> ().PlayAnimalBGM ("scarab");
     }
 
     public override void TurnOff()
     {
         isActive = false;
         velocity.x = 0;
-        velocity.y = 0;
+		velocity.y = 0;
+		FindObjectOfType<PlayerGovernor> ().StopAnimalBGM ();
     }
 
+
+	
+	void OnDestroy(){
+		FindObjectOfType<PlayerGovernor> ().StopAnimalBGM ();
+	}
 }

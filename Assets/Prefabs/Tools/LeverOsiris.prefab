@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbaeff8505975054882a19d93d3eafed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  translateAreas: []
   destroyAreas: []
   createAreas: []
   toolsToUse: []
@@ -112,7 +113,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e5b88c6fd56baeb4fab6acb0ac322bee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 513c42cefb7a03a4fad201216ea74ff3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -160,7 +161,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e5b88c6fd56baeb4fab6acb0ac322bee,
+      objectReference: {fileID: 21300000, guid: 513c42cefb7a03a4fad201216ea74ff3,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_LocalRotation.z

@@ -16,9 +16,10 @@ public class LevelManager : MonoBehaviour {
     public Text endLevelFound;
     public Text endLevelTotal;
 	public string nextLevel = "Credits";
+	public bool speedRun = false;
 	bool respawning = false;
 
-    int activeCharacters = 2;
+    public int activeCharacters = 2;
 
 	GameObject player;
 	PlayerGovernor playerGovernor;
@@ -50,6 +51,7 @@ public class LevelManager : MonoBehaviour {
 
 	public void RespawnPlayer(){
 		if (!respawning) {
+            playerGovernor.canSwitchPlayer = false;
 			// To insert the respawn delay the code must be executed in a coroutine
 			StartCoroutine ("RespawnPlayerCo");
 		}
@@ -58,7 +60,7 @@ public class LevelManager : MonoBehaviour {
 	public IEnumerator RespawnPlayerCo(){
 
 		respawning = true;
-		playerGovernor.canSwitchPlayer = false;
+		
 		// Instantiate the particle system representing the death of the player
 		Instantiate (deathParticle, player.transform.position, player.transform.rotation);
 		if (playerGovernor.IsP1Active ()) {
@@ -71,10 +73,13 @@ public class LevelManager : MonoBehaviour {
 		player.GetComponent<Player> ().enabled = false;
 		player.GetComponent<Renderer> ().enabled = false;
 		//Debug.Log ("Player respawn");
-	
+
 		// Now we wait the respawn delay so the death animation can be seen and then the player respawn
 		// to the last activated chekpoint 
+       
 		yield return new WaitForSeconds (respawnDelay);
+        playerGovernor.canSwitchPlayer = false;
+
 		if (playerGovernor.IsP1Active ()) {
             Vector3 respawnPos = currentCheckpointP1.transform.position;
             respawnPos.z = -2;
@@ -87,9 +92,11 @@ public class LevelManager : MonoBehaviour {
 		player.GetComponent<Player> ().enabled = true;
 		player.GetComponent<Renderer> ().enabled = true;
 		Instantiate (respawnParticle, player.transform.position, player.transform.rotation);
-		playerGovernor.canSwitchPlayer = true;
-
+		if (!speedRun) {
+			playerGovernor.canSwitchPlayer = true;
+		}
 		respawning = false;
+
 	}
 
     public void PlayerExit()
@@ -109,9 +116,30 @@ public class LevelManager : MonoBehaviour {
             endLevelFound.text = FindObjectOfType<Collector>().getCollected().ToString();
             endLevelTotal.text = FindObjectOfType<Collector>().getTotal().ToString();
             endLevelPanel.SetActive(true);
+			if(speedRun){
+				FindObjectOfType<SpeedRunManager>().UpdateTimes();
+			}
         }
         
     }
+
+    public void ExitBothPlayer()
+    {
+        playerGovernor.canSwitchPlayer = false;
+        foreach (Player p in FindObjectsOfType<Player>()){
+            p.gameObject.GetComponent<Renderer>().enabled = false;
+            activeCharacters--;
+            p.enabled = false;
+            p.gameObject.GetComponent<Controller2D>().enabled = false;
+        }
+        endLevelFound.text = FindObjectOfType<Collector>().getCollected().ToString();
+        endLevelTotal.text = FindObjectOfType<Collector>().getTotal().ToString();
+        endLevelPanel.SetActive(true);
+    }
+
+	public void RemoveOneCharacter(){
+		activeCharacters--;
+	}
 
     // TRICKS AREA:
 

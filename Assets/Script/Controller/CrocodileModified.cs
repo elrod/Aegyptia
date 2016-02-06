@@ -51,9 +51,11 @@ public class CrocodileModified : MonoBehaviour {
 			{
 				
 				gravity = -(2 * swimHeight) / Mathf.Pow(timeToJumpApex, 2);
-				if (Input.GetButtonDown("Jump"))
+                float inputFloat = Input.GetAxis("Jump");
+                Debug.Log(inputFloat);
+				if (inputFloat>0)
 				{
-					velocity.y = jumpVelocity;
+					velocity.y = jumpVelocity* inputFloat;
 				}
 				
 				targetVelocityX = input * swimSpeed;

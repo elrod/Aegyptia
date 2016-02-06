@@ -10,6 +10,7 @@ public class CameraMovement : MonoBehaviour {
 	
 	public float switchTime = 3f;
 	public float waitTimeOnFocus = 1.5f;
+    public bool follow = true;
 	float elapsedTime;
 	float waitedTime = 0f;
 	int weight = 0;
@@ -28,6 +29,8 @@ public class CameraMovement : MonoBehaviour {
 	
 	Vector3 startPos;
 	Vector3 destPos;
+
+    Vector3 staticCameraPosition;
 	
 	GameObject activePlayer;
 	GameObject stoppedPlayer;
@@ -43,20 +46,30 @@ public class CameraMovement : MonoBehaviour {
 	// was moving. FixedUpdate should be used for physics only... It could be called more than once per frame, so this could result
 	// in a camera moving faster than it should and vibrating when the player is moving!
 	void Update(){
+		if (activePlayer != null) {
+			if (moving) {
+				ReachNewPosition ();
+			}
 		
-		if (moving) {
-			ReachNewPosition();
-		}
-		
-		if (comingBack) {
-			ComeBack();
-		}
-		
-		if (!moving && !comingBack) {
-			float posX = Mathf.SmoothDamp (transform.position.x, activePlayer.transform.position.x + offset.x + offsetBase.x, ref velocity.x, smoothTimeX);
-			float posY = Mathf.SmoothDamp (transform.position.y, activePlayer.transform.position.y + offset.y + offsetBase.y, ref velocity.y, smoothTimeY);
-			
-			transform.position = new Vector3 (posX, posY, transform.position.z);
+			if (comingBack) {
+				ComeBack ();
+			}
+
+			if (!moving && !comingBack) {
+				if (follow) {
+					float posX = Mathf.SmoothDamp (transform.position.x, activePlayer.transform.position.x + offset.x + offsetBase.x, ref velocity.x, smoothTimeX);
+					float posY = Mathf.SmoothDamp (transform.position.y, activePlayer.transform.position.y + offset.y + offsetBase.y, ref velocity.y, smoothTimeY);
+
+					transform.position = new Vector3 (posX, posY, transform.position.z);
+				} else {
+					float posX = Mathf.SmoothDamp (transform.position.x, staticCameraPosition.x, ref velocity.x, smoothTimeX);
+					float posY = Mathf.SmoothDamp (transform.position.y, staticCameraPosition.y, ref velocity.y, smoothTimeY);
+
+					transform.position = new Vector3 (posX, posY, transform.position.z);
+				}
+			}
+		} else {
+			activePlayer = GameObject.FindGameObjectWithTag ("Player");
 		}
 	}
 	
@@ -138,4 +151,16 @@ public class CameraMovement : MonoBehaviour {
 	public bool IsMoving(){
 		return moving || comingBack;
 	}
+
+    public void FollowPlayer(bool followPlayer)
+    {
+        follow = followPlayer;
+        staticCameraPosition = transform.position;
+    }
+
+    public void FollowPlayer(bool followPlayer, Vector3 staticCameraPos)
+    {
+        follow = followPlayer;
+        staticCameraPosition = staticCameraPos;
+    }
 }

@@ -17,7 +17,6 @@ public class ArrowShoter : MonoBehaviour {
     private int spawnedArrows = 0;
     bool infiniteArrows = false;
     Trap trapInfo;
-    bool burstStart = false;
     float initialMinTime;
     float initialMaxTime;
     // Use this for initialization
@@ -81,7 +80,7 @@ public class ArrowShoter : MonoBehaviour {
 		audio.clip = arrowSpawn;
 		audio.Play ();
         GameObject go = Instantiate<GameObject>(arrowPrefab) as GameObject;
-        Vector3 arrowPosition = transform.position;
+        Vector3 arrowPosition = transform.position +  new Vector3(0.5f,0f,0f);
         if (applyYOffset)
         {
             arrowPosition.y += Random.Range(-1 * yOffsetMagnitude, yOffsetMagnitude);

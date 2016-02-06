@@ -42,7 +42,12 @@ public class DangerArea : MonoBehaviour {
 			red = !red;
 		}
 	} //end Fade
-	
+
+	void OnTriggerEnter2D(Collider2D coll){
+		if (coll.gameObject.CompareTag ("Player") && GetComponent<AudioSource>() != null) {
+			GetComponent<AudioSource>().Play();
+		}
+	}
 	
 	void OnTriggerStay2D(Collider2D coll){
 		if (coll.gameObject.CompareTag ("Player")) {
@@ -57,6 +62,9 @@ public class DangerArea : MonoBehaviour {
 			endColor.a = 0f;
 			filter.color = endColor;
 			red = false;
+			if (GetComponent<AudioSource>() != null) {
+				GetComponent<AudioSource>().Stop();
+			}
 		}
 	}
 }

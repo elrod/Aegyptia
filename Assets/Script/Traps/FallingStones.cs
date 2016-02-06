@@ -71,7 +71,7 @@ public class FallingStones : MonoBehaviour {
 
 	void SpawnStone(){
 		GameObject go = Instantiate<GameObject>(stonePrefab) as GameObject;
-		Vector3 stonePosition = transform.position;
+		Vector3 stonePosition = transform.position + new Vector3(0f,0f,-0.5f);
 		if(applyXOffset){
 			stonePosition.x += Random.Range (-1*xOffsetMagnitude, xOffsetMagnitude);
 		}

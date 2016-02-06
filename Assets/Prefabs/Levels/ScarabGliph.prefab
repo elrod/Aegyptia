@@ -60,7 +60,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 0
     m_Resolution: -1
     m_Strength: 1
     m_Bias: .0500000007
@@ -103,7 +103,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shape: {fileID: 159180, guid: 4ad31f481a2b5d646a15503d145afd2a, type: 2}
-  spawnPoint: {x: 3, y: -1, z: -2}
+  spawnPoint: {x: 3, y: -1.29999995, z: -2}
+  transormaionParticleIN: {fileID: 19816586, guid: d46b8460c10c8e543971a5273e804963,
+    type: 2}
+  transormaionParticleOUT: {fileID: 19816586, guid: d46b8460c10c8e543971a5273e804963,
+    type: 2}
 --- !u!212 &21280544
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -122,9 +126,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}

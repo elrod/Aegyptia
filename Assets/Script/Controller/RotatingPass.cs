@@ -54,6 +54,14 @@ public class RotatingPass : Tool {
                     {
                         Flip();
                     }
+                    else
+                    {
+
+                    }
+                }
+                else if(objLeft == null)
+                {
+                    FindObjectOfType<LevelEventsManager>().NotifyEvent("Osiris", "OSIRIS_CANNOT_PLACE_OBJECT");
                 }
             }
             else
@@ -69,6 +77,10 @@ public class RotatingPass : Tool {
                         Flip();
                     }
                     
+                }
+                else if(objRight == null)
+                {
+                    FindObjectOfType<LevelEventsManager>().NotifyEvent("Isis", "ISIS_CANNOT_PLACE_OBJECT");
                 }
             }
         }

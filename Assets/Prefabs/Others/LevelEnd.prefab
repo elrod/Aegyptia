@@ -64,6 +64,7 @@ GameObject:
   - 222: {fileID: 22291942}
   - 114: {fileID: 11497906}
   - 114: {fileID: 11423392}
+  - 114: {fileID: 11489714}
   m_Layer: 5
   m_Name: LevelEnd
   m_TagString: Untagged
@@ -724,6 +725,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11489714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754a8263728b41e4ebdf45b646506cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonList:
+  - {fileID: 11459012}
+  - {fileID: 11433564}
+  - {fileID: 11431890}
+  horizontal: 1
 --- !u!114 &11491870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1100,7 +1117,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: buttonList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buttonList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11459012}
+    - target: {fileID: 0}
+      propertyPath: buttonList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11433564}
+    - target: {fileID: 0}
+      propertyPath: buttonList.Array.data[2]
+      value: 
+      objectReference: {fileID: 11431890}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 117868}

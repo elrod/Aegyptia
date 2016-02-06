@@ -302,20 +302,38 @@ public class Lever : Tool {
 		//rotating = true;
 		//rotationDirection = false;
 	}
-	
-	void OnTriggerEnter2D (Collider2D coll){
-		if (coll.gameObject.CompareTag ("Player")) {
-			active = true;
-		} /*else {
-			active = false;
-		}*/
-	}
-	
-	void OnTriggerExit2D (Collider2D coll){
-		if (coll.gameObject.CompareTag ("Player")) {
-			active = false;
-		}
-	}
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.CompareTag("Player"))
+        {
+            active = true;
+        }
+        if (coll.gameObject.CompareTag("InactivePlayer"))
+        {
+            active = false;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.gameObject.CompareTag("Player"))
+        {
+            active = false;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D coll)
+    {
+        if (coll.gameObject.CompareTag("Player"))
+        {
+            active = true;
+        }
+        if (coll.gameObject.CompareTag("InactivePlayer"))
+        {
+            active = false;
+        }
+    }
 	
 }
 

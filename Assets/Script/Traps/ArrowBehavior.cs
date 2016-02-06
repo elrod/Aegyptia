@@ -32,7 +32,8 @@ public class ArrowBehavior : MonoBehaviour {
     //}
 
     void OnTriggerEnter2D(Collider2D coll){
-		if (!coll.tag.Equals("ArrowShoter") && !coll.tag.Equals("ZoomArea")){
+		if (!coll.tag.Equals("ArrowShoter") && !coll.tag.Equals("ZoomArea") && !coll.tag.Equals("Arrow")){
+           
 			moving = false;
 			GetComponent<Renderer>().enabled = false;
 			GetComponent<BoxCollider2D>().enabled = false;

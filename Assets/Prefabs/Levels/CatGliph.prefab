@@ -42,9 +42,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: -.0194244385, y: .0239543915}
+  m_Offset: {x: .0147094727, y: .1301229}
   serializedVersion: 2
-  m_Size: {x: 2.95739484, y: 2.82055044}
+  m_Size: {x: 1.89602256, y: 3.62743425}
 --- !u!108 &10891810
 Light:
   m_ObjectHideFlags: 1
@@ -60,7 +60,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 0
     m_Resolution: -1
     m_Strength: 1
     m_Bias: .0500000007
@@ -71,7 +71,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294963199
   m_Lightmapping: 4
   m_BounceIntensity: 1.29999995
   m_ShadowRadius: 0
@@ -88,8 +88,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc65765b3a9f4bb42a61ed98982b1c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shape: {fileID: 117258, guid: d28dcf8886dbf4b47a51cb47a7dc3177, type: 2}
-  spawnPoint: {x: 3, y: -1, z: -2}
+  shape: {fileID: 168386, guid: 5cb21ef4ee15e9b4aa1cb0401f7e9b1b, type: 2}
+  spawnPoint: {x: 2, y: 0, z: 0}
+  transormationParticleIN: {fileID: 19816586, guid: d46b8460c10c8e543971a5273e804963,
+    type: 2}
+  transormationParticleOUT: {fileID: 19816586, guid: d46b8460c10c8e543971a5273e804963,
+    type: 2}
 --- !u!114 &11437136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,7 +134,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e52f95e0a66dd6741b09a8c9b8269d8f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a58383bea9386148bc813944bfe6335, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

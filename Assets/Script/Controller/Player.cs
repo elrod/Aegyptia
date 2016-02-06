@@ -47,6 +47,8 @@ public class Player : MonoBehaviour {
     Vector2 humanColliderSize;
     Vector2 humanColliderOffset;
     Vector3 tranformationPoint;
+    ParticleSystem tranformPartcleIn;
+    ParticleSystem tranformPartcleOut;
 
     SkeletonAnimation spineAnim;
     string curr_anim;
@@ -222,9 +224,11 @@ public class Player : MonoBehaviour {
 
     private void ShapeShift()
     {
+        //Instantiate(tranformPartcleIn,gameObject.transform.position + (new Vector3(0,1,0)), gameObject.transform.rotation);
         anim = Instantiate<GameObject>(NewShape) as GameObject; //create the new shape
         //Vector3 pos = transform.position;
         Vector3 pos = tranformationPoint;
+        Instantiate(tranformPartcleOut, pos + (new Vector3(0, 0, -1)), gameObject.transform.rotation);
         //pos.z = 1;
         gameObject.transform.position = pos;
         anim.transform.position = pos; //the new shape's position is the same of the player and the spawnpoint
@@ -242,6 +246,7 @@ public class Player : MonoBehaviour {
 
     private void BackToHuman()
     {
+        Instantiate(tranformPartcleIn, gameObject.transform.position + (new Vector3(0, 1, -3)), gameObject.transform.rotation);
         gameObject.GetComponent<MeshRenderer>().enabled = true;
         gameObject.GetComponent<BoxCollider2D>().size = humanColliderSize;
         gameObject.GetComponent<BoxCollider2D>().offset = humanColliderOffset;
@@ -287,9 +292,12 @@ public class Player : MonoBehaviour {
         BackToHuman();
     }
 
-    public void setTransformationPoint(Vector3 point)
+    public void setTransformationPoint(Vector3 point, ParticleSystem partIn, ParticleSystem partOut)
     {
         tranformationPoint = point;
+        tranformPartcleIn = partIn;
+        tranformPartcleOut = partOut;
+
     }
 
 	void PlaySound(int clipIndex){

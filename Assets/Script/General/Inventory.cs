@@ -14,8 +14,7 @@ public class Inventory : MonoBehaviour {
 	}
 
 	public Image GUIItemPic;
-	public Text GUIItemText;
-
+	// public Text GUIItemText;
 
 	string selectedObject;
 
@@ -34,17 +33,17 @@ public class Inventory : MonoBehaviour {
 	}
 
 	public void PickUp(GameObject theObject, Sprite GUIPic){
-		InventoryObject inventObj;
-		inventObj.tool = theObject.GetComponent<Tool>();
-		inventObj.itemPic = GUIPic;
-		inventObj.name = theObject.name;
-		inventObj.autoConsume = true;
-		inventory.Add(inventObj);
-		selectedObject = inventObj.name;
-		GUIItemPic.sprite = inventObj.itemPic;
+		InventoryObject objToAdd;
+		objToAdd.tool = theObject.GetComponent<Tool>();
+		objToAdd.itemPic = GUIPic;
+		objToAdd.name = theObject.name;
+		objToAdd.autoConsume = true;
+		inventory.Add(objToAdd);
+		selectedObject = objToAdd.name;
+		GUIItemPic.sprite = objToAdd.itemPic;
 		GUIItemPic.enabled = true;
-		GUIItemText.text = inventObj.name;
-        // TODO: fix this... its all hardcoded for the demo!
+		// GUIItemText.text = objToAdd.name;
+		// TODO: fix this... its all hardcoded for the demo!
         //if(gameObject.name == "Osiris" && inventObj.name == "Osiris Key")
         //{
         //    FindObjectOfType<LevelEventsManager>().NotifyEvent("osiris", "OSIRIS_KEY_FOUND");
@@ -98,7 +97,7 @@ public class Inventory : MonoBehaviour {
                 GameObject toGive = obj.tool.gameObject;
                 inventory.Remove(obj);
                 updateInventoryGui();
-                Debug.Log(inventory.Count);
+                // Debug.Log(inventory.Count);
                 return toGive;
             }
         }
@@ -112,14 +111,14 @@ public class Inventory : MonoBehaviour {
         {
             GUIItemPic.sprite = null;
             GUIItemPic.enabled = false;
-            GUIItemText.text = "Inventory Empty";
+            // GUIItemText.text = "Inventory Empty";
         }
         else
         {
             selectedObject = inventory[inventory.Count - 1].name;
             GUIItemPic.sprite = inventory[inventory.Count - 1].itemPic;
             GUIItemPic.enabled = true;
-            GUIItemText.text = inventory[inventory.Count - 1].name;
+            // GUIItemText.text = inventory[inventory.Count - 1].name;
         }
     }
 }
